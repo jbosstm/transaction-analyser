@@ -1,0 +1,12 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<datasources>
+    <datasource jndi-name="java:jboss/datasources/txvisTestDS" pool-name="txvisTestDS" enabled="true" use-java-context="true">
+        <connection-url>jdbc:mysql://localhost:3306/txvistest</connection-url>
+        <driver>MySqlNonXA</driver>
+        <security>
+            <user-name>root</user-name>
+            <password>root</password>
+        </security>
+    </datasource>
+</datasources>

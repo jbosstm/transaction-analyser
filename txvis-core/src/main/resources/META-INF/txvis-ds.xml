@@ -1,0 +1,43 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<datasources>
+    <!--<xa-datasource jta="false" jndi-name="java:jboss/datasources/txvisDS" pool-name="txvisDS" enabled="true"-->
+                   <!--use-java-context="true" use-ccm="true">-->
+        <!--<xa-datasource-property name="ServerName">-->
+            <!--localhost-->
+        <!--</xa-datasource-property>-->
+        <!--<xa-datasource-property name="DatabaseName">-->
+            <!--txvis-->
+        <!--</xa-datasource-property>-->
+        <!--<xa-datasource-property name="User">-->
+            <!--txvis-->
+        <!--</xa-datasource-property>-->
+        <!--<xa-datasource-property name="Password">-->
+            <!--txvis-->
+        <!--</xa-datasource-property>-->
+        <!--<driver>MySqlXA</driver>-->
+    <!--</xa-datasource>-->
+
+    <datasource jndi-name="java:jboss/datasources/txvisDS" jta="false" pool-name="txvisDS" enabled="true" use-java-context="true">
+        <connection-url>jdbc:mysql://localhost:3306/txvis</connection-url>
+        <driver>MySqlNonXA</driver>
+        <security>
+            <user-name>txvis</user-name>
+            <password>txvis</password>
+        </security>
+        <transaction-isolation>TRANSACTION_READ_UNCOMMITTED</transaction-isolation>
+    </datasource>
+    <!--<xa-datasource jndi-name="java:jboss/datasources/txvisDS" pool-name="txvisDS" enabled="true" use-java-context="true">-->
+        <!--<xa-datasource-property name="ServerName">localhost</xa-datasource-property>-->
+        <!--<xa-datasource-property name="DatabaseName">txvis</xa-datasource-property>-->
+        <!--<xa-datasource-property name="User">txvis</xa-datasource-property>-->
+        <!--<xa-datasource-property name="Password">txvis</xa-datasource-property>-->
+        <!--<driver>postgresql</driver>-->
+        <!--<recovery>-->
+            <!--<recover-credential>-->
+                <!--<user-name>txvis</user-name>-->
+                <!--<password>txvis</password>-->
+            <!--</recover-credential>-->
+        <!--</recovery>-->
+    <!--</xa-datasource>-->
+</datasources>
