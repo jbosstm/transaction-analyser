@@ -1,0 +1,100 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml"
+   xmlns:ui="http://java.sun.com/jsf/facelets"
+   xmlns:h="http://java.sun.com/jsf/html"
+   xmlns:f="http://java.sun.com/jsf/core">
+
+<h:head>
+<title>TxVis</title>
+    <h:outputStylesheet library="css" name="bootstrap.min.css"  />
+    <style>
+        body {
+            padding-top: 10px;
+        }
+    </style>
+</h:head>
+
+<h:body>
+   <div class="container-fluid" >
+       <!--<div class="page-header">-->
+           <!--<h1>Transaction Visualisation Tool</h1>-->
+       <!--</div>-->
+       <div class="navbar">
+           <div class="navbar-inner">
+               <h:link value="TxVis" class="brand" outcome="txlist" />
+               <ul class="nav">
+               </ul>
+           </div>
+       </div>
+       <div class="row-fluid" id="content">
+           <div class="span8">
+               <h:form class="form-inline">
+                   <div>
+                       <h4>Filter</h4>
+                       <h:outputLabel for="filterByStatus" value="By Status: " />
+                       <h:selectOneMenu id="filterByStatus" value="#{transactionListBean.filterByStatus}">
+                           <f:selectItem itemLabel="ALL" itemValue="" />
+                           <f:selectItems value="#{transactionListBean.statuses}" />
+                           <f:ajax render="txlist" event="change" execute="filterByStatus" />
+                       </h:selectOneMenu>
+                   </div>
+
+                   <div id="transactions">
+                       <h:dataTable value="#{transactionListBean.transactionsList}" id="txlist" var="transaction"
+                                    styleClass="table table-striped"
+                                    rendered="#{not empty transactionListBean.transactionsList}">
+                           <h:column>
+                               <f:facet name="header">Transaction ID</f:facet>
+                               <h:link value="#{transaction.txuid}" outcome="txinfo" >
+                                   <f:param name="includeViewParams" value="true" />
+                                   <f:param name="txid" value="#{transaction.id}" />
+                               </h:link>
+                           </h:column>
+                           <h:column>
+                               <f:facet name="header">Node</f:facet>
+                               #{transaction.nodeid}
+                           </h:column>
+                           <h:column>
+                               <f:facet name="header">Distributed</f:facet>
+                               #{transaction.distributed}
+                           </h:column>
+                           <h:column>
+                               <f:facet name="header">Status</f:facet>
+                               #{transaction.status}
+                           </h:column>
+                           <h:column>
+                               <f:facet name="header">Duration</f:facet>
+                               #{transaction.duration}ms
+                           </h:column>
+                       </h:dataTable>
+                   </div>
+               </h:form>
+           </div>
+           <div class="span4" id="issues">
+               <ui:repeat value="#{issueParserBean.issues}" var="issue">
+                   <div class="alert alert-info">
+                       <button type="button" class="close" data-dismiss="alert">&#215;</button>
+                       <p><strong><h:outputText value="#{issue.title}" escape="false" /></strong></p>
+                       <p><h:outputText value="#{issue.body}" escape="false" /></p>
+                   </div>
+               </ui:repeat>
+           </div>
+       </div>
+   </div>
+
+    <h:outputScript library="js" name="jquery-1.9.1.min.js" />
+    <h:outputScript library="js" name="bootstrap.min.js" />
+    <script>
+        var POLL_INTERVAL = 5000;
+        $(function() {
+            setInterval(
+                function() {
+                    $('#content').load(document.URL + ' #content');
+                    console.log(document.URL);
+                },
+                POLL_INTERVAL
+            )
+        })
+    </script>
+</h:body>
+</html>

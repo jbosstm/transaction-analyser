@@ -1,0 +1,75 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:ui="http://java.sun.com/jsf/facelets"
+      xmlns:h="http://java.sun.com/jsf/html"
+      xmlns:f="http://java.sun.com/jsf/core">
+
+<h:head>
+    <title>Transaction Topology: #{graphPlotterBean.transaction.txuid}</title>
+    <h:outputStylesheet library="css" name="bootstrap.min.css"  />
+    <style>
+
+        #infovis {
+            position:relative;
+            width:600px;
+            height:600px;
+            margin:auto;
+            overflow:hidden;
+        }
+
+        .tip {
+            color: #111;
+            width: 139px;
+            background-color: white;
+            border:1px solid #ccc;
+            -moz-box-shadow:#555 2px 2px 8px;
+            -webkit-box-shadow:#555 2px 2px 8px;
+            -o-box-shadow:#555 2px 2px 8px;
+            box-shadow:#555 2px 2px 8px;
+            opacity:0.9;
+            filter:alpha(opacity=90);
+            font-size:10px;
+            font-family:Verdana, Geneva, Arial, Helvetica, sans-serif;
+            padding:7px;
+        }
+
+    </style>
+</h:head>
+<f:event type="preRenderView" listener="#{graphPlotterBean.init}"/>
+
+<h:body>
+    <div class="page-header">
+        <h1>Transaction Topology: #{graphPlotterBean.transaction.txuid}</h1>
+    </div>
+
+
+    <a href="#myModal" role="button" class="btn" data-toggle="modal">Launch demo modal</a>
+
+    <!-- Modal -->
+    <div id="myModal" class="modal hide fade" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+        <div class="modal-header">
+            <button type="button" class="close" data-dismiss="modal" aria-hidden="true">×</button>
+        </div>
+        <div class="modal-body" id="infovis">
+        </div>
+    </div>
+
+
+
+    <!--<div id="infovis"></div>-->
+
+
+    <h:outputScript library="js" name="jquery-1.9.1.min.js" />
+    <h:outputScript library="js" name="bootstrap.min.js" />
+    <h:outputScript library="js" name="jit-yc.js" />
+    <h:outputScript library="js" name="infoviz-graph.js" />
+    <script>
+        var json = <h:outputText value="#{graphPlotterBean.jsonGraph}" escape="false"/>;
+        $(init())
+
+        $('#myModal').on('shown', function () {
+            init();
+        })
+    </script>
+</h:body>
+</html>

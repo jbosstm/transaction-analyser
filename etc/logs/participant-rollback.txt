@@ -1,0 +1,60 @@
+[0m10:15:52,442 TRACE [com.arjuna.ats.jta] (pool-2-thread-1) BaseTransaction.begin
+[0m10:15:52,445 TRACE [com.arjuna.ats.arjuna] (pool-2-thread-1) StateManager::StateManager( 2, 0 )
+[0m10:15:52,446 TRACE [com.arjuna.ats.arjuna] (pool-2-thread-1) BasicAction::BasicAction()
+[0m10:15:52,446 TRACE [com.arjuna.ats.arjuna] (pool-2-thread-1) BasicAction::Begin() for action-id 0:ffffac118223:-6fc6eada:515023cb:13
+[0m10:15:52,446 TRACE [com.arjuna.ats.arjuna] (pool-2-thread-1) BasicAction::actionInitialise() for action-id 0:ffffac118223:-6fc6eada:515023cb:13
+[0m10:15:52,447 TRACE [com.arjuna.ats.arjuna] (pool-2-thread-1) ActionHierarchy::ActionHierarchy(1)
+[0m10:15:52,447 TRACE [com.arjuna.ats.arjuna] (pool-2-thread-1) ActionHierarchy::add(0:ffffac118223:-6fc6eada:515023cb:13, 1)
+[0m10:15:52,448 TRACE [com.arjuna.ats.arjuna] (pool-2-thread-1) BasicAction::addChildThread () action 0:ffffac118223:-6fc6eada:515023cb:13 adding Thread[pool-2-thread-1,5,main]
+[0m10:15:52,448 TRACE [com.arjuna.ats.arjuna] (pool-2-thread-1) BasicAction::addChildThread () action 0:ffffac118223:-6fc6eada:515023cb:13 adding Thread[pool-2-thread-1,5,main] result = true
+[0m10:15:52,448 TRACE [com.arjuna.ats.arjuna] (pool-2-thread-1) TransactionReaper::insert ( BasicAction: 0:ffffac118223:-6fc6eada:515023cb:13 status: ActionStatus.RUNNING, 300 )
+[0m10:15:52,449 TRACE [com.arjuna.ats.arjuna] (pool-2-thread-1) ReaperElement::ReaperElement ( BasicAction: 0:ffffac118223:-6fc6eada:515023cb:13 status: ActionStatus.RUNNING, 300 )
+[0m10:15:52,449 TRACE [com.arjuna.ats.arjuna] (Transaction Reaper) ReaperThread.run ()
+[0m10:15:52,449 TRACE [com.arjuna.ats.arjuna] (Transaction Reaper) TransactionReaper::check ()
+[0m10:15:52,450 TRACE [com.arjuna.ats.arjuna] (Transaction Reaper) TransactionReaper::check - comparing 1364206852449
+[0m10:15:52,450 TRACE [com.arjuna.ats.arjuna] (Transaction Reaper) Thread Thread[Transaction Reaper,5,main] sleeping for 299999
+[0m10:15:52,450 TRACE [com.arjuna.ats.jta] (pool-2-thread-1) TransactionImple.enlistResource ( org.jboss.narayana.transactionMonitor.simple.DummyXAResource@72e0b50 )
+[0m10:15:52,450 TRACE [com.arjuna.ats.jta] (pool-2-thread-1) TransactionImple.getStatus
+[0m10:15:52,452 TRACE [com.arjuna.ats.arjuna] (pool-2-thread-1) StateManager::StateManager( 1, 0 )
+[0m10:15:52,453 TRACE [com.arjuna.ats.arjuna] (pool-2-thread-1) AbstractRecord::AbstractRecord (0:ffffac118223:-6fc6eada:515023cb:15, 1)
+[0m10:15:52,453 TRACE [com.arjuna.ats.arjuna] (pool-2-thread-1) InputObjectState::InputObjectState()
+[0m10:15:52,453 TRACE [com.arjuna.ats.arjuna] (pool-2-thread-1) FileSystemStore.allObjUids(EISNAME, InputObjectState Uid   : 0:0:0:0:0
+[0m10:15:52,453 TRACE [com.arjuna.ats.arjuna] (pool-2-thread-1) OutputObjectState::OutputObjectState()
+[0m10:15:52,454 TRACE [com.arjuna.ats.jta] (pool-2-thread-1) XAResourceRecord.XAResourceRecord ( < formatId=131077, gtrid_length=29, bqual_length=36, tx_uid=0:ffffac118223:-6fc6eada:515023cb:13, node_name=1, branch_uid=0:ffffac118223:-6fc6eada:515023cb:14, subordinatenodename=null, eis_name=unknown eis name >, org.jboss.narayana.transactionMonitor.simple.DummyXAResource@72e0b50 )
+[0m10:15:52,455 TRACE [com.arjuna.ats.arjuna] (pool-2-thread-1) RecordList::insert(RecordList: empty) : appending /StateManager/AbstractRecord/XAResourceRecord for 0:ffffac118223:-6fc6eada:515023cb:15
+[0m10:15:52,455 TRACE [com.arjuna.ats.jta] (pool-2-thread-1) TransactionImple.enlistResource ( org.jboss.narayana.transactionMonitor.simple.DummyXAResource@7aa354c9 )
+[0m10:15:52,455 TRACE [com.arjuna.ats.jta] (pool-2-thread-1) TransactionImple.getStatus
+[0m10:15:52,456 TRACE [com.arjuna.ats.arjuna] (pool-2-thread-1) StateManager::StateManager( 1, 0 )
+[0m10:15:52,456 TRACE [com.arjuna.ats.arjuna] (pool-2-thread-1) AbstractRecord::AbstractRecord (0:ffffac118223:-6fc6eada:515023cb:19, 1)
+[0m10:15:52,456 TRACE [com.arjuna.ats.jta] (pool-2-thread-1) XAResourceRecord.XAResourceRecord ( < formatId=131077, gtrid_length=29, bqual_length=36, tx_uid=0:ffffac118223:-6fc6eada:515023cb:13, node_name=1, branch_uid=0:ffffac118223:-6fc6eada:515023cb:18, subordinatenodename=null, eis_name=unknown eis name >, org.jboss.narayana.transactionMonitor.simple.DummyXAResource@7aa354c9 )
+[0m10:15:52,457 TRACE [com.arjuna.ats.arjuna] (pool-2-thread-1) RecordList::insert(RecordList: 0:ffffac118223:-6fc6eada:515023cb:15) : appending /StateManager/AbstractRecord/XAResourceRecord for 0:ffffac118223:-6fc6eada:515023cb:19
+[0m10:15:52,457 TRACE [com.arjuna.ats.jta] (pool-2-thread-1) BaseTransaction.commit
+[0m10:15:52,457 TRACE [com.arjuna.ats.jta] (pool-2-thread-1) TransactionImple.commitAndDisassociate
+[0m10:15:52,457 TRACE [com.arjuna.ats.arjuna] (pool-2-thread-1) BasicAction::End() for action-id 0:ffffac118223:-6fc6eada:515023cb:13
+[0m10:15:52,457 TRACE [com.arjuna.ats.arjuna] (pool-2-thread-1) BasicAction::prepare () for action-id 0:ffffac118223:-6fc6eada:515023cb:13
+[0m10:15:52,458 TRACE [com.arjuna.ats.jta] (pool-2-thread-1) XAResourceRecord.topLevelPrepare for XAResourceRecord < resource:org.jboss.narayana.transactionMonitor.simple.DummyXAResource@72e0b50, txid:< formatId=131077, gtrid_length=29, bqual_length=36, tx_uid=0:ffffac118223:-6fc6eada:515023cb:13, node_name=1, branch_uid=0:ffffac118223:-6fc6eada:515023cb:14, subordinatenodename=null, eis_name=unknown eis name >, heuristic: TwoPhaseOutcome.FINISH_OK com.arjuna.ats.internal.jta.resources.arjunacore.XAResourceRecord@50150c84 >
+[0m10:15:52,458 TRACE [com.arjuna.ats.arjuna] (pool-2-thread-1) RecordList::insert(RecordList: empty) : appending /StateManager/AbstractRecord/XAResourceRecord for 0:ffffac118223:-6fc6eada:515023cb:15
+[0m10:15:52,459 TRACE [com.arjuna.ats.jta] (pool-2-thread-1) XAResourceRecord.topLevelPrepare for XAResourceRecord < resource:org.jboss.narayana.transactionMonitor.simple.DummyXAResource@7aa354c9, txid:< formatId=131077, gtrid_length=29, bqual_length=36, tx_uid=0:ffffac118223:-6fc6eada:515023cb:13, node_name=1, branch_uid=0:ffffac118223:-6fc6eada:515023cb:18, subordinatenodename=null, eis_name=unknown eis name >, heuristic: TwoPhaseOutcome.FINISH_OK com.arjuna.ats.internal.jta.resources.arjunacore.XAResourceRecord@15e8d72f >
+[0m[33m10:15:52,460 WARN  [com.arjuna.ats.jta] (pool-2-thread-1) ARJUNA016041: prepare on < formatId=131077, gtrid_length=29, bqual_length=36, tx_uid=0:ffffac118223:-6fc6eada:515023cb:13, node_name=1, branch_uid=0:ffffac118223:-6fc6eada:515023cb:18, subordinatenodename=null, eis_name=unknown eis name > (org.jboss.narayana.transactionMonitor.simple.DummyXAResource@7aa354c9) failed with exception XAException.XAER_RMERR: javax.transaction.xa.XAException
+	at com.arjuna.ats.internal.jta.resources.arjunacore.XAResourceRecord.topLevelPrepare(XAResourceRecord.java:213) [narayana-jts-jacorb-5.0.0.M3-SNAPSHOT.jar:5.0.0.M3-SNAPSHOT (revision: ${buildNumber})]
+	at com.arjuna.ats.arjuna.coordinator.BasicAction.doPrepare(BasicAction.java:2579) [narayana-jts-jacorb-5.0.0.M3-SNAPSHOT.jar:5.0.0.M3-SNAPSHOT (revision: ${buildNumber})]
+	at com.arjuna.ats.arjuna.coordinator.BasicAction.doPrepare(BasicAction.java:2529) [narayana-jts-jacorb-5.0.0.M3-SNAPSHOT.jar:5.0.0.M3-SNAPSHOT (revision: ${buildNumber})]
+	at com.arjuna.ats.arjuna.coordinator.BasicAction.prepare(BasicAction.java:2090) [narayana-jts-jacorb-5.0.0.M3-SNAPSHOT.jar:5.0.0.M3-SNAPSHOT (revision: ${buildNumber})]
+	at com.arjuna.ats.arjuna.coordinator.BasicAction.End(BasicAction.java:1481) [narayana-jts-jacorb-5.0.0.M3-SNAPSHOT.jar:5.0.0.M3-SNAPSHOT (revision: ${buildNumber})]
+	at com.arjuna.ats.arjuna.coordinator.TwoPhaseCoordinator.end(TwoPhaseCoordinator.java:98) [narayana-jts-jacorb-5.0.0.M3-SNAPSHOT.jar:5.0.0.M3-SNAPSHOT (revision: ${buildNumber})]
+	at com.arjuna.ats.arjuna.AtomicAction.commit(AtomicAction.java:162) [narayana-jts-jacorb-5.0.0.M3-SNAPSHOT.jar:5.0.0.M3-SNAPSHOT (revision: ${buildNumber})]
+	at com.arjuna.ats.internal.jta.transaction.arjunacore.TransactionImple.commitAndDisassociate(TransactionImple.java:1165) [narayana-jts-jacorb-5.0.0.M3-SNAPSHOT.jar:5.0.0.M3-SNAPSHOT (revision: ${buildNumber})]
+	at com.arjuna.ats.internal.jta.transaction.arjunacore.BaseTransaction.commit(BaseTransaction.java:126) [narayana-jts-jacorb-5.0.0.M3-SNAPSHOT.jar:5.0.0.M3-SNAPSHOT (revision: ${buildNumber})]
+	at com.arjuna.ats.jbossatx.BaseTransactionManagerDelegate.commit(BaseTransactionManagerDelegate.java:75)
+[0m10:15:52,467 TRACE [com.arjuna.ats.arjuna] (pool-2-thread-1) RecordList::insert(RecordList: empty) : appending /StateManager/AbstractRecord/XAResourceRecord for 0:ffffac118223:-6fc6eada:515023cb:19
+[0m[33m10:15:52,467 WARN  [com.arjuna.ats.arjuna] (pool-2-thread-1) ARJUNA012073: BasicAction.End() - prepare phase of action-id 0:ffffac118223:-6fc6eada:515023cb:13 failed.
+[0m[33m10:15:52,467 WARN  [com.arjuna.ats.arjuna] (pool-2-thread-1) ARJUNA012075: Action Aborting
+[0m10:15:52,467 TRACE [com.arjuna.ats.arjuna] (pool-2-thread-1) BasicAction::phase2Abort() for action-id 0:ffffac118223:-6fc6eada:515023cb:13
+[0m10:15:52,468 TRACE [com.arjuna.ats.arjuna] (pool-2-thread-1) BasicAction::doAbort (XAResourceRecord < resource:org.jboss.narayana.transactionMonitor.simple.DummyXAResource@72e0b50, txid:< formatId=131077, gtrid_length=29, bqual_length=36, tx_uid=0:ffffac118223:-6fc6eada:515023cb:13, node_name=1, branch_uid=0:ffffac118223:-6fc6eada:515023cb:14, subordinatenodename=null, eis_name=unknown eis name >, heuristic: TwoPhaseOutcome.FINISH_OK com.arjuna.ats.internal.jta.resources.arjunacore.XAResourceRecord@50150c84 >)
+[0m10:15:52,468 TRACE [com.arjuna.ats.jta] (pool-2-thread-1) XAResourceRecord.topLevelAbort for XAResourceRecord < resource:org.jboss.narayana.transactionMonitor.simple.DummyXAResource@72e0b50, txid:< formatId=131077, gtrid_length=29, bqual_length=36, tx_uid=0:ffffac118223:-6fc6eada:515023cb:13, node_name=1, branch_uid=0:ffffac118223:-6fc6eada:515023cb:14, subordinatenodename=null, eis_name=unknown eis name >, heuristic: TwoPhaseOutcome.FINISH_OK com.arjuna.ats.internal.jta.resources.arjunacore.XAResourceRecord@50150c84 >
+[0m10:15:52,468 TRACE [com.arjuna.ats.arjuna] (pool-2-thread-1) BasicAction::doAbort (XAResourceRecord < resource:org.jboss.narayana.transactionMonitor.simple.DummyXAResource@7aa354c9, txid:< formatId=131077, gtrid_length=29, bqual_length=36, tx_uid=0:ffffac118223:-6fc6eada:515023cb:13, node_name=1, branch_uid=0:ffffac118223:-6fc6eada:515023cb:18, subordinatenodename=null, eis_name=unknown eis name >, heuristic: TwoPhaseOutcome.FINISH_OK com.arjuna.ats.internal.jta.resources.arjunacore.XAResourceRecord@15e8d72f >)
+[0m10:15:52,469 TRACE [com.arjuna.ats.jta] (pool-2-thread-1) XAResourceRecord.topLevelAbort for XAResourceRecord < resource:org.jboss.narayana.transactionMonitor.simple.DummyXAResource@7aa354c9, txid:< formatId=131077, gtrid_length=29, bqual_length=36, tx_uid=0:ffffac118223:-6fc6eada:515023cb:13, node_name=1, branch_uid=0:ffffac118223:-6fc6eada:515023cb:18, subordinatenodename=null, eis_name=unknown eis name >, heuristic: TwoPhaseOutcome.FINISH_OK com.arjuna.ats.internal.jta.resources.arjunacore.XAResourceRecord@15e8d72f >
+[0m10:15:52,469 TRACE [com.arjuna.ats.arjuna] (pool-2-thread-1) BasicAction::updateState() for action-id 0:ffffac118223:-6fc6eada:515023cb:13
+[0m10:15:52,469 TRACE [com.arjuna.ats.arjuna] (pool-2-thread-1) BasicAction::removeChildThread () action 0:ffffac118223:-6fc6eada:515023cb:13 removing TSThread:1
+[0m10:15:52,469 TRACE [com.arjuna.ats.arjuna] (pool-2-thread-1) BasicAction::removeChildThread () action 0:ffffac118223:-6fc6eada:515023cb:13 removing TSThread:1 result = true
+[0m10:15:52,470 TRACE [com.arjuna.ats.arjuna] (pool-2-thread-1) TransactionReaper::remove ( BasicAction: 0:ffffac118223:-6fc6eada:515023cb:13 status: ActionStatus.ABORTED )
