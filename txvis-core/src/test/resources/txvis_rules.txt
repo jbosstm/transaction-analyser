@@ -1,0 +1,53 @@
+RULE Transaction begin
+INTERFACE javax.transaction.TransactionManager
+METHOD begin
+AT ENTRY
+BIND NOTHING
+IF TRUE
+DO debug("[transactionMonitor] client:transaction:begin")
+ENDRULE
+
+RULE Transaction commit
+INTERFACE javax.transaction.TransactionManager
+METHOD commit
+AT ENTRY
+BIND NOTHING
+IF TRUE
+DO debug("[transactionMonitor] client:transaction:commit")
+ENDRULE
+
+RULE Transaction rollback
+INTERFACE javax.transaction.TransactionManager
+METHOD rollback
+AT ENTRY
+BIND NOTHING
+IF TRUE
+DO debug("[transactionMonitor] client:transaction:rollback")
+ENDRULE
+
+RULE XAResource prepare
+INTERFACE javax.transaction.xa.XAResource
+METHOD prepare(Xid)
+AT ENTRY
+BIND NOTHING
+IF TRUE
+DO debug("[transactionMonitor] tm:xaresource:prepare")
+ENDRULE
+
+RULE XAResource commit
+INTERFACE javax.transaction.xa.XAResource
+METHOD commit(Xid, boolean)
+AT ENTRY
+BIND NOTHING
+IF TRUE
+DO debug("[transactionMonitor] tm:xaresource:commit")
+ENDRULE
+
+RULE XAResource rollback
+INTERFACE javax.transaction.xa.XAResource
+METHOD rollback(Xid)
+AT ENTRY
+BIND NOTHING
+IF TRUE
+DO debug("[transactionMonitor] tm:xaresource:rollback")
+ENDRULE

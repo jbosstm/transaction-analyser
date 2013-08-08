@@ -1,0 +1,252 @@
+<!DOCTYPE html>
+<!--
+  ~ JBoss, Home of Professional Open Source.
+  ~ Copyright 2013, Red Hat, Inc., and individual contributors
+  ~ as indicated by the @author tags. See the copyright.txt file in the
+  ~ distribution for a full listing of individual contributors.
+  ~
+  ~ This is free software; you can redistribute it and/or modify it
+  ~ under the terms of the GNU Lesser General Public License as
+  ~ published by the Free Software Foundation; either version 2.1 of
+  ~ the License, or (at your option) any later version.
+  ~
+  ~ This software is distributed in the hope that it will be useful,
+  ~ but WITHOUT ANY WARRANTY; without even the implied warranty of
+  ~ MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE. See the GNU
+  ~ Lesser General Public License for more details.
+  ~
+  ~ You should have received a copy of the GNU Lesser General Public
+  ~ License along with this software; if not, write to the Free
+  ~ Software Foundation, Inc., 51 Franklin St, Fifth Floor, Boston, MA
+  ~ 02110-1301 USA, or see the FSF site: http://www.fsf.org.
+  -->
+
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:ui="http://java.sun.com/jsf/facelets"
+      xmlns:h="http://java.sun.com/jsf/html"
+      xmlns:f="http://java.sun.com/jsf/core">
+
+<h:head>
+    <title>TxVis / Transaction Info: #{transactionInfoBean.transaction.txuid}</title>
+    <h:outputStylesheet library="css" name="bootstrap.min.css"/>
+    <style>
+
+        #infovis {
+            position: relative;
+            width: 970px;
+            height: 600px;
+            margin: auto;
+            overflow: scroll;
+            text-align: center;
+            vertical-align: middle;
+        }
+
+            /*TOOLTIPS*/
+        .tip {
+            color: #111;
+            width: 139px;
+            background-color: white;
+            border: 1px solid #ccc;
+            -moz-box-shadow: #555 2px 2px 8px;
+            -webkit-box-shadow: #555 2px 2px 8px;
+            -o-box-shadow: #555 2px 2px 8px;
+            box-shadow: #555 2px 2px 8px;
+            opacity: 0.9;
+            filter: alpha(opacity=90);
+            font-size: 10px;
+            font-family: Verdana, Geneva, Arial, Helvetica, sans-serif;
+            padding: 7px;
+        }
+
+        .jit-autoadjust-label {
+            padding: 15px;
+            text-align: center;
+            vertical-align: middle;
+        }
+
+        #update, #restore {
+            text-align: center;
+            width: 100px;
+            margin: 0px 35px 10px 35px;
+        }
+
+        body {
+            padding-top: 20px;
+        }
+
+        body .modal {
+            /* new custom width */
+            width: 1000px;
+            /* must be half of the width, minus scrollbar on the left (30px) */
+            margin-left: -500px;
+        }
+    </style>
+</h:head>
+<f:event type="preRenderView" listener="#{transactionInfoBean.init}"/>
+<f:event type="preRenderView" listener="#{graphPlotterBean.init}"/>
+<h:body>
+    <div class="container">
+        <div class="navbar">
+            <div class="navbar-inner">
+                <h:link value="TxVis" class="brand" outcome="txlist"/>
+                <a id="btn-visualise" href="#myModal" class="btn pull-right" role="button" data-toggle="modal">Visualise
+                    Transaction</a>
+            </div>
+        </div>
+        <ul class="breadcrumb">
+            <li>
+                <h:link value="list" outcome="txlist"/>
+            </li>
+            <ui:repeat value="#{transactionInfoBean.reverseHierarchy}" var="tx">
+                <li>
+                    <span class="divider">/</span>
+                    <h:link value="#{tx.nodeid}" outcome="txinfo">
+                        <f:param name="includeViewParams" value="true"/>
+                        <f:param name="txid" value="#{tx.id}"/>
+                    </h:link>
+                </li>
+            </ui:repeat>
+            <li class="active">
+                <span class="divider">/</span>#{transactionInfoBean.transaction.nodeid}
+            </li>
+        </ul>
+        <div>
+            <h3>Transaction Information</h3>
+            <dl class="dl-horizontal">
+                <dt>Transaction UID:</dt>
+                <dd>#{transactionInfoBean.transaction.txuid}</dd>
+                <dt>Node ID:</dt>
+                <dd>#{transactionInfoBean.transaction.nodeid}</dd>
+                <dt>Distributed:</dt>
+                <dd>#{transactionInfoBean.transaction.distributed}</dd>
+                <dt>Outcome:</dt>
+                <dd>#{transactionInfoBean.transaction.status}</dd>
+                <dt>Start Time:</dt>
+                <dd>#{transactionInfoBean.transaction.startTime}</dd>
+                <dt>End Time:</dt>
+                <dd>#{transactionInfoBean.transaction.endTime != null ? transactionInfoBean.transaction.endTime : "-"}
+                </dd>
+                <dt>Duration:</dt>
+                <dd>#{transactionInfoBean.transaction.duration}ms</dd>
+            </dl>
+        </div>
+        <hr/>
+        <div>
+            <h3>Enlisted Participants</h3>
+
+            <h4>Resources</h4>
+            <h:outputText value="No enlisted resources"
+                          rendered="#{empty transactionInfoBean.transaction.participantRecords}"/>
+            <h:dataTable value="#{transactionInfoBean.transaction.participantRecords}" var="rec"
+                         styleClass="table table-striped"
+                         rendered="#{not empty transactionInfoBean.transaction.participantRecords}">
+                <h:column>
+                    <f:facet name="header">Jndi Name</f:facet>
+                    #{rec.resourceManager.jndiName}
+                </h:column>
+                <h:column>
+                    <f:facet name="header">Product Name</f:facet>
+                    #{rec.resourceManager.productName}
+                </h:column>
+                <h:column>
+                    <f:facet name="header">Product Version</f:facet>
+                    #{rec.resourceManager.productVersion}
+                </h:column>
+                <h:column>
+                    <f:facet name="header">Vote</f:facet>
+                    #{rec.vote}
+                </h:column>
+                <h:column>
+                    <f:facet name="header">XAException</f:facet>
+                    #{rec.xaException}
+                </h:column>
+            </h:dataTable>
+
+            <h:panelGroup layout="block" rendered="#{transactionInfoBean.transaction.distributed}">
+                <h4>Subordinate Transactions</h4>
+                <h:outputText value="No subordinate transaction"
+                              rendered="#{empty transactionInfoBean.transaction.subordinates}"/>
+                <h:dataTable value="#{transactionInfoBean.transaction.subordinates}" var="tx"
+                             styleClass="table table-striped"
+                             rendered="#{not empty transactionInfoBean.transaction.subordinates}">
+                    <h:column>
+                        <f:facet name="header">Node ID</f:facet>
+                        <h:link value="#{tx.nodeid}" outcome="txinfo">
+                            <f:param name="includeViewParams" value="true"/>
+                            <f:param name="txid" value="#{tx.id}"/>
+                        </h:link>
+
+                    </h:column>
+                    <h:column>
+                        <f:facet name="header">Outcome</f:facet>
+                        #{tx.status}
+                    </h:column>
+                </h:dataTable>
+            </h:panelGroup>
+        </div>
+        <hr/>
+        <div>
+            <h3>Event Timeline</h3>
+            <h:dataTable value="#{transactionInfoBean.transaction.eventsInTemporalOrder}" var="event"
+                         styleClass="table table-striped">
+                <h:column>
+                    <f:facet name="header">Time</f:facet>
+                    #{event.timestamp}
+                </h:column>
+                <h:column>
+                    <f:facet name="header">Event</f:facet>
+                    #{event.eventType}
+                </h:column>
+                <h:column>
+                    <f:facet name="header">Actor</f:facet>
+                    #{event.eventEntity}
+                </h:column>
+            </h:dataTable>
+        </div>
+
+        <ul class="breadcrumb">
+            <li>
+                <h:link value="list" outcome="txlist"/>
+            </li>
+            <ui:repeat value="#{transactionInfoBean.reverseHierarchy}" var="tx">
+                <li>
+                    <span class="divider">/</span>
+                    <h:link value="#{tx.nodeid}" outcome="txinfo">
+                        <f:param name="includeViewParams" value="true"/>
+                        <f:param name="txid" value="#{tx.id}"/>
+                    </h:link>
+                </li>
+            </ui:repeat>
+            <li class="active"><span class="divider">/</span>#{transactionInfoBean.transaction.nodeid}</li>
+        </ul>
+
+        <div id="myModal" class="modal hide fade" tabindex="-1" role="dialog" aria-labelledby="myModalLabel"
+             aria-hidden="true">
+            <div class="modal-header">
+                Transaction Topology:
+                <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&#215;</button>
+            </div>
+            <div class="modal-body" id="infovis">
+            </div>
+        </div>
+    </div>
+
+    <h:outputScript library="js" name="jquery-1.9.1.min.js"/>
+    <h:outputScript library="js" name="bootstrap.min.js"/>
+    <h:outputScript library="js" name="jit-yc.js"/>
+    <h:outputScript library="js" name="infoviz-graph.js"/>
+    <script>
+        var json =
+        <
+        h:outputText
+        value = "#{graphPlotterBean.jsonGraph}"
+        escape = "false" / >;
+
+        $(init())
+
+        $('#myModal').on('shown', function () {
+            init();
+        })
+    </script>
+</h:body>
+</html>
