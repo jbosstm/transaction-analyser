@@ -325,8 +325,8 @@ public class Transaction implements Serializable {
      * @return
      */
     public Collection<Event> getEventsInTemporalOrder() {
-        //FIXME - Problem with hibernate compatibilty with JPA2.0 OrderBy annotation, this hack will probably
-        //FIXME - incur a performance penalty
+        //todo: - Problem with hibernate compatibilty with JPA2.0 OrderBy annotation, this hack will probably
+        //todo: - incur a performance penalty
         Collections.sort((List<Event>) events);
         return events;
     }
