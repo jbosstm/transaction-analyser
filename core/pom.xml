@@ -27,12 +27,12 @@
     <modelVersion>4.0.0</modelVersion>
 
     <parent>
-        <artifactId>txvis</artifactId>
-        <groupId>org.jboss.narayana</groupId>
-        <version>1.0-SNAPSHOT</version>
+        <artifactId>txprof-all</artifactId>
+        <groupId>org.jboss.narayana.txprof</groupId>
+        <version>1.0.0.Alpha1-SNAPSHOT</version>
     </parent>
 
-    <artifactId>txvis-core</artifactId>
+    <artifactId>core</artifactId>
     <name>Txvis Core Module</name>
     <description>Contains the core log parsing and persistence components of the tool</description>
     <properties/>
