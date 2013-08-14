@@ -29,6 +29,7 @@ import javax.annotation.PostConstruct;
 import javax.annotation.PreDestroy;
 import javax.annotation.Resource;
 import javax.ejb.EJB;
+import javax.ejb.Schedule;
 import javax.ejb.SessionContext;
 import javax.ejb.Singleton;
 import javax.ejb.Startup;
@@ -87,7 +88,7 @@ public class PluginService implements Serializable {
             timer.cancel();
     }
 
-    //@Schedule(minute = "*/2", hour = "*", persistent = true)
+    @Schedule(minute = "*/2", hour = "*", persistent = false)
     public void scanForIssues() {
 
         for (Plugin p : plugins)

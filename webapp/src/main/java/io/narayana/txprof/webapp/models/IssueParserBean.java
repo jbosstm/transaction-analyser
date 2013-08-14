@@ -58,7 +58,6 @@ public class IssueParserBean implements Serializable {
 
     public Collection<Issue> getIssues() {
 
-        pluginService.scanForIssues();
         updateIssues();
 
         // facelets don't support iterating over a set
