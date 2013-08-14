@@ -26,9 +26,9 @@
     <modelVersion>4.0.0</modelVersion>
 
 
-    <groupId>org.jboss.narayana</groupId>
-    <artifactId>txvis</artifactId>
-    <version>1.0-SNAPSHOT</version>
+    <groupId>org.jboss.narayana.txprof</groupId>
+    <artifactId>txprof-all</artifactId>
+    <version>1.0.0.Alpha1-SNAPSHOT</version>
 
     <packaging>pom</packaging>
     <name>Txvis: Transaction Profiling and Visualization Tool</name>
@@ -44,11 +44,11 @@
                 <activeByDefault>true</activeByDefault>
             </activation>
             <modules>
-                <module>txvis-core</module>
-                <module>txvis-plugins</module>
-                <module>txvis-webapp</module>
-                <module>txvis-full</module>
-                <module>txvis-lite</module>
+                <module>core</module>
+                <module>plugins</module>
+                <module>webapp</module>
+                <module>tx-profiler-full</module>
+                <module>tx-profiler-lite</module>
             </modules>
         </profile>
         <profile>
@@ -57,19 +57,19 @@
                 <activeByDefault>true</activeByDefault>
             </activation>
             <modules>
-                <module>txvis-core</module>
-                <module>txvis-webapp</module>
-                <module>txvis-full</module>
+                <module>core</module>
+                <module>webapp</module>
+                <module>tx-profiler-full</module>
             </modules>
         </profile>
         <profile>
             <id>distributed</id>
             <modules>
-                <module>txvis-core</module>
-                <module>txvis-plugins</module>
-                <module>txvis-webapp</module>
-                <module>txvis-full</module>
-                <module>txvis-lite</module>
+                <module>core</module>
+                <module>plugins</module>
+                <module>webapp</module>
+                <module>tx-profiler-full</module>
+                <module>tx-profiler-lite</module>
             </modules>
         </profile>
     </profiles>
@@ -102,22 +102,22 @@
     <dependencyManagement>
         <dependencies>
             <dependency>
-                <groupId>org.jboss.narayana</groupId>
-                <artifactId>txvis-core</artifactId>
+                <groupId>org.jboss.narayana.txprof</groupId>
+                <artifactId>core</artifactId>
                 <version>${project.version}</version>
                 <type>ejb</type>
             </dependency>
 
             <dependency>
-                <groupId>org.jboss.narayana</groupId>
-                <artifactId>txvis-plugins</artifactId>
+                <groupId>org.jboss.narayana.txprof</groupId>
+                <artifactId>plugins</artifactId>
                 <version>${project.version}</version>
                 <type>ejb</type>
             </dependency>
 
             <dependency>
-                <groupId>org.jboss.narayana</groupId>
-                <artifactId>txvis-webapp</artifactId>
+                <groupId>org.jboss.narayana.txprof</groupId>
+                <artifactId>webapp</artifactId>
                 <version>${project.version}</version>
                 <type>war</type>
                 <scope>compile</scope>
