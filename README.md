@@ -12,17 +12,27 @@ Dependencies
 
 The following dependencies must be satisfied before running the tool. 
 
+### WildFly
+
+Currently this only works with a particular version of WildFly. To build it:
+
+  git clone https://github.com/wildfly/wildfly.git
+  git checkout 4e5be37e2d03d398ff7af0d4716a18230820c9fb 
+  ./build.sh clean install -DskipTests
+
+This will be resolved soon with: https://issues.jboss.org/browse/JBTM-1893.
+
 ### MySQL
 
 A local MySQL server is required running on `localhost` with the default port of `3306` and needs to be configured with the following database and users:
 
-A user: `txvis` with password: `d8mmANpFJVQUXMtb` which has ALL privileges on a database called `txvis`.
+A user: `txvis` with password: `txvis` which has ALL privileges on a database called `txvis`.
 
 This can be created from the command line like so (note: leave root password blank if you have never set it before):
 
 	>mysql -u root -p <root password>
 	mysql> CREATE DATABASE txvis;
-	mysql> GRANT ALL PRIVILEGES ON txvis.* TO txvis@localhost IDENTIFIED BY 'd8mmANpFJVQUXMtb';
+	mysql> GRANT ALL PRIVILEGES ON txvis.* TO txvis@localhost IDENTIFIED BY 'txvis';
 	
 In order for MySQL to work with JBoss you will need to install the Connector/J MySQL JDBC driver this can be achieved by following these steps:
 
@@ -31,9 +41,9 @@ In order for MySQL to work with JBoss you will need to install the Connector/J M
 3. Copy module.xml from `[project-root]/etc` to the same directory as above; NOTE: if you downloaded a version of Connector/J other than 5.1.25 you will need to edit module.xml and update the resource-root path property to point to the correct connector/J jar file.
 4. Add the following lines to your JBoss standalone.xml file:
 		
-		<driver name="MySqlXA" module="com.mysql">
-			<xa-datasource-class>com.mysql.jdbc.jdbc2.optional.MysqlXADataSource</xa-datasource-class>
-		</driver>
+    <driver name="MySqlNonXA" module="com.mysql">
+        <datasource-class>com.mysql.jdbc.jdbc2.optional.MysqlDataSource</datasource-class>
+    </driver>
     
 This should be placed inside the `<datasources><drivers>` tags.
 
