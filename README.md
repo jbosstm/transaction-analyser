@@ -37,7 +37,7 @@ This can be created from the command line like so (note: leave root password bla
 In order for MySQL to work with JBoss you will need to install the Connector/J MySQL JDBC driver this can be achieved by following these steps:
 
 1. Download Connector/J from MySQL at: http://dev.mysql.com/downloads/connector/j/
-2. Extract the archive and copy mysql-connector-java-[version]-bin.jar to `$JBOSS_HOME/modules/com/mysql/main` recursively creating the directories if they don't exist.
+2. Extract the archive and copy mysql-connector-java-[version]-bin.jar to `$JBOSS_HOME/modules/system/layers/base/com/mysql/main` recursively creating the directories if they don't exist.
 3. Copy module.xml from `[project-root]/etc` to the same directory as above; NOTE: if you downloaded a version of Connector/J other than 5.1.25 you will need to edit module.xml and update the resource-root path property to point to the correct connector/J jar file.
 4. Add the following lines to your JBoss standalone.xml file:
 		
@@ -55,13 +55,19 @@ Maven 3+ should be installed and present in your OS's PATH environment variable.
 
 The commons-io 2.5-SNAPSHOT release is required as it contains a bug fix that is essential to the correct running of this tool. The snapshot release is not available from a central maven repository so a compiled jar is included in the [project root]/etc/lib directory. 
 
-This should be installed into your local maven repository using the shell script `installdeps.sh` available in the [project root]/etc/ directory: 
+This should be installed into your local maven repository using the following commands
+
+    cd ./etc
+    ./installdeps.sh
 
 Alternatively this can be installed by running the following maven command from the [project root]/etc/lib directory: 
 	mvn install:install-file -Dfile=commons-io-2.5-SNAPSHOT.jar -DgroupId=commons-io -DartifactId=commons-io -Dversion=2.5-SNAPSHOT -Dpackaging=jar
 	
 Running TxVis
 -------------
+
+Start the application server and check it boots without errors.
+
 A shell script is included in the project root folder to deploy and start txvis: `deploy.sh` the corresponding script `undeploy.sh` is included to shut it down.
 
 The user interface can be accessed by pointing a browser at: http://localhost/txvis/
