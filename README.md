@@ -14,13 +14,10 @@ The following dependencies must be satisfied before running the tool.
 
 ### WildFly
 
-Currently this only works with a particular version of WildFly. To build it:
+Currently this works with the latest WildFly master. To build it:
 
-  git clone https://github.com/wildfly/wildfly.git
-  git checkout 4e5be37e2d03d398ff7af0d4716a18230820c9fb 
-  ./build.sh clean install -DskipTests
-
-This will be resolved soon with: https://issues.jboss.org/browse/JBTM-1893.
+    git clone https://github.com/wildfly/wildfly.git
+    ./build.sh clean install -DskipTests
 
 ### MySQL
 
@@ -38,12 +35,12 @@ In order for MySQL to work with JBoss you will need to install the Connector/J M
 
 1. Download Connector/J from MySQL at: http://dev.mysql.com/downloads/connector/j/
 2. Extract the archive and copy mysql-connector-java-[version]-bin.jar to `$JBOSS_HOME/modules/system/layers/base/com/mysql/main` recursively creating the directories if they don't exist.
-3. Copy module.xml from `[project-root]/etc` to the same directory as above; NOTE: if you downloaded a version of Connector/J other than 5.1.25 you will need to edit module.xml and update the resource-root path property to point to the correct connector/J jar file.
+3. Copy module.xml from `[project-root]/etc` to the same directory as above; NOTE: if you downloaded a version of Connector/J other than 5.1.26 you will need to edit module.xml and update the resource-root path property to point to the correct connector/J jar file.
 4. Add the following lines to your JBoss standalone.xml file:
 		
-    <driver name="MySqlNonXA" module="com.mysql">
-        <datasource-class>com.mysql.jdbc.jdbc2.optional.MysqlDataSource</datasource-class>
-    </driver>
+   <driver name="MySqlNonXA" module="com.mysql">
+       <datasource-class>com.mysql.jdbc.jdbc2.optional.MysqlDataSource</datasource-class>
+   </driver>
     
 This should be placed inside the `<datasources><drivers>` tags.
 
@@ -70,4 +67,4 @@ Start the application server and check it boots without errors.
 
 A shell script is included in the project root folder to deploy and start txvis: `deploy.sh` the corresponding script `undeploy.sh` is included to shut it down.
 
-The user interface can be accessed by pointing a browser at: http://localhost/txvis/
+The user interface can be accessed by pointing a browser at: http://localhost:8080/txvis/
