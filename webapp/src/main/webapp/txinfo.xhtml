@@ -236,6 +236,7 @@
     <h:outputScript library="js" name="jit-yc.js"/>
     <h:outputScript library="js" name="infoviz-graph.js"/>
     <script>
+        <![CDATA[
         var json =
         <
         h:outputText
@@ -247,6 +248,7 @@
         $('#myModal').on('shown', function () {
             init();
         })
+            ]]>
     </script>
 </h:body>
 </html>
