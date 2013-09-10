@@ -70,7 +70,6 @@ public final class Configuration {
             JTSResourceRecordHandler.class,
             JTSInterpositionHandler.class,
             JTSResourceStatusChangeHandler.class,
-            ArjunaTransactionImpleHandler.class,
             TxPrepareFailedHandler.class,
             TxFinalStatusHandler.class,
     };
