@@ -19,6 +19,33 @@ Currently this works with the latest WildFly master. To build it:
     git clone https://github.com/wildfly/wildfly.git
     ./build.sh clean install -DskipTests
 
+You need to change the logging level for the transaction manager. This is what the profiler reads in order to get its information.
+
+Open standalone/configuration/standalone.xml and change:
+
+            <logger category="com.arjuna">
+                <level name="WARN"/>
+            </logger>
+
+To:
+            <logger category="com.arjuna">
+                <level name="TRACE"/>
+            </logger>
+
+Also, set the TRACE level on the periodic-rotating-file-handler, by adding the "<level name="TRACE"/>" block. This ensures that the transaction manager's
+TRACE logging appears in the standalone/log/server.log file.
+
+            <periodic-rotating-file-handler name="FILE" autoflush="true">
+                <level name="TRACE"/>
+                <formatter>
+                    <named-formatter name="PATTERN"/>
+                </formatter>
+                <file relative-to="jboss.server.log.dir" path="server.log"/>
+                <suffix value=".yyyy-MM-dd"/>
+                <append value="true"/>
+            </periodic-rotating-file-handler>
+
+
 ### MySQL
 
 A local MySQL server is required running on `localhost` with the default port of `3306` and needs to be configured with the following database and users:
@@ -68,3 +95,80 @@ Start the application server and check it boots without errors.
 A shell script is included in the project root folder to deploy and start txvis: `deploy.sh` the corresponding script `undeploy.sh` is included to shut it down.
 
 The user interface can be accessed by pointing a browser at: http://localhost:8080/txvis/
+
+
+## Profiling a Distributed Transaction
+
+To profile a distributed transaction you will need to make some additional configuration changes:
+
+Enable JTS and set the Node ID, by updating the transactions SubSytem config in standalone/configuration/standalone-full.xml. In particular you are adding the 'node-identifier' attribute
+and the 'jts' block.
+
+    <subsystem xmlns="urn:jboss:domain:transactions:1.3">
+        <core-environment node-identifier="${jboss.tx.node.id}">
+            <process-id>
+                <uuid/>
+            </process-id>
+        </core-environment>
+        <recovery-environment socket-binding="txn-recovery-environment" status-socket-binding="txn-status-manager"/>
+        <coordinator-environment default-timeout="300"/>
+        <jts/>
+    </subsystem>
+
+Update the JacOrb service for use by JTS:
+
+    <subsystem xmlns="urn:jboss:domain:jacorb:1.3">
+        <orb socket-binding="jacorb" ssl-socket-binding="jacorb-ssl" name="${jboss.node.name}">
+            <initializers security="identity" transactions="on"/>
+        </orb>
+        <naming root-context="${jboss.node.name}/Naming/root"/>
+    </subsystem>
+
+
+Now start each server involved in the transaction. The following commands show how to run three separate copies of WildFly on the same computer. It uses port offsets to ensure each uses
+different ports. Also different node names and IDs are needed for each instance:
+
+    ./bin/standalone.sh -Djboss.node.name=alpha -Djboss.tx.node.id=alpha -c standalone-full.xml
+    ./bin/standalone.sh -Djboss.node.name=gamma -Djboss.tx.node.id=gamma -c standalone-full.xml -Djboss.socket.binding.port-offset=200
+    ./bin/standalone.sh -Djboss.node.name=beta -Djboss.tx.node.id=beta -c standalone-full.xml -Djboss.socket.binding.port-offset=100
+
+
+### Running an example to create some transactions
+
+Clone the following project. This will allow you to run some succesful and failing transactions and observe them in the Transaction Profiler.
+
+    git clone https://github.com/alexcreasy/distributed-test-service.git
+    cd distributed-test-service
+
+Add the following driver to standalone/configuration/standalone-full.xml.
+
+    <driver name="MySqlXA" module="com.mysql">
+        <xa-datasource-class>com.mysql.jdbc.jdbc2.optional.MysqlXADataSource</xa-datasource-class>
+    </driver>
+
+Change driver in the DS of application1, currently it is configured to use Postgres. Edit ./application-component-1/src/main/webapp/WEB-INF/jts-quickstart-ds.xml and set:
+
+    <driver>MySqlXA</driver>
+
+Now create the required database and user:
+
+	>mysql -u root -p <root password>
+	mysql> CREATE DATABASE jts-quickstart-database;
+	mysql> GRANT ALL PRIVILEGES ON jts-quickstart-database.* TO sa@localhost IDENTIFIED BY 'sa';
+
+Deploy the application to each server:
+
+    mvn package jboss-as:deploy
+
+Copy the 'lite' version of the Transaction Profiler to the 2nd and 3rd servers.
+
+  cp ./tx-profiler-lite/target/tx-profiler-lite.ear <PATH TO DEPLOY DIR ON SERVER2>
+  cp ./tx-profiler-lite/target/tx-profiler-lite.ear <PATH TO DEPLOY DIR ON SERVER3>
+
+
+Visit the Transaction Profiler page: http://localhost:8080/txvis/. This is where the transaction details will apear after they are run.
+
+Run the transactions by visiting here and creating some users: http://localhost:8080/jboss-as-jts-application-component-1/addCustomer.jsf
+
+
+
