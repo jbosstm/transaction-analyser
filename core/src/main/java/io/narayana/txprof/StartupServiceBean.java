@@ -83,11 +83,6 @@ public class StartupServiceBean {
             logger.info("Bootstrapping...");
             logger.info("Server Node Id: " + System.getProperty(Configuration.NODEID_SYS_PROP_NAME));
             logger.info("Logfile: " + Configuration.LOGFILE_PATH);
-
-            logger.info("System Properties");
-            for (String propName : System.getProperties().stringPropertyNames())
-                logger.info(propName + " = " + System.getProperty(propName));
-            logger.info("");
         }
 
         startLogParser();
