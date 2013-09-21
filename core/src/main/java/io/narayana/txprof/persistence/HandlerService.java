@@ -173,27 +173,30 @@ public class HandlerService {
         Transaction tx = findTransaction(this.nodeid, txuid);
 
         switch (actionStatus) {
-            case "COMMITTED":
-                tx.setStatus(Status.COMMITTED, timestamp);
+            case "FINISH_OK":
+                switch (tx.getStatus()) {
+                    case COMMIT: case ONE_PHASE_COMMIT:
+                        tx.setStatus(Status.COMMITTED, timestamp);
+                        break;
+                    case PHASE_ONE_ABORT: case PHASE_TWO_ABORT:
+                        tx.setStatus(Status.ABORTED, timestamp);
+                        break;
+                }
                 tx.addEvent(new Event(EventType.FINISH_OK, nodeid, timestamp));
                 break;
-            case "ABORTED":
-                tx.setStatus(Status.ABORTED, timestamp);
-                tx.addEvent(new Event(EventType.FINISH_OK, nodeid, timestamp));
-                break;
-            case "H_COMMIT":
+            case "HEURISTIC_COMMIT":
                 tx.setStatus(Status.HEURISTIC_COMMIT, timestamp);
                 tx.addEvent(new Event(EventType.HEURISTIC_COMMIT, nodeid, timestamp));
                 break;
-            case "H_HAZARD":
+            case "HEURISTIC_HAZARD":
                 tx.setStatus(Status.HEURISTIC_HAZARD, timestamp);
                 tx.addEvent(new Event(EventType.HEURISTIC_HAZARD, nodeid, timestamp));
                 break;
-            case "H_MIXED":
+            case "HEURISTIC_MIXED":
                 tx.setStatus(Status.HEURISTIC_MIXED, timestamp);
                 tx.addEvent(new Event(EventType.HEURISTIC_MIXED, nodeid, timestamp));
                 break;
-            case "H_ROLLBACK":
+            case "HEURISTIC_ROLLBACK":
                 tx.setStatus(Status.HEURISTIC_ROLLBACK, timestamp);
                 tx.addEvent(new Event(EventType.HEURISTIC_ROLLBACK, nodeid, timestamp));
                 break;
