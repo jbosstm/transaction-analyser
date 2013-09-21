@@ -23,7 +23,6 @@
 package io.narayana.txprof;
 
 import io.narayana.txprof.logparsing.as8.filters.PackageFilter;
-import io.narayana.txprof.logparsing.as8.handlers.ArjunaTransactionImpleHandler;
 import io.narayana.txprof.logparsing.as8.handlers.BasicActionHandler;
 import io.narayana.txprof.logparsing.as8.handlers.JTACreateResourceRecordHandler;
 import io.narayana.txprof.logparsing.as8.handlers.JTAResourceExceptionHandler;
