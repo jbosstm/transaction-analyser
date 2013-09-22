@@ -32,7 +32,7 @@ import java.util.regex.Matcher;
 public class TxFinalStatusHandler extends JbossAS8AbstractHandler {
 
     private static final String REGEX = "BasicAction::End\\(\\)\\sresult\\sfor\\saction-id\\s\\(" + PATTERN_TXUID
-            + "\\)\\sis\\s\\(ActionStatus\\.(?<RESULT>[A-Z_]+)\\)\\snode\\sid:\\s\\((?<NODE>[^\\)]+)\\)";
+            + "\\)\\sis\\s\\(TwoPhaseOutcome\\.(?<RESULT>[A-Z_]+)\\)\\snode\\sid:\\s\\((?<NODE>[^\\)]+)\\)";
 
     public TxFinalStatusHandler() {
 
