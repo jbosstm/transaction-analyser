@@ -135,7 +135,7 @@ different ports. Also different node names and IDs are needed for each instance:
 
 ### Running an example to create some transactions
 
-Clone the following project. This will allow you to run some succesful and failing transactions and observe them in the Transaction Profiler.
+Clone the following project. This will allow you to run some successful and failing transactions and observe them in the Transaction Profiler.
 
     git clone https://github.com/alexcreasy/distributed-test-service.git
     cd distributed-test-service

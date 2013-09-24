@@ -67,7 +67,8 @@ public class CentralisedAS8IntegrationTest {
                 .withTransitivity().asFile();
 
         return ShrinkWrap.create(WebArchive.class, "CentralisedAS8IntegrationTest.war")
-                .addPackages(true, "org.jboss.narayana.txvis")
+                .addPackages(true, "io.narayana.txprof")
+                .addPackages(true, "org.jboss.narayana.txvis.test")
                 .addAsWebInfResource(EmptyAsset.INSTANCE, "beans.xml")
                 .addAsWebInfResource(new FileAsset(new File("src/test/resources/persistence.xml")),
                         "classes/META-INF/persistence.xml")

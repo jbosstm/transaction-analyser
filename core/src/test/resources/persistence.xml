@@ -34,6 +34,7 @@
         <class>io.narayana.txprof.persistence.entities.ResourceManager</class>
         <class>io.narayana.txprof.persistence.entities.ParticipantRecord</class>
         <class>io.narayana.txprof.persistence.entities.Event</class>
+        <class>io.narayana.txprof.persistence.entities.RequestRecord</class>
         <properties>
             <!-- Properties for Hibernate -->
             <property name="hibernate.hbm2ddl.auto" value="create-drop"/>
