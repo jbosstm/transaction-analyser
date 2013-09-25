@@ -30,11 +30,5 @@
 
     <container qualifier="jboss" default="true">
 
-        <configuration>
-            <property name="managementAddress">localhost</property>
-            <property name="username">arquillian</property>
-            <property name="password">!Helios6</property>
-        </configuration>
-
     </container>
 </arquillian>
