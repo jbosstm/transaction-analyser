@@ -268,7 +268,7 @@ public class HandlerService {
 
                 // Flush needs to be called to force a PersistenceException if creating the new record has
                 // violated a primary key constraint, otherwise the JPA spec is unclear on which exception
-                // will be thrown, Hibernate will usually throw a RollbackException which is less specific.
+                // will be thrown,
                 em.flush();
 
                 em.getTransaction().commit();

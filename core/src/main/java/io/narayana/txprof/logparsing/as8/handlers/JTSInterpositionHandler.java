@@ -32,11 +32,8 @@ import java.util.regex.Matcher;
 public class JTSInterpositionHandler extends JbossAS8AbstractHandler {
 
     private static final String REGEX = "Interposition(?:Server|Client)RequestInterceptorImpl::" +
-            "(?<METHOD>send_request|receive_request)\\s\\(\\screate\\s\\)\\snodeId=(?<NODEID>.*?)\\srequestId=(?<REQID>\\d+)" +
+            "(?<METHOD>send_request|receive_request).*?nodeId=(?<NODEID>.*?)\\srequestId=(?<REQID>\\d+)" +
             ".*?(?<IOR>IOR:[A-Z0-9]+)";
-
-    // InterpositionServerRequestInterceptorImpl::receive_request ( create ) nodeId=server2 requestId=100
-    // InterpositionClientRequestInterceptorImpl::send_request ( create ) nodeId=server1 requestId=100
 
     public JTSInterpositionHandler() {
 
