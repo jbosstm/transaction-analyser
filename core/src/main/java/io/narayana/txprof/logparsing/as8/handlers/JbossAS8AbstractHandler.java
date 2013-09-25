@@ -94,7 +94,7 @@ public abstract class JbossAS8AbstractHandler extends AbstractHandler {
     /*
      *
      */
-    private static final String PATTERN_TIMESTAMP = "(?<" + TIMESTAMP + ">\\d{2}:\\d{2}:\\d{2},\\d{3})";
+    private static final String PATTERN_TIMESTAMP = "\\d{4}-\\d{2}-\\d{2} (?<" + TIMESTAMP + ">\\d{2}:\\d{2}:\\d{2},\\d{3})";
     /*
      *
      */
