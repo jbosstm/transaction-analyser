@@ -77,6 +77,8 @@ public class CentralisedAS8IntegrationTest {
                 .setManifest(new StringAsset(ManifestMF));
     }
 
+
+    //TODO: why does it run two transactions per test?
     private static final int NO_OF_TX = 2;
     private static final int NO_OF_PARTICIPANTS = 3;
     private static final int INTRO_DELAY = 0;
@@ -133,7 +135,7 @@ public class CentralisedAS8IntegrationTest {
         assertEquals("Incorrect number of transaction parsed", NO_OF_TX, transactionDAO.retrieveAll().size());
 
         for (Transaction tx : transactionDAO.retrieveAll()) {
-            assertEquals("Transaction " + tx.getTxuid() + " did not report the correct status", Status.COMMIT,
+            assertEquals("Transaction " + tx.getTxuid() + " did not report the correct status", Status.COMMITTED,
                     transactionDAO.retrieve(nodeid, tx.getTxuid()).getStatus());
 
             assertEquals("Incorrect number of Events created for Transaction: " + tx.getTxuid(), EXPECTED_NO_OF_EVENTS,
@@ -152,6 +154,7 @@ public class CentralisedAS8IntegrationTest {
 
         assertEquals("Incorrect number of transaction parsed", NO_OF_TX, transactionDAO.retrieveAll().size());
 
+        //TODO: need to distinguish between phase one abort and phase two abort
         for (Transaction tx : transactionDAO.retrieveAll()) {
             assertEquals("Transaction " + tx.getTxuid() + " did not report the correct status", Status.PHASE_ONE_ABORT,
                     transactionDAO.retrieve(nodeid, tx.getTxuid()).getStatus());
