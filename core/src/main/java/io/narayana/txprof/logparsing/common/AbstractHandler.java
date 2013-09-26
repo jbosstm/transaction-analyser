@@ -38,10 +38,13 @@ public abstract class AbstractHandler implements Handler {
      *
      */
     public static final String TXUID = "TXUID";
+    public static final String RESUID = "RESUID";
     /**
      *
      */
     public static final String PATTERN_TXUID = "(?<" + TXUID + ">(?:-?[0-9a-f]+:){4}-?[0-9a-f]+)";
+
+    public static final String PATTERN_RESOURCE_UID = "(?<" + RESUID + ">(?:-?[0-9a-f]+:){4}-?[0-9a-f]+)";
 
 
     private final Pattern pattern;

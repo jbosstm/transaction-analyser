@@ -354,6 +354,7 @@ public class HandlerService {
         }
     }
 
+
     public void resourceStatusOutcomeJTS(String rmuid, String twoPhaseOutcome, Timestamp timestamp) {
 
         em.getTransaction().begin();
@@ -550,7 +551,7 @@ public class HandlerService {
      * @param timestamp
      */
     public void enlistResourceManagerJTA(String txuid, String rmJndiName, String rmProductName,
-                                         String rmProductVersion, Timestamp timestamp) {
+                                         String rmProductVersion, Timestamp timestamp, String rmuid) {
 
         try {
             em.getTransaction().begin();
@@ -565,6 +566,7 @@ public class HandlerService {
             }
 
             final ParticipantRecord rec = new ParticipantRecord(tx, rm, timestamp);
+            rec.setRmuid(rmuid);
 
             em.persist(rec);
 

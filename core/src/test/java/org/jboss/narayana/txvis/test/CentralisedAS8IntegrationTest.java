@@ -22,6 +22,9 @@
 
 package org.jboss.narayana.txvis.test;
 
+import io.narayana.txprof.persistence.entities.Event;
+import io.narayana.txprof.persistence.enums.EventType;
+import junit.framework.Assert;
 import org.jboss.arquillian.container.test.api.Deployment;
 import org.jboss.arquillian.junit.Arquillian;
 import io.narayana.txprof.Configuration;
@@ -45,6 +48,8 @@ import org.junit.runner.RunWith;
 
 import javax.ejb.EJB;
 import java.io.File;
+import java.util.Collection;
+import java.util.List;
 
 import static org.junit.Assert.assertEquals;
 
@@ -73,17 +78,17 @@ public class CentralisedAS8IntegrationTest {
                 .addAsWebInfResource(new FileAsset(new File("src/test/resources/persistence.xml")),
                         "classes/META-INF/persistence.xml")
                 .addAsManifestResource(new FileAsset(new File("src/test/resources/txvis-test-ds.xml")), "txvis-test-ds.xml")
+                //.addAsManifestResource(new FileAsset(new File("src/test/resources/txvis-test-mysql-ds.xml")), "txvis-test-mysql-ds.xml")
                 .addAsLibraries(libs)
                 .setManifest(new StringAsset(ManifestMF));
     }
 
 
-    //TODO: why does it run two transactions per test?
-    private static final int NO_OF_TX = 2;
+    private static final int NO_OF_TX = 1;
     private static final int NO_OF_PARTICIPANTS = 3;
     private static final int INTRO_DELAY = 0;
-    private static final int OUTRO_DELAY = 1000;
-    private static final int EXPECTED_NO_OF_EVENTS = 3 + (2 * NO_OF_PARTICIPANTS);
+    private static final int OUTRO_DELAY = 3000;
+    private static final int EXPECTED_NO_OF_EVENTS = 4 + (3 * NO_OF_PARTICIPANTS);
 
 
     @EJB
@@ -130,7 +135,12 @@ public class CentralisedAS8IntegrationTest {
     @Test
     public void clientDrivenCommitTest() throws Exception {
 
+        System.out.println(">>>>>>>>");
+
         createAndLogTransactions(Status.COMMIT);
+
+
+        System.out.println("<<<<<<<<");
 
         assertEquals("Incorrect number of transaction parsed", NO_OF_TX, transactionDAO.retrieveAll().size());
 
@@ -138,8 +148,10 @@ public class CentralisedAS8IntegrationTest {
             assertEquals("Transaction " + tx.getTxuid() + " did not report the correct status", Status.COMMITTED,
                     transactionDAO.retrieve(nodeid, tx.getTxuid()).getStatus());
 
-            assertEquals("Incorrect number of Events created for Transaction: " + tx.getTxuid(), EXPECTED_NO_OF_EVENTS,
-                    tx.getEvents().size());
+            assertEvents(tx.getEvents(), EventType.BEGIN, EventType.ENLIST, EventType.ENLIST, EventType.ENLIST,
+                    EventType.PREPARE, EventType.PREPARE_OK, EventType.PREPARE_OK, EventType.PREPARE_OK,
+                    EventType.COMMIT, EventType.FINISH_OK, EventType.FINISH_OK, EventType.FINISH_OK, EventType.FINISH_OK);
+
 
             for (ParticipantRecord rec : tx.getParticipantRecords())
                 assertEquals("ParticipantRecord did not report the correct vote: Transaction: " + rec.getTransaction().getTxuid() +
@@ -159,23 +171,25 @@ public class CentralisedAS8IntegrationTest {
             assertEquals("Transaction " + tx.getTxuid() + " did not report the correct status", Status.PHASE_ONE_ABORT,
                     transactionDAO.retrieve(nodeid, tx.getTxuid()).getStatus());
 
-            // Expected number of events is four less as the client will initiate a rollback without asking
-            // the participants to prepare, therefore the transaction and the participants will not have a prepare event.
-            assertEquals("Incorrect number of Events created for Transaction: " + tx.getTxuid(),
-                    (EXPECTED_NO_OF_EVENTS - 4), tx.getEvents().size());
+            assertEvents(tx.getEvents(), EventType.BEGIN, EventType.ENLIST, EventType.ENLIST, EventType.ENLIST, EventType.ABORT, EventType.FINISH_OK, EventType.FINISH_OK, EventType.FINISH_OK);
+
         }
     }
 
     @Test
     public void resourceDrivenRollbackTest() throws Exception {
 
+        System.out.println(">>>>>>>>");
+
         createAndLogTransactions(Status.PHASE_TWO_ABORT);
+
+        System.out.println("<<<<<<<<");
 
         assertEquals("Incorrect number of transaction parsed", NO_OF_TX, transactionDAO.retrieveAll().size());
 
         for (Transaction tx : transactionDAO.retrieveAll()) {
             assertEquals("Transaction " + tx.getTxuid() + " did not report the correct status",
-                    Status.PHASE_TWO_ABORT, transactionDAO.retrieve(nodeid, tx.getTxuid()).getStatus());
+                    Status.ABORTED, transactionDAO.retrieve(nodeid, tx.getTxuid()).getStatus());
 
             int abortVotes = 0;
             for (ParticipantRecord rec : tx.getParticipantRecords()) {
@@ -202,5 +216,19 @@ public class CentralisedAS8IntegrationTest {
         Thread.sleep(introSleepDelay);
         txUtil.createTx(noOfTx, noOfParticipantsPerTx, outcome);
         Thread.sleep(outroSleepDelay);
+    }
+
+    private void assertEvents(Collection<Event> actualEvents, EventType... expected) {
+
+        assertEquals("Incorrect number of Events created for Transaction: " + expected.length,
+                expected.length, actualEvents.size());
+
+        Object[] eventArray = actualEvents.toArray();
+
+        int index=0;
+        for (EventType eventType : expected) {
+            assertEquals(eventType, ((Event) eventArray[index]).getEventType());
+            index++;
+        }
     }
 }
