@@ -137,13 +137,6 @@
         </dependency>
 
         <dependency>
-            <groupId>org.jboss.arquillian.junit</groupId>
-            <artifactId>arquillian-junit-container</artifactId>
-            <version>${arquillian.version}</version>
-            <scope>test</scope>
-        </dependency>
-
-        <dependency>
             <groupId>org.jboss.arquillian.protocol</groupId>
             <artifactId>arquillian-protocol-servlet</artifactId>
             <scope>test</scope>
@@ -215,9 +208,46 @@
 
             <dependencies>
                 <dependency>
+                    <groupId>org.jboss.arquillian.junit</groupId>
+                    <artifactId>arquillian-junit-container</artifactId>
+                    <version>1.0.3.Final</version>
+                    <scope>test</scope>
+                </dependency>
+                <dependency>
                         <groupId>org.wildfly</groupId>
                         <artifactId>wildfly-arquillian-container-remote</artifactId>
-                        <version>${jboss.version}</version>
+                        <version>8.0.0.Beta1-SNAPSHOT</version>
+                    <scope>test</scope>
+                </dependency>
+            </dependencies>
+        </profile>
+
+        <profile>
+            <id>eap62</id>
+
+            <build>
+                <plugins>
+                    <plugin>
+                        <artifactId>maven-surefire-plugin</artifactId>
+                        <version>${version.maven.surefire}</version>
+                        <configuration>
+                            <skip>false</skip>
+                        </configuration>
+                    </plugin>
+                </plugins>
+            </build>
+
+            <dependencies>
+                <dependency>
+                    <groupId>org.jboss.arquillian.junit</groupId>
+                    <artifactId>arquillian-junit-container</artifactId>
+                    <version>1.0.0.Final</version>
+                    <scope>test</scope>
+                </dependency>
+                <dependency>
+                        <groupId>org.jboss.as</groupId>
+                        <artifactId>jboss-as-arquillian-container-remote</artifactId>
+                        <version>7.3.0.Final-redhat-SNAPSHOT</version>
                     <scope>test</scope>
                 </dependency>
             </dependencies>

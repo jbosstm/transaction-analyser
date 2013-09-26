@@ -79,11 +79,7 @@
 
         <version.maven.surefire>2.15</version.maven.surefire>
 
-        <jboss.version>8.0.0.Beta1-SNAPSHOT</jboss.version>
-
         <version.jboss.maven.plugin>7.3.Final</version.jboss.maven.plugin>
-
-        <arquillian.version>1.0.3.Final</arquillian.version>
 
         <version.jboss.spec.javaee.6.0>3.0.2.Final</version.jboss.spec.javaee.6.0>
 
