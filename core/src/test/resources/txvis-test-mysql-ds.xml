@@ -25,11 +25,11 @@
 <datasources>
     <datasource jndi-name="java:jboss/datasources/txvisTestDS" pool-name="txvisTestDS" enabled="true"
                 use-java-context="true">
-        <connection-url>jdbc:mysql://localhost:3306/txvistest</connection-url>
+        <connection-url>jdbc:mysql://localhost:3306/txvis</connection-url>
         <driver>MySqlNonXA</driver>
         <security>
-            <user-name>root</user-name>
-            <password>root</password>
+            <user-name>txvis</user-name>
+            <password>txvis</password>
         </security>
     </datasource>
 </datasources>
