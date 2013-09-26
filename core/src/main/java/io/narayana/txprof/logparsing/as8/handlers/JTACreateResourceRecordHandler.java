@@ -23,6 +23,7 @@
 package io.narayana.txprof.logparsing.as8.handlers;
 
 import java.util.regex.Matcher;
+import java.util.regex.Pattern;
 
 /**
  * @Author Alex Creasy &lt;a.r.creasy@newcastle.ac.uk$gt;
@@ -34,8 +35,12 @@ public class JTACreateResourceRecordHandler extends JbossAS8AbstractHandler {
     /**
      *
      */
-    public static final String REGEX = "XAResourceRecord\\.XAResourceRecord.*?" + "tx_uid=" + PATTERN_TXUID + ".*?" +
-            PATTERN_XARESOURCEWRAPPERIMPL;
+    public static final String REGEX = "XAResourceRecord\\.XAResourceRecord.*?" + "tx_uid=" + PATTERN_TXUID + ".*?" + PATTERN_XARESOURCEWRAPPERIMPL + "\\] \\), record id=" + PATTERN_RESOURCE_UID;
+
+    public static final String LINE = "XAResourceRecord.XAResourceRecord ( < formatId=131077, gtrid_length=29, " +
+            "bqual_length=36, tx_uid=0:ffff7f000001:-3713c968:5243fb29:25, node_name=1, branch_uid=0:ffff7f000001:-3713c968:5243fb29:2c, " +
+            "subordinatenodename=null, eis_name=unknown eis name >, XAResourceWrapperImpl@2c12bd7e[xaResource=null pad=false " +
+            "overrideRmValue=false productName=Dummy Product productVersion=1.0.0 jndiName=java:jboss/a30c016d/fakeJndiName2] ), record id=0:ffff7f000001:-3713c968:5243fb29:2d";
 
     /**
      *
@@ -53,6 +58,18 @@ public class JTACreateResourceRecordHandler extends JbossAS8AbstractHandler {
     public void handle(Matcher matcher, String line) {
 
         service.enlistResourceManagerJTA(matcher.group(TXUID), matcher.group(RM_JNDI_NAME), matcher.group(RM_PRODUCT_NAME),
-                matcher.group(RM_PRODUCT_VERSION), parseTimestamp(matcher.group(TIMESTAMP)));
+                matcher.group(RM_PRODUCT_VERSION), parseTimestamp(matcher.group(TIMESTAMP)), matcher.group(RESUID));
+    }
+
+    public static void main(String[] args) {
+
+        Pattern pattern = Pattern.compile(REGEX);
+        Matcher matcher = pattern.matcher(LINE);
+        if (matcher.find()) {
+            System.out.println("Found");
+            System.out.println(matcher.group(RESUID));
+        } else {
+            System.out.println("Not found");
+        }
     }
 }
