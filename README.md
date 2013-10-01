@@ -171,4 +171,13 @@ Visit the Transaction Profiler page: http://localhost:8080/txvis/. This is where
 Run the transactions by visiting here and creating some users: http://localhost:8080/jboss-as-jts-application-component-1/addCustomer.jsf
 
 
+## Running the Arquillian Tests
 
+First setup the logging for WildFly as above. Then run the following commands:
+
+    cd JBOSS_HOME
+    ./bin/standalone.sh
+    
+    cd <back to this dir>
+    cd core
+    mvn test
