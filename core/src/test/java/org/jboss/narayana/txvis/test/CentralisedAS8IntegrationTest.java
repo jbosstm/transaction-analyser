@@ -22,19 +22,18 @@
 
 package org.jboss.narayana.txvis.test;
 
-import io.narayana.txprof.persistence.entities.Event;
-import io.narayana.txprof.persistence.enums.EventType;
-import junit.framework.Assert;
-import org.jboss.arquillian.container.test.api.Deployment;
-import org.jboss.arquillian.junit.Arquillian;
 import io.narayana.txprof.Configuration;
 import io.narayana.txprof.LogMonitorBean;
 import io.narayana.txprof.persistence.dao.GenericDAO;
 import io.narayana.txprof.persistence.dao.TransactionDAO;
+import io.narayana.txprof.persistence.entities.Event;
 import io.narayana.txprof.persistence.entities.ParticipantRecord;
 import io.narayana.txprof.persistence.entities.Transaction;
+import io.narayana.txprof.persistence.enums.EventType;
 import io.narayana.txprof.persistence.enums.Status;
 import io.narayana.txprof.persistence.enums.Vote;
+import org.jboss.arquillian.container.test.api.Deployment;
+import org.jboss.arquillian.junit.Arquillian;
 import org.jboss.narayana.txvis.test.utils.TransactionUtil;
 import org.jboss.shrinkwrap.api.ShrinkWrap;
 import org.jboss.shrinkwrap.api.asset.EmptyAsset;
@@ -49,7 +48,6 @@ import org.junit.runner.RunWith;
 import javax.ejb.EJB;
 import java.io.File;
 import java.util.Collection;
-import java.util.List;
 
 import static org.junit.Assert.assertEquals;
 
@@ -78,7 +76,7 @@ public class CentralisedAS8IntegrationTest {
                 .addAsWebInfResource(new FileAsset(new File("src/test/resources/persistence.xml")),
                         "classes/META-INF/persistence.xml")
                 .addAsManifestResource(new FileAsset(new File("src/test/resources/txvis-test-ds.xml")), "txvis-test-ds.xml")
-                //.addAsManifestResource(new FileAsset(new File("src/test/resources/txvis-test-mysql-ds.xml")), "txvis-test-mysql-ds.xml")
+                        //.addAsManifestResource(new FileAsset(new File("src/test/resources/txvis-test-mysql-ds.xml")), "txvis-test-mysql-ds.xml")
                 .addAsLibraries(libs)
                 .setManifest(new StringAsset(ManifestMF));
     }
@@ -225,7 +223,7 @@ public class CentralisedAS8IntegrationTest {
 
         Object[] eventArray = actualEvents.toArray();
 
-        int index=0;
+        int index = 0;
         for (EventType eventType : expected) {
             assertEquals(eventType, ((Event) eventArray[index]).getEventType());
             index++;

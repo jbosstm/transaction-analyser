@@ -214,9 +214,9 @@
                     <scope>test</scope>
                 </dependency>
                 <dependency>
-                        <groupId>org.wildfly</groupId>
-                        <artifactId>wildfly-arquillian-container-remote</artifactId>
-                        <version>8.0.0.Beta1-SNAPSHOT</version>
+                    <groupId>org.wildfly</groupId>
+                    <artifactId>wildfly-arquillian-container-remote</artifactId>
+                    <version>8.0.0.Beta1-SNAPSHOT</version>
                     <scope>test</scope>
                 </dependency>
             </dependencies>
@@ -245,9 +245,9 @@
                     <scope>test</scope>
                 </dependency>
                 <dependency>
-                        <groupId>org.jboss.as</groupId>
-                        <artifactId>jboss-as-arquillian-container-remote</artifactId>
-                        <version>7.3.0.Final-redhat-SNAPSHOT</version>
+                    <groupId>org.jboss.as</groupId>
+                    <artifactId>jboss-as-arquillian-container-remote</artifactId>
+                    <version>7.3.0.Final-redhat-SNAPSHOT</version>
                     <scope>test</scope>
                 </dependency>
             </dependencies>

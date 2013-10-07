@@ -22,7 +22,12 @@
 
 package io.narayana.txprof.persistence.entities;
 
-import javax.persistence.*;
+import javax.persistence.Entity;
+import javax.persistence.FetchType;
+import javax.persistence.Id;
+import javax.persistence.NamedQueries;
+import javax.persistence.NamedQuery;
+import javax.persistence.OneToMany;
 import java.io.Serializable;
 import java.util.Collection;
 import java.util.Collections;

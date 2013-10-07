@@ -24,11 +24,20 @@ package io.narayana.txprof.persistence.dao;
 
 import io.narayana.txprof.interceptors.LoggingInterceptor;
 
-import javax.ejb.*;
+import javax.ejb.NoSuchEntityException;
+import javax.ejb.Stateless;
+import javax.ejb.TransactionAttribute;
+import javax.ejb.TransactionAttributeType;
+import javax.ejb.TransactionManagement;
+import javax.ejb.TransactionManagementType;
 import javax.interceptor.AroundInvoke;
 import javax.interceptor.Interceptors;
 import javax.interceptor.InvocationContext;
-import javax.persistence.*;
+import javax.persistence.EntityManager;
+import javax.persistence.EntityManagerFactory;
+import javax.persistence.NoResultException;
+import javax.persistence.NonUniqueResultException;
+import javax.persistence.PersistenceUnit;
 import java.util.Collections;
 import java.util.List;
 

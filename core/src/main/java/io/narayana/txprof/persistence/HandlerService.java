@@ -22,7 +22,6 @@
 
 package io.narayana.txprof.persistence;
 
-import org.apache.log4j.Logger;
 import io.narayana.txprof.Configuration;
 import io.narayana.txprof.interceptors.LoggingInterceptor;
 import io.narayana.txprof.persistence.entities.Event;
@@ -33,12 +32,22 @@ import io.narayana.txprof.persistence.entities.Transaction;
 import io.narayana.txprof.persistence.enums.EventType;
 import io.narayana.txprof.persistence.enums.Status;
 import io.narayana.txprof.persistence.enums.Vote;
+import org.apache.log4j.Logger;
 
-import javax.ejb.*;
+import javax.ejb.Stateful;
+import javax.ejb.TransactionAttribute;
+import javax.ejb.TransactionAttributeType;
+import javax.ejb.TransactionManagement;
+import javax.ejb.TransactionManagementType;
 import javax.interceptor.AroundInvoke;
 import javax.interceptor.Interceptors;
 import javax.interceptor.InvocationContext;
-import javax.persistence.*;
+import javax.persistence.EntityManager;
+import javax.persistence.EntityManagerFactory;
+import javax.persistence.NoResultException;
+import javax.persistence.PersistenceException;
+import javax.persistence.PersistenceUnit;
+import javax.persistence.RollbackException;
 import java.sql.Timestamp;
 import java.util.HashMap;
 import java.util.Map;
@@ -175,10 +184,12 @@ public class HandlerService {
         switch (actionStatus) {
             case "FINISH_OK":
                 switch (tx.getStatus()) {
-                    case COMMIT: case ONE_PHASE_COMMIT:
+                    case COMMIT:
+                    case ONE_PHASE_COMMIT:
                         tx.setStatus(Status.COMMITTED, timestamp);
                         break;
-                    case PHASE_ONE_ABORT: case PHASE_TWO_ABORT:
+                    case PHASE_ONE_ABORT:
+                    case PHASE_TWO_ABORT:
                         tx.setStatus(Status.ABORTED, timestamp);
                         break;
                 }

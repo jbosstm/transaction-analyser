@@ -25,7 +25,13 @@ package io.narayana.txprof.persistence.dao;
 import io.narayana.txprof.persistence.entities.Transaction;
 import io.narayana.txprof.persistence.enums.Status;
 
-import javax.ejb.*;
+import javax.ejb.EJB;
+import javax.ejb.LocalBean;
+import javax.ejb.Stateless;
+import javax.ejb.TransactionAttribute;
+import javax.ejb.TransactionAttributeType;
+import javax.ejb.TransactionManagement;
+import javax.ejb.TransactionManagementType;
 import javax.persistence.EntityManager;
 import javax.persistence.EntityManagerFactory;
 import javax.persistence.NoResultException;

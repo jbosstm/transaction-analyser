@@ -22,8 +22,6 @@
 
 package org.jboss.narayana.txvis.test;
 
-import org.jboss.arquillian.container.test.api.Deployment;
-import org.jboss.arquillian.junit.Arquillian;
 import io.narayana.txprof.Configuration;
 import io.narayana.txprof.persistence.HandlerService;
 import io.narayana.txprof.persistence.dao.GenericDAO;
@@ -36,6 +34,8 @@ import io.narayana.txprof.persistence.entities.Transaction;
 import io.narayana.txprof.persistence.enums.EventType;
 import io.narayana.txprof.persistence.enums.Status;
 import io.narayana.txprof.persistence.enums.Vote;
+import org.jboss.arquillian.container.test.api.Deployment;
+import org.jboss.arquillian.junit.Arquillian;
 import org.jboss.narayana.txvis.test.utils.UniqueIdGenerator;
 import org.jboss.shrinkwrap.api.ShrinkWrap;
 import org.jboss.shrinkwrap.api.asset.FileAsset;

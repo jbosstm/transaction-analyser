@@ -22,12 +22,12 @@
 
 package org.jboss.narayana.txvis.test;
 
-import org.jboss.arquillian.container.test.api.Deployment;
-import org.jboss.arquillian.junit.Arquillian;
 import io.narayana.txprof.persistence.dao.GenericDAO;
 import io.narayana.txprof.persistence.dao.TransactionDAO;
 import io.narayana.txprof.persistence.entities.Transaction;
 import io.narayana.txprof.persistence.enums.Status;
+import org.jboss.arquillian.container.test.api.Deployment;
+import org.jboss.arquillian.junit.Arquillian;
 import org.jboss.narayana.txvis.test.utils.UniqueIdGenerator;
 import org.jboss.shrinkwrap.api.ShrinkWrap;
 import org.jboss.shrinkwrap.api.asset.FileAsset;

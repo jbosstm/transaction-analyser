@@ -22,8 +22,8 @@
 
 package io.narayana.txprof.plugins;
 
-import org.apache.log4j.Logger;
 import io.narayana.txprof.persistence.DataAccessObject;
+import org.apache.log4j.Logger;
 
 import javax.annotation.PostConstruct;
 import javax.annotation.PreDestroy;

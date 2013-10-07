@@ -22,13 +22,23 @@
 
 package io.narayana.txprof;
 
-import org.apache.commons.io.input.Tailer;
-import org.apache.log4j.Logger;
 import io.narayana.txprof.logparsing.common.LogParser;
 import io.narayana.txprof.logparsing.common.LogParserFactory;
+import org.apache.commons.io.input.Tailer;
+import org.apache.log4j.Logger;
 
 import javax.annotation.Resource;
-import javax.ejb.*;
+import javax.ejb.Asynchronous;
+import javax.ejb.EJB;
+import javax.ejb.LocalBean;
+import javax.ejb.Lock;
+import javax.ejb.LockType;
+import javax.ejb.SessionContext;
+import javax.ejb.Singleton;
+import javax.ejb.TransactionAttribute;
+import javax.ejb.TransactionAttributeType;
+import javax.ejb.TransactionManagement;
+import javax.ejb.TransactionManagementType;
 import java.io.File;
 
 /**

@@ -24,7 +24,6 @@ package io.narayana.txprof.plugins;
 
 import io.narayana.txprof.persistence.entities.Transaction;
 
-import javax.persistence.*;
 import java.io.Serializable;
 import java.util.Collections;
 import java.util.HashSet;

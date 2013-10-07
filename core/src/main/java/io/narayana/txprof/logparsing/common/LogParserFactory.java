@@ -22,9 +22,9 @@
 
 package io.narayana.txprof.logparsing.common;
 
-import org.apache.log4j.Logger;
 import io.narayana.txprof.Configuration;
 import io.narayana.txprof.persistence.HandlerService;
+import org.apache.log4j.Logger;
 
 import javax.naming.Context;
 import javax.naming.InitialContext;

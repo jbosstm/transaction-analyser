@@ -22,11 +22,11 @@
 
 package org.jboss.narayana.txvis.test;
 
-import org.jboss.arquillian.container.test.api.Deployment;
-import org.jboss.arquillian.junit.Arquillian;
 import io.narayana.txprof.persistence.dao.GenericDAO;
 import io.narayana.txprof.persistence.entities.Transaction;
 import io.narayana.txprof.persistence.enums.Status;
+import org.jboss.arquillian.container.test.api.Deployment;
+import org.jboss.arquillian.junit.Arquillian;
 import org.jboss.narayana.txvis.test.utils.UniqueIdGenerator;
 import org.jboss.shrinkwrap.api.ShrinkWrap;
 import org.jboss.shrinkwrap.api.asset.FileAsset;
@@ -40,7 +40,8 @@ import javax.ejb.EJB;
 import java.io.File;
 import java.sql.Timestamp;
 
-import static junit.framework.Assert.*;
+import static junit.framework.Assert.assertEquals;
+import static junit.framework.Assert.assertNotNull;
 
 /**
  * @Author Alex Creasy &lt;a.r.creasy@newcastle.ac.uk$gt;
