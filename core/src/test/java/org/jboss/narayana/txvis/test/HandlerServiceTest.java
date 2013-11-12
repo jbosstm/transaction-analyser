@@ -136,6 +136,7 @@ public class HandlerServiceTest {
 
         final String txuid = idGen.getUniqueTxId();
         service.begin(txuid, timestamp, null);
+        service.prepare(txuid, timestamp);
         service.phase2Commit(txuid, timestamp);
 
         final Transaction tx = transactionDAO.retrieve(jbossNodeId, txuid);
@@ -175,6 +176,7 @@ public class HandlerServiceTest {
 
         final String txuid = idGen.getUniqueTxId();
         service.begin(txuid, timestamp, null);
+        service.prepare(txuid, timestamp);
         service.phase2Abort(txuid, timestamp);
 
         final Transaction tx = transactionDAO.retrieve(jbossNodeId, txuid);
@@ -201,7 +203,7 @@ public class HandlerServiceTest {
         ResourceManager rm2 = new ResourceManager(jndiName2, null, null);
         resourceManagerDAO.create(rm2);
         assertNotNull("ResourceManager not created", resourceManagerDAO.retrieve(jndiName2));
-        service.enlistResourceManagerJTA(txuid, jndiName2, null, null, timestamp, "1");
+        service.enlistResourceManagerJTA(txuid, jndiName2, null, null, timestamp, "2");
         rm2 = resourceManagerDAO.retrieve(jndiName2);
         assertNotNull("ResourceManager not created", rm2);
         assertEquals("ResourceManager contained incorrect Jndi name", jndiName2, rm2.getJndiName());
@@ -217,7 +219,7 @@ public class HandlerServiceTest {
         service.begin(txuid, timestamp, null);
 
         final String jndiName = idGen.getUniqueJndiName();
-        service.enlistResourceManagerJTA(txuid, jndiName, null, null, timestamp, "2");
+        service.enlistResourceManagerJTA(txuid, jndiName, null, null, timestamp, "3");
         service.resourcePreparedJTA(txuid, jndiName, timestamp);
 
         assertEquals("ParticipantRecord contained incorrect vote", Vote.COMMIT,
@@ -233,7 +235,7 @@ public class HandlerServiceTest {
         service.begin(txuid, timestamp, null);
 
         final String jndiName = idGen.getUniqueJndiName();
-        service.enlistResourceManagerJTA(txuid, jndiName, null, null, timestamp, "3");
+        service.enlistResourceManagerJTA(txuid, jndiName, null, null, timestamp, "4");
         service.resourceFailedToPrepareJTA(txuid, jndiName, xaException, timestamp);
 
         assertEquals("ParticipantRecord contained incorrect vote", Vote.ABORT,
