@@ -26,7 +26,7 @@
              xsi:schemaLocation="http://java.sun.com/xml/ns/persistence
              http://java.sun.com/xml/ns/persistence/persistence_2_0.xsd">
     <persistence-unit name="org.jboss.narayana.txvis" transaction-type="RESOURCE_LOCAL">
-        <non-jta-data-source>java:jboss/datasources/txvisDS</non-jta-data-source>
+        <non-jta-data-source>java:jboss/datasources/DefaultDS</non-jta-data-source>
         <class>io.narayana.txprof.persistence.entities.Transaction</class>
         <class>io.narayana.txprof.persistence.entities.ResourceManager</class>
         <class>io.narayana.txprof.persistence.entities.ParticipantRecord</class>
@@ -36,7 +36,7 @@
             <property name="hibernate.hbm2ddl.auto" value="update"/>
             <property name="hibernate.show_sql" value="false"/>
             <property name="hibernate.format_sql" value="false"/>
-            <property name="hibernate.dialect" value="org.hibernate.dialect.MySQLDialect"/>
+            <property name="hibernate.dialect" value="org.hibernate.dialect.H2Dialect"/>
             <property name="transaction.factory_class" value="org.hibernate.transaction.JDBCTransactionFactory"/>
             <property name="hibernate.current_session_context_class" value="thread"/>
         </properties>

@@ -40,7 +40,7 @@
     <!--<driver>MySqlXA</driver>-->
     <!--</xa-datasource>-->
 
-    <datasource jndi-name="java:jboss/datasources/txvisDS" jta="false" pool-name="txvisDS" enabled="true"
+    <datasource jndi-name="java:jboss/datasources/txvisDS" jta="false" pool-name="txvisDS" enabled="false"
                 use-java-context="true">
         <connection-url>jdbc:mysql://localhost:3306/txvis</connection-url>
         <driver>MySqlNonXA</driver>
@@ -63,4 +63,12 @@
     <!--</recover-credential>-->
     <!--</recovery>-->
     <!--</xa-datasource>-->
+    <datasource jndi-name="java:jboss/datasources/DefaultDS" pool-name="DefaultDS" enabled="true" use-java-context="true">
+        <connection-url>jdbc:h2:file:${jboss.server.data.dir}/txvis</connection-url>
+        <driver>h2</driver>
+        <security>
+            <user-name>txvis</user-name>
+            <password>txvis</password>
+        </security>
+    </datasource>
 </datasources>
