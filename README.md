@@ -32,7 +32,7 @@ To:
                 <level name="TRACE"/>
             </logger>
 
-Also, set the TRACE level on the periodic-rotating-file-handler, by adding the "<level name="TRACE"/>" block. This ensures that the transaction manager's
+Also, set the TRACE level on the periodic-rotating-file-handler, by adding the `<level name="TRACE"/>` block. This ensures that the transaction manager's
 TRACE logging appears in the standalone/log/server.log file.
 
             <periodic-rotating-file-handler name="FILE" autoflush="true">
