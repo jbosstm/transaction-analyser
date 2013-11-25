@@ -49,6 +49,7 @@
                 <module>webapp</module>
                 <module>tx-profiler-full</module>
                 <module>tx-profiler-lite</module>
+                <module>demo</module>
             </modules>
         </profile>
         <profile>
