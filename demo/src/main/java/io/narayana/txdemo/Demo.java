@@ -27,21 +27,27 @@ import javax.transaction.TransactionManager;
  * @author <a href="mailto:zfeng@redhat.com">Amos Feng</a>
  */
 public abstract class Demo {
+
     private int id;
     private String name;
 
-    public Demo() {}
+    public Demo() {
+
+    }
 
     public Demo(int id, String name) {
+
         this.id = id;
         this.name = name;
     }
 
     public String getName() {
+
         return name;
     }
 
     public int getId() {
+
         return id;
     }
 

@@ -1,12 +1,12 @@
 .view-container {
-	position: relative;
+    position: relative;
 }
 
 .view-frame.ng-enter,
 .view-frame.ng-leave {
-	background: white;
-	position: absolute;
-	top: 0;
-	left: 0;
-	right: 0;
+    background: white;
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
 }

@@ -27,7 +27,9 @@ import javax.transaction.TransactionManager;
  * @author <a href="mailto:zfeng@redhat.com">Amos Feng</a>
  */
 public class PrepareFailDemo extends Demo {
+
     public PrepareFailDemo() {
+
         super(3, "Participant Fails to Prepare");
     }
 

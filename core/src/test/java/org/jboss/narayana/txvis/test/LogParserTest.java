@@ -22,18 +22,19 @@
 
 package org.jboss.narayana.txvis.test;
 
-import static org.junit.Assert.assertTrue;
 import io.narayana.txprof.logparsing.as8.handlers.JbossAS8AbstractHandler;
 import io.narayana.txprof.logparsing.common.Handler;
+import org.junit.Test;
 
 import java.util.regex.Matcher;
 
-import org.junit.Test;
+import static org.junit.Assert.assertTrue;
 
 public class LogParserTest {
- 
+
     @Test
     public void timestampTest() {
+
         Handler handler = new TestHandler();
 
         String timestamp = "21:21:59,910";
@@ -51,12 +52,15 @@ public class LogParserTest {
 }
 
 class TestHandler extends JbossAS8AbstractHandler {
+
     public TestHandler() {
+
         super("");
     }
 
     @Override
     public void handle(Matcher matcher, String line) {
+
         assertTrue(matcher.group(TIMESTAMP).equals(line));
     }
 }

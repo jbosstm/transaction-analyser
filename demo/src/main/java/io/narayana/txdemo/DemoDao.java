@@ -34,10 +34,12 @@ import java.io.Serializable;
 @Stateless
 @LocalBean
 public class DemoDao implements Serializable {
+
     @PersistenceContext
     private EntityManager em;
 
     public void create(String name) throws Exception {
+
         DemoData data = new DemoData();
         data.setName(name);
         em.persist(data);

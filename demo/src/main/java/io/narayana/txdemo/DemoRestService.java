@@ -41,6 +41,7 @@ import java.util.List;
 @Path("/demos")
 @Stateless
 public class DemoRestService {
+
     private ArrayList<Demo> demos = new ArrayList<>();
 
     @EJB
@@ -49,7 +50,8 @@ public class DemoRestService {
     @Resource(lookup = "java:jboss/TransactionManager")
     private TransactionManager tm;
 
-    public DemoRestService () {
+    public DemoRestService() {
+
         demos.add(new SuccessTransactionDemo());
         demos.add(new TimeoutTransactionDemo());
         demos.add(new PrepareFailDemo());
@@ -59,6 +61,7 @@ public class DemoRestService {
     @Produces(MediaType.APPLICATION_JSON)
     @TransactionAttribute(TransactionAttributeType.NEVER)
     public List<Demo> listAllDemos() {
+
         return demos;
     }
 
@@ -67,8 +70,9 @@ public class DemoRestService {
     @Produces(MediaType.APPLICATION_JSON)
     @TransactionAttribute(value = TransactionAttributeType.NEVER)
     public DemoResult getDemo(@PathParam("id") int id) {
-        for(Demo demo : demos) {
-            if(demo.getId() == id) {
+
+        for (Demo demo : demos) {
+            if (demo.getId() == id) {
                 try {
                     return demo.run(tm, dao);
                 } catch (Exception e) {

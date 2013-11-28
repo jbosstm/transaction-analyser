@@ -1,6 +1,8 @@
 <em ng-show="demos.length == 0">No Demos.</em>
 <table ng-hide="demos.length == 0" class="simpletablestyle">
-    <tr ng-repeat="demo in demos | orderBy:orderBy"><td>{{demo.id}})</td><td>{{demo.name}}</td>
-        <td><input type="button" ng-click="invoke_demo(demo.id)" name="invoke" value="Invoke" /></td>
+    <tr ng-repeat="demo in demos | orderBy:orderBy">
+        <td>{{demo.id}})</td>
+        <td>{{demo.name}}</td>
+        <td><input type="button" ng-click="invoke_demo(demo.id)" name="invoke" value="Invoke"/></td>
     </tr>
 </table>
