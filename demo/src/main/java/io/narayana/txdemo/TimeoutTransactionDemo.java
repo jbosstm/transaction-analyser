@@ -28,14 +28,23 @@ import javax.transaction.TransactionManager;
  */
 public class TimeoutTransactionDemo extends Demo {
     public TimeoutTransactionDemo() {
-        super(2, "timeout transaction demo");
+        super(2, "Transaction Timeout");
     }
 
     @Override
     public DemoResult run(TransactionManager tm, DemoDao dao) throws Exception {
-        tm.getTransaction().enlistResource(new DemoDummyXAResource("demo1", DemoDummyXAResource.faultType.TIMEOUT));
+
+
+        tm.setTransactionTimeout(1);
+        tm.begin();
+
+        tm.getTransaction().enlistResource(new DemoDummyXAResource("demo1"));
         tm.getTransaction().enlistResource(new DemoDummyXAResource("demo2"));
         dao.create("timeout");
+        Thread.sleep(2000);
+
+        tm.commit();
+
         return new DemoResult(0, "timeout");
     }
 }

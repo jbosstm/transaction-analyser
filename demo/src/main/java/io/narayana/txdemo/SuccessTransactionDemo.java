@@ -29,14 +29,20 @@ import javax.transaction.TransactionManager;
 public class SuccessTransactionDemo extends Demo {
 
     public SuccessTransactionDemo() {
-        super(1, "success transaction demo");
+        super(1, "Successful Transaction");
     }
 
     @Override
     public DemoResult run(TransactionManager tm, DemoDao dao) throws Exception {
+
+        tm.begin();
+
         tm.getTransaction().enlistResource(new DemoDummyXAResource("demo1"));
         tm.getTransaction().enlistResource(new DemoDummyXAResource("demo2"));
         dao.create("test");
+
+        tm.commit();
+
         return new DemoResult(0, "commit ok");
     }
 }

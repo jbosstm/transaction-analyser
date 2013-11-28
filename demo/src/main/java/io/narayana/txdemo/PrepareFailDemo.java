@@ -28,14 +28,20 @@ import javax.transaction.TransactionManager;
  */
 public class PrepareFailDemo extends Demo {
     public PrepareFailDemo() {
-        super(3, "prepare fail transaction demo");
+        super(3, "Participant Fails to Prepare");
     }
 
     @Override
     public DemoResult run(TransactionManager tm, DemoDao dao) throws Exception {
+
+        tm.begin();
+
         tm.getTransaction().enlistResource(new DemoDummyXAResource("demo1"));
         tm.getTransaction().enlistResource(new DemoDummyXAResource("demo2", DemoDummyXAResource.faultType.PREPARE_FAIL));
         dao.create("prepare_fail");
+
+        tm.commit();
+
         return new DemoResult(0, "prepare fail");
     }
 }

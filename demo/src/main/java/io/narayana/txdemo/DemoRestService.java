@@ -65,6 +65,7 @@ public class DemoRestService {
     @GET
     @Path("/{id:[0-9][0-9]*}")
     @Produces(MediaType.APPLICATION_JSON)
+    @TransactionAttribute(value = TransactionAttributeType.NEVER)
     public DemoResult getDemo(@PathParam("id") int id) {
         for(Demo demo : demos) {
             if(demo.getId() == id) {
