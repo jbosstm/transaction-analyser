@@ -27,7 +27,9 @@ import javax.transaction.TransactionManager;
  * @author <a href="mailto:zfeng@redhat.com">Amos Feng</a>
  */
 public class TimeoutTransactionDemo extends Demo {
+
     public TimeoutTransactionDemo() {
+
         super(2, "Transaction Timeout");
     }
 

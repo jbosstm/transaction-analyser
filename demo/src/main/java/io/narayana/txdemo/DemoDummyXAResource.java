@@ -30,24 +30,30 @@ import java.io.Serializable;
  * @author <a href="mailto:zfeng@redhat.com">Amos Feng</a>
  */
 public class DemoDummyXAResource implements XAResource, Serializable {
-    public enum faultType {TIMEOUT, PREPARE_FAIL, NONE};
+
+    public enum faultType {TIMEOUT, PREPARE_FAIL, NONE}
+
+    ;
 
     private String name;
 
     private faultType fault = faultType.NONE;
 
     public DemoDummyXAResource(String name) {
+
         this(name, faultType.NONE);
     }
 
     public DemoDummyXAResource(String name, faultType fault) {
+
         this.name = name;
         this.fault = fault;
     }
 
     @Override
     public void commit(Xid xid, boolean b) throws XAException {
-        if(fault == faultType.TIMEOUT) throw new XAException(XAException.XA_RBTIMEOUT);
+
+        if (fault == faultType.TIMEOUT) throw new XAException(XAException.XA_RBTIMEOUT);
     }
 
     @Override
@@ -62,17 +68,20 @@ public class DemoDummyXAResource implements XAResource, Serializable {
 
     @Override
     public int getTransactionTimeout() throws XAException {
+
         return 0;
     }
 
     @Override
     public boolean isSameRM(XAResource xaResource) throws XAException {
+
         return this.equals(xaResource);
     }
 
     @Override
     public int prepare(Xid xid) throws XAException {
-        if(fault == faultType.PREPARE_FAIL) {
+
+        if (fault == faultType.PREPARE_FAIL) {
             throw new XAException(XAException.XAER_RMFAIL);
         }
         return XAResource.XA_OK;
@@ -80,6 +89,7 @@ public class DemoDummyXAResource implements XAResource, Serializable {
 
     @Override
     public Xid[] recover(int i) throws XAException {
+
         return null;
     }
 
@@ -90,6 +100,7 @@ public class DemoDummyXAResource implements XAResource, Serializable {
 
     @Override
     public boolean setTransactionTimeout(int timeout) throws XAException {
+
         return false;
     }
 
@@ -100,6 +111,7 @@ public class DemoDummyXAResource implements XAResource, Serializable {
 
     @Override
     public String toString() {
-        return "XAResourceWrapperImpl@[xaResource=" + super.toString() + " pad=false overrideRmValue=null productName=" + name + " productVersion=1.0 jndiName=java:jboss/" + name +"]";
+
+        return "XAResourceWrapperImpl@[xaResource=" + super.toString() + " pad=false overrideRmValue=null productName=" + name + " productVersion=1.0 jndiName=java:jboss/" + name + "]";
     }
 }

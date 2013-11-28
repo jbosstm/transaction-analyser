@@ -63,7 +63,8 @@
     <!--</recover-credential>-->
     <!--</recovery>-->
     <!--</xa-datasource>-->
-    <datasource jndi-name="java:jboss/datasources/DefaultDS" pool-name="DefaultDS" enabled="true" use-java-context="true">
+    <datasource jndi-name="java:jboss/datasources/DefaultDS" pool-name="DefaultDS" enabled="true"
+                use-java-context="true">
         <connection-url>jdbc:h2:file:${jboss.server.data.dir}/txvis</connection-url>
         <driver>h2</driver>
         <security>

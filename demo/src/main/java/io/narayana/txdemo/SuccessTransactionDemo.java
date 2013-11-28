@@ -29,6 +29,7 @@ import javax.transaction.TransactionManager;
 public class SuccessTransactionDemo extends Demo {
 
     public SuccessTransactionDemo() {
+
         super(1, "Successful Transaction");
     }
 

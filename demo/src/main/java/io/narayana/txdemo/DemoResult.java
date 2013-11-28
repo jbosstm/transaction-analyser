@@ -25,19 +25,23 @@ package io.narayana.txdemo;
  * @author <a href="mailto:zfeng@redhat.com">Amos Feng</a>
  */
 public class DemoResult {
+
     private int ret;
     private String msg;
 
     public DemoResult(int ret, String msg) {
+
         this.ret = ret;
         this.msg = msg;
     }
 
     public int getRet() {
+
         return ret;
     }
 
     public String getMsg() {
+
         return msg;
     }
 }
