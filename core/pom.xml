@@ -55,7 +55,7 @@
             <dependency>
                 <groupId>org.jboss.shrinkwrap.resolver</groupId>
                 <artifactId>shrinkwrap-resolver-bom</artifactId>
-                <version>2.0.0-alpha-5</version>
+                <version>2.0.0-beta-1</version>
                 <scope>import</scope>
                 <type>pom</type>
             </dependency>
@@ -74,7 +74,7 @@
         <dependency>
             <groupId>org.jboss.shrinkwrap.resolver</groupId>
             <artifactId>shrinkwrap-resolver-api</artifactId>
-            <version>2.0.0-alpha-5</version>
+            <version>2.0.0-beta-1</version>
             <scope>test</scope>
         </dependency>
 
@@ -93,14 +93,14 @@
         <dependency>
             <groupId>org.jboss.shrinkwrap.resolver</groupId>
             <artifactId>shrinkwrap-resolver-impl-maven</artifactId>
-            <version>2.0.0-alpha-5</version>
+            <version>2.0.0-beta-1</version>
             <scope>test</scope>
         </dependency>
 
         <dependency>
             <groupId>org.jboss.shrinkwrap.resolver</groupId>
             <artifactId>shrinkwrap-resolver-api-maven</artifactId>
-            <version>2.0.0-alpha-5</version>
+            <version>2.0.0-beta-1</version>
             <scope>test</scope>
         </dependency>
 
@@ -146,6 +146,8 @@
             <groupId>commons-io</groupId>
             <artifactId>commons-io</artifactId>
             <version>2.5-SNAPSHOT</version>
+            <scope>system</scope>
+            <systemPath>${basedir}/../etc/lib/commons-io-2.5-SNAPSHOT.jar</systemPath>
         </dependency>
 
         <dependency>

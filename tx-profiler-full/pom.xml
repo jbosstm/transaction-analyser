@@ -61,6 +61,26 @@
     <build>
         <finalName>${project.artifactId}</finalName>
         <plugins>
+            <plugin>  
+                <groupId>org.apache.maven.plugins</groupId>  
+                <artifactId>maven-dependency-plugin</artifactId>  
+                <executions>  
+                    <execution>  
+                        <id>copy</id>  
+                        <phase>compile</phase>  
+                        <goals>  
+                            <goal>copy-dependencies</goal>  
+                        </goals>  
+                        <configuration>  
+                            <includeGroupIds>commons-io</includeGroupIds>
+                            <stripVersion>true</stripVersion>
+                            <outputDirectory>  
+                                ${project.build.directory}/${project.artifactId}/lib  
+                            </outputDirectory>  
+                        </configuration>  
+                    </execution>  
+                </executions>  
+            </plugin>
             <plugin>
                 <groupId>org.apache.maven.plugins</groupId>
                 <artifactId>maven-ear-plugin</artifactId>

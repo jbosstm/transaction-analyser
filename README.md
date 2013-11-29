@@ -46,10 +46,6 @@ Maven 3+ should be installed and present in your OS's PATH environment variable.
 The commons-io 2.5-SNAPSHOT release is required as it contains a bug fix that is essential to the correct running of this tool.
 The snapshot release is not available from a central maven repository so a compiled jar is included in the [project root]/etc/lib directory.
 
-This should be installed into your local maven repository using the following command:
-
-    mvn install:install-file -Dfile=./etc/lib/commons-io-2.5-SNAPSHOT.jar -DgroupId=commons-io -DartifactId=commons-io -Dversion=2.5-SNAPSHOT -Dpackaging=jar
-
 ## Build and Deploy the Transaction Analyser
 Ensure WildFly is running, then run:
 
