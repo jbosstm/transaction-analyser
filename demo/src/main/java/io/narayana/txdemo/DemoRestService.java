@@ -55,6 +55,7 @@ public class DemoRestService {
         demos.add(new SuccessTransactionDemo());
         demos.add(new TimeoutTransactionDemo());
         demos.add(new PrepareFailDemo());
+        demos.add(new ClientDrivenRollbackDemo());
     }
 
     @GET
