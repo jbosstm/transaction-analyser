@@ -25,13 +25,13 @@
              xmlns="http://java.sun.com/xml/ns/persistence" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
              xsi:schemaLocation="http://java.sun.com/xml/ns/persistence
              http://java.sun.com/xml/ns/persistence/persistence_2_0.xsd">
-    <persistence-unit name="org.jboss.narayana.txvis" transaction-type="RESOURCE_LOCAL">
+    <persistence-unit name="io.narayana.nta" transaction-type="RESOURCE_LOCAL">
         <non-jta-data-source>java:jboss/datasources/DefaultDS</non-jta-data-source>
-        <class>io.narayana.txprof.persistence.entities.Transaction</class>
-        <class>io.narayana.txprof.persistence.entities.ResourceManager</class>
-        <class>io.narayana.txprof.persistence.entities.ParticipantRecord</class>
-        <class>io.narayana.txprof.persistence.entities.Event</class>
-        <class>io.narayana.txprof.persistence.entities.RequestRecord</class>
+        <class>io.narayana.nta.persistence.entities.Transaction</class>
+        <class>io.narayana.nta.persistence.entities.ResourceManager</class>
+        <class>io.narayana.nta.persistence.entities.ParticipantRecord</class>
+        <class>io.narayana.nta.persistence.entities.Event</class>
+        <class>io.narayana.nta.persistence.entities.RequestRecord</class>
         <properties>
             <property name="hibernate.hbm2ddl.auto" value="update"/>
             <property name="hibernate.show_sql" value="false"/>

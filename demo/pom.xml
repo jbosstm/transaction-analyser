@@ -25,13 +25,13 @@
     <modelVersion>4.0.0</modelVersion>
 
     <parent>
-        <artifactId>txprof-all</artifactId>
-        <groupId>org.jboss.narayana.txprof</groupId>
+        <artifactId>nta-all</artifactId>
+        <groupId>io.narayana.nta</groupId>
         <version>1.0.0.Alpha1-SNAPSHOT</version>
     </parent>
 
     <artifactId>demo</artifactId>
-    <name>Txvis Demo Application</name>
+    <name>Narayana Transaction Analyser Demo Application</name>
     <description>A demo application that could fail transactions on demand</description>
     <packaging>war</packaging>
 

@@ -51,7 +51,7 @@ Ensure WildFly is running, then run:
 
     mvn clean package -DskipTests jboss-as:deploy
 
-The user interface can now be accessed by pointing a browser at: http://localhost:8080/txvis/
+The user interface can now be accessed by pointing a browser at: http://localhost:8080/nta/
 
 
 ## Running the Demo Application

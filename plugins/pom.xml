@@ -25,13 +25,14 @@
          xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
          xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
     <parent>
-        <artifactId>txprof-all</artifactId>
-        <groupId>org.jboss.narayana.txprof</groupId>
+        <artifactId>nta-all</artifactId>
+        <groupId>io.narayana.nta</groupId>
         <version>1.0.0.Alpha1-SNAPSHOT</version>
     </parent>
     <modelVersion>4.0.0</modelVersion>
 
     <artifactId>plugins</artifactId>
+    <name>Narayana Transaction Analyser Plugin Module</name>
 
     <dependencyManagement>
 
@@ -50,7 +51,7 @@
     <dependencies>
 
         <dependency>
-            <groupId>org.jboss.narayana.txprof</groupId>
+            <groupId>io.narayana.nta</groupId>
             <artifactId>core</artifactId>
             <version>1.0.0.Alpha1-SNAPSHOT</version>
             <scope>provided</scope>

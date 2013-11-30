@@ -26,15 +26,15 @@
     <modelVersion>4.0.0</modelVersion>
 
 
-    <groupId>org.jboss.narayana.txprof</groupId>
-    <artifactId>txprof-all</artifactId>
+    <groupId>io.narayana.nta</groupId>
+    <artifactId>nta-all</artifactId>
     <version>1.0.0.Alpha1-SNAPSHOT</version>
 
     <packaging>pom</packaging>
-    <name>Txvis: Transaction Profiling and Visualization Tool</name>
+    <name>Narayana Transaction Analyser</name>
     <description>
-        TxVis is a prototype transaction profiling and visualisation tool for WildFly / JBoss EAP used for highlighting
-        possible performance issues with transactional applications.
+		Narayana Transaction Analyser is a tool for helping to diagnose issues with JTA and JTS 
+		transactions in WildFly and JBoss EAP 6.
     </description>
 
     <profiles>
@@ -47,8 +47,8 @@
                 <module>core</module>
                 <module>plugins</module>
                 <module>webapp</module>
-                <module>tx-profiler-full</module>
-                <module>tx-profiler-lite</module>
+                <module>nta-full</module>
+                <module>nta-lite</module>
                 <module>demo</module>
             </modules>
         </profile>
@@ -60,7 +60,7 @@
             <modules>
                 <module>core</module>
                 <module>webapp</module>
-                <module>tx-profiler-full</module>
+                <module>nta-full</module>
             </modules>
         </profile>
         <profile>
@@ -69,8 +69,8 @@
                 <module>core</module>
                 <module>plugins</module>
                 <module>webapp</module>
-                <module>tx-profiler-full</module>
-                <module>tx-profiler-lite</module>
+                <module>nta-full</module>
+                <module>nta-lite</module>
             </modules>
         </profile>
     </profiles>
@@ -99,21 +99,21 @@
     <dependencyManagement>
         <dependencies>
             <dependency>
-                <groupId>org.jboss.narayana.txprof</groupId>
+                <groupId>io.narayana.nta</groupId>
                 <artifactId>core</artifactId>
                 <version>${project.version}</version>
                 <type>ejb</type>
             </dependency>
 
             <dependency>
-                <groupId>org.jboss.narayana.txprof</groupId>
+                <groupId>io.narayana.nta</groupId>
                 <artifactId>plugins</artifactId>
                 <version>${project.version}</version>
                 <type>ejb</type>
             </dependency>
 
             <dependency>
-                <groupId>org.jboss.narayana.txprof</groupId>
+                <groupId>io.narayana.nta</groupId>
                 <artifactId>webapp</artifactId>
                 <version>${project.version}</version>
                 <type>war</type>

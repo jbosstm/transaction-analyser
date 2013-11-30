@@ -27,13 +27,13 @@
     <modelVersion>4.0.0</modelVersion>
 
     <parent>
-        <artifactId>txprof-all</artifactId>
-        <groupId>org.jboss.narayana.txprof</groupId>
+        <artifactId>nta-all</artifactId>
+        <groupId>io.narayana.nta</groupId>
         <version>1.0.0.Alpha1-SNAPSHOT</version>
     </parent>
 
     <artifactId>core</artifactId>
-    <name>Txvis Core Module</name>
+    <name>Narayana Transaction Analyser Core Module</name>
     <description>Contains the core log parsing and persistence components of the tool</description>
     <properties/>
 

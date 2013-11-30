@@ -29,13 +29,13 @@ Update the JacOrb service for use by JTS:
 
 A local MySQL server is required running on `localhost` with the default port of `3306` and needs to be configured with the following database and users:
 
-A user: `txvis` with password: `txvis` which has ALL privileges on a database called `txvis`.
+A user: `nta` with password: `nta` which has ALL privileges on a database called `nta`.
 
 This can be created from the command line like so (note: leave root password blank if you have never set it before):
 
 	>mysql -u root -p <root password>
-	mysql> CREATE DATABASE txvis;
-	mysql> GRANT ALL PRIVILEGES ON txvis.* TO txvis@localhost IDENTIFIED BY 'txvis';
+	mysql> CREATE DATABASE nta;
+	mysql> GRANT ALL PRIVILEGES ON nta.* TO nta@localhost IDENTIFIED BY 'nta';
 
 In order for MySQL to work with JBoss you will need to install the Connector/J MySQL JDBC driver this can be achieved by following these steps:
 
@@ -61,7 +61,7 @@ different ports. Also different node names and IDs are needed for each instance:
 
 ## Running an example to create some transactions
 
-Clone the following project. This will allow you to run some successful and failing transactions and observe them in the Transaction Profiler.
+Clone the following project. This will allow you to run some successful and failing transactions and observe them in the Transaction Analyser.
 
     git clone https://github.com/alexcreasy/distributed-test-service.git
     cd distributed-test-service
@@ -86,12 +86,12 @@ Deploy the application to each server:
 
     mvn package jboss-as:deploy
 
-Copy the 'lite' version of the Transaction Profiler to the 2nd and 3rd servers.
+Copy the 'lite' version of the Transaction Analyser to the 2nd and 3rd servers.
 
-  cp ./tx-profiler-lite/target/tx-profiler-lite.ear <PATH TO DEPLOY DIR ON SERVER2>
-  cp ./tx-profiler-lite/target/tx-profiler-lite.ear <PATH TO DEPLOY DIR ON SERVER3>
+  cp ./nta-lite/target/nta-lite.ear <PATH TO DEPLOY DIR ON SERVER2>
+  cp ./nta-lite/target/nta-lite.ear <PATH TO DEPLOY DIR ON SERVER3>
 
 
-Visit the Transaction Profiler page: http://localhost:8080/txvis/. This is where the transaction details will apear after they are run.
+Visit the Transaction Analyser page: http://localhost:8080/nta/. This is where the transaction details will apear after they are run.
 
 Run the transactions by visiting here and creating some users: http://localhost:8080/jboss-as-jts-application-component-1/addCustomer.jsf

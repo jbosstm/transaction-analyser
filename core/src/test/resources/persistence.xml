@@ -26,15 +26,15 @@
              xsi:schemaLocation="
         http://java.sun.com/xml/ns/persistence
         http://java.sun.com/xml/ns/persistence/persistence_2_0.xsd">
-    <persistence-unit name="org.jboss.narayana.txvis" transaction-type="RESOURCE_LOCAL">
+    <persistence-unit name="io.narayana.nta" transaction-type="RESOURCE_LOCAL">
         <!-- If you are running in a production environment, add a managed
            data source, the example data source is just for proofs of concept! -->
-        <non-jta-data-source>java:jboss/datasources/txvisTestDS</non-jta-data-source>
-        <class>io.narayana.txprof.persistence.entities.Transaction</class>
-        <class>io.narayana.txprof.persistence.entities.ResourceManager</class>
-        <class>io.narayana.txprof.persistence.entities.ParticipantRecord</class>
-        <class>io.narayana.txprof.persistence.entities.Event</class>
-        <class>io.narayana.txprof.persistence.entities.RequestRecord</class>
+        <non-jta-data-source>java:jboss/datasources/ntaTestDS</non-jta-data-source>
+        <class>io.narayana.nta.persistence.entities.Transaction</class>
+        <class>io.narayana.nta.persistence.entities.ResourceManager</class>
+        <class>io.narayana.nta.persistence.entities.ParticipantRecord</class>
+        <class>io.narayana.nta.persistence.entities.Event</class>
+        <class>io.narayana.nta.persistence.entities.RequestRecord</class>
         <properties>
             <!-- Properties for Hibernate -->
             <property name="hibernate.hbm2ddl.auto" value="create-drop"/>
