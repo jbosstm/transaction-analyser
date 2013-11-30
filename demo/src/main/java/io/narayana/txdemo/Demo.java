@@ -30,15 +30,17 @@ public abstract class Demo {
 
     private int id;
     private String name;
+    private String desc;
 
     public Demo() {
 
     }
 
-    public Demo(int id, String name) {
+    public Demo(int id, String name, String desc) {
 
         this.id = id;
         this.name = name;
+        this.desc = desc;
     }
 
     public String getName() {
@@ -49,6 +51,10 @@ public abstract class Demo {
     public int getId() {
 
         return id;
+    }
+
+    public String getDesc() {
+        return desc;
     }
 
     public abstract DemoResult run(TransactionManager utx, DemoDao dao) throws Exception;

@@ -30,7 +30,8 @@ public class PrepareFailDemo extends Demo {
 
     public PrepareFailDemo() {
 
-        super(3, "Participant Fails to Prepare");
+        super(3, "Participant Fails to Prepare", "This demo enlists two dummy participants and one db participant. " +
+                "One dummy participant fails to prepare and the transaction outcome is PHASE_TWO_ABORT");
     }
 
     @Override
