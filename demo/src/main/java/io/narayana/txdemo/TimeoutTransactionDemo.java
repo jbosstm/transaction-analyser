@@ -30,7 +30,8 @@ public class TimeoutTransactionDemo extends Demo {
 
     public TimeoutTransactionDemo() {
 
-        super(2, "Transaction Timeout");
+        super(2, "Transaction Timeout", "This demo setTransactionTimeout(1) and sleeps 2 seconds to simulate the business logic." +
+                "The transaction outcome is PHASE_ONE_ABORT");
     }
 
     @Override
