@@ -1,4 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
+
 <!--
   ~ JBoss, Home of Professional Open Source.
   ~ Copyright 2013, Red Hat, Inc., and individual contributors
@@ -21,6 +22,14 @@
   ~ 02110-1301 USA, or see the FSF site: http://www.fsf.org.
   -->
 
-<jboss-web>
-    <context-root>nta</context-root>
-</jboss-web>
+<datasources>
+    <datasource jndi-name="java:jboss/datasources/ntaTestDS"
+                pool-name="ticket-monster" enabled="true" use-java-context="true">
+        <connection-url>jdbc:h2:mem:ticket-monster;DB_CLOSE_ON_EXIT=FALSE;DB_CLOSE_DELAY=-1</connection-url>
+        <driver>h2</driver>
+        <security>
+            <user-name>sa</user-name>
+            <password>sa</password>
+        </security>
+    </datasource>
+</datasources>

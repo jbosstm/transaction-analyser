@@ -25,13 +25,13 @@
     <modelVersion>4.0.0</modelVersion>
 
     <parent>
-        <artifactId>txprof-all</artifactId>
-        <groupId>org.jboss.narayana.txprof</groupId>
+        <artifactId>nta-all</artifactId>
+        <groupId>io.narayana.nta</groupId>
         <version>1.0.0.Alpha1-SNAPSHOT</version>
     </parent>
 
     <artifactId>webapp</artifactId>
-    <name>Txvis User Interface</name>
+    <name>Narayana Transaction Analyser User Interface</name>
     <description>Contains the web based user interface component of the tool</description>
     <packaging>war</packaging>
 
@@ -50,14 +50,14 @@
     <dependencies>
 
         <dependency>
-            <groupId>org.jboss.narayana.txprof</groupId>
+            <groupId>io.narayana.nta</groupId>
             <artifactId>core</artifactId>
             <version>1.0.0.Alpha1-SNAPSHOT</version>
             <scope>provided</scope>
         </dependency>
 
         <dependency>
-            <groupId>org.jboss.narayana.txprof</groupId>
+            <groupId>io.narayana.nta</groupId>
             <artifactId>plugins</artifactId>
             <version>1.0.0.Alpha1-SNAPSHOT</version>
             <scope>provided</scope>
