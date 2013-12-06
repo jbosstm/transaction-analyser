@@ -82,5 +82,5 @@ public final class Configuration {
      */
     public static final String HANDLER_SERVICE_JNDI_NAME = "java:module/HandlerService";
 
-    public static final String NODEID_SYS_PROP_NAME = "txvis.nodeid";
+    public static final String NODEID_SYS_PROP_NAME = "nta.nodeid";
 }

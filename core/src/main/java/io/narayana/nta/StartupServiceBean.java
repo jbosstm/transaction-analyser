@@ -38,7 +38,7 @@ import javax.ejb.TransactionManagementType;
 import java.io.File;
 
 /**
- * This bean ensures that txvis-core is correctly bootstrapped and will begin logging
+ * This bean ensures that nta-core is correctly bootstrapped and will begin logging
  * once it is deployed in the application container. It contains no user invokable methods
  * as these should only be called by the EJB container.
  *
@@ -52,10 +52,10 @@ import java.io.File;
  * The bean is a startup singleton which causes the application container to invoke
  * the PostConstruct method as soon as the application is deployed.
  *
- * As with all EJBs used in Txvis, transaction management MUST be disabled as
+ * As with all EJBs used in NTA, transaction management MUST be disabled as
  * below. This application is monitoring the transactions produced on the
  * server it's deployed on so, as well as dirtying the data the tool will collect,
- * it can cause a recursive loop, whereby txvis spawns a new transaction for
+ * it can cause a recursive loop, whereby nta spawns a new transaction for
  * every transaction it reads.
  */
 
@@ -86,7 +86,7 @@ public class StartupServiceBean {
                 arjPropertyManager.getCoordinatorEnvironmentBean().getDefaultTimeout()));
 
         if (logger.isInfoEnabled()) {
-            logger.info("TxVis: JBoss Transaction Visualization Tool");
+            logger.info("Narayana Transaction Analyser");
             logger.info("Bootstrapping...");
             logger.info("Server Node Id: " + System.getProperty(Configuration.NODEID_SYS_PROP_NAME));
             logger.info("Logfile: " + Configuration.LOGFILE_PATH);
@@ -108,11 +108,11 @@ public class StartupServiceBean {
     protected void tearDown() {
 
         if (logger.isInfoEnabled())
-            logger.info("Txvis tool cease monitoring");
+            logger.info("NTA tool cease monitoring");
 
         logMonitor.stop();
 
         if (logger.isInfoEnabled())
-            logger.info("Txvis tool shutting down");
+            logger.info("NTA tool shutting down");
     }
 }

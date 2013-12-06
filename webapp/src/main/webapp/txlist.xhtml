@@ -27,7 +27,7 @@
       xmlns:f="http://java.sun.com/jsf/core">
 
 <h:head>
-    <title>TxVis</title>
+    <title>Narayana Transaction Analyser</title>
     <h:outputStylesheet library="css" name="bootstrap.min.css"/>
     <style>
         body {
@@ -38,14 +38,16 @@
 
 <h:body>
     <div class="container-fluid">
-        <!--<div class="page-header">-->
-        <!--<h1>Transaction Visualisation Tool</h1>-->
-        <!--</div>-->
         <div class="navbar">
             <div class="navbar-inner">
-                <h:link value="TxVis" class="brand" outcome="txlist"/>
-                <ul class="nav">
-                </ul>
+                <h:link value="Narayana Transaction Analyser" class="brand" outcome="txlist"/>
+                <h:form id="trace-logging">
+                    <h:inputHidden id="traceLoggingEnable" value="#{traceLoggingBean.traceLoggingEnable}"/>
+                    <h:commandButton id="test" value="#{traceLoggingBean.status}" class="btn pull-right">
+                        <f:ajax execute="traceLoggingEnable" render="trace-logging"/>
+                    </h:commandButton>
+                </h:form>
+
             </div>
         </div>
         <div class="row-fluid" id="content">
