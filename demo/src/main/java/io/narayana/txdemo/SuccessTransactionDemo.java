@@ -30,8 +30,8 @@ public class SuccessTransactionDemo extends Demo {
 
     public SuccessTransactionDemo() {
 
-        super(1, "Successful Transaction", "This demo enlists two dummy participant and one db participant. " +
-                "All participants commit successful and the transaction outcome is COMMIT");
+        super(1, "Successful Transaction", "This demo enlists three resources. Two are dummies and the third is a database. " +
+                "All participants commit successfully and the transaction outcome is COMMIT");
     }
 
     @Override

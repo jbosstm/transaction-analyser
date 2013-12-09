@@ -30,7 +30,8 @@ public class TimeoutTransactionDemo extends Demo {
 
     public TimeoutTransactionDemo() {
 
-        super(2, "Transaction Timeout", "This demo setTransactionTimeout(1) and sleeps 2 seconds to simulate the business logic." +
+        super(2, "Transaction Timeout", "This demo sets the transaction timeout to 1 second and then sleeps for 2 seconds " +
+                "after the transaction has begun. This simulates a transaction timeout due to slow business logic." +
                 "The transaction outcome is PHASE_ONE_ABORT");
     }
 

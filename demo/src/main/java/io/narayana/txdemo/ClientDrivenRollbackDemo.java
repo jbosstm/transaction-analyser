@@ -30,8 +30,8 @@ public class ClientDrivenRollbackDemo extends Demo {
 
     public ClientDrivenRollbackDemo() {
 
-        super(4, "Client-driven Rollback", "This demo enlists two dummy participant and one db participant. " +
-                "Calls rollback and the transaction outcome is PHASE_ONE_ABORT");
+        super(4, "Client-driven Rollback", "This demo enlists three resources. Two are dummies and the third is a database. " +
+                "The business logic calls rollback and the transaction outcome is PHASE_ONE_ABORT");
     }
 
     @Override
