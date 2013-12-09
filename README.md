@@ -14,44 +14,30 @@ with a demo application allowing you to trigger failing transactions on-demand. 
 these issues would be reported.
 
 
-## Building and deploying
+## Building from source
+If you have a binary release of this tool, you can skip to the 'Deploy to WildFly' and 'Running the Demo Application' sections.
 
-The following steps explain how to build and deploy the `Transaction Analyser` from source.
+To build the `Transaction Analyser` from source you need Maven 3.0.0+ installed and available on your path. Then run:
+
+    mvn clean install
 
 ## Build and Configure WildFly
 
 Currently the `Transaction Analyser` only works with the latest WildFly master. To build it:
 
     git clone https://github.com/wildfly/wildfly.git
+    cd wildfly
     ./build.sh clean install -DskipTests
 
-You need to change the logging level for the transaction manager. This is what the tool reads in order to get its information. To do this:
-
-Start WildFly
-
-    cd ./build/target/wildfly-8.0.0.Beta2-SNAPSHOT
-
-Connect to the server via jboss-cli and run the commands to update the logging configuration:
-
-    ./bin/jboss-cli.sh --connect --command="/subsystem=logging/periodic-rotating-file-handler=FILE:write-attribute(name=level,value=TRACE)"
-    ./bin/jboss-cli.sh --connect --command="/subsystem=logging/logger=com.arjuna:write-attribute(name=level,value=TRACE)"
 
 
-## Maven
+## Deploy to WildFLy
+To run the `Transaction Analyzer` you just need to deploy the ear file to WildFly and visit the console. To do this:
 
-Maven 3+ should be installed and present in your OS's PATH environment variable.
+    cp nta-full/target/nta-full.ear $WILDFLY_HOME/standalone/deployments
 
-## commons-io-2.5-SNAPSHOT.jar
-
-The commons-io 2.5-SNAPSHOT release is required as it contains a bug fix that is essential to the correct running of this tool.
-The snapshot release is not available from a central maven repository so a compiled jar is included in the [project root]/etc/lib directory.
-
-## Build and Deploy the Transaction Analyser
-Ensure WildFly is running, then run:
-
-    mvn clean package -DskipTests jboss-as:deploy
-
-The user interface can now be accessed by pointing a browser at: http://localhost:8080/nta/
+Then visit: http://localhost:8080/nta/. By default the `Transaction Analyser` is disabled. To enable it click on the 'start' button at the top-right
+of the console's home page. Similarly, you can stop it by clicking the 'stop' button.
 
 
 ## Running the Demo Application
@@ -64,5 +50,4 @@ completes you will be notified of the outcome from the transaction. For most sce
 as most scenarios result in a failing transaction. After running a scenario, go to the `Transaction Analyser` console and look at the details of the
 latest transaction.
 
-NOTE: if you don't see any transactions in the `Transaction Analyser`, you may have miss-configured the logging. See above for how to correctly configure the logging.
-This is essential as the `Transaction Analyser` reads the server.log file to figure out what happened during the transaction.
+NOTE: if you don't see any transactions in the `Transaction Analyser`, you may have forgotten to hit 'start' to enable analysis.
