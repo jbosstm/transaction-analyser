@@ -56,7 +56,7 @@ import java.io.File;
  * but also has the potential to prevent the application sever from
  * shutting down!
  *
- * As with all EJBs used in Txvis, transaction management MUST be disabled as
+ * As with all EJBs used in NTA, transaction management MUST be disabled as
  * below. This application is monitoring the transactions produced on the
  * server it's deployed on so as well as dirtying the data the tool will collect,
  * it can cause a recursive loop, which will rapidly result in the JVM running
