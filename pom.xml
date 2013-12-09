@@ -33,8 +33,8 @@
     <packaging>pom</packaging>
     <name>Narayana Transaction Analyser</name>
     <description>
-		Narayana Transaction Analyser is a tool for helping to diagnose issues with JTA and JTS 
-		transactions in WildFly and JBoss EAP 6.
+        Narayana Transaction Analyser is a tool for helping to diagnose issues with JTA and JTS
+        transactions in WildFly and JBoss EAP 6.
     </description>
 
     <profiles>
@@ -131,6 +131,17 @@
     </dependencyManagement>
 
     <build>
+        <pluginManagement>
+            <plugins>
+                <plugin>
+                    <artifactId>maven-surefire-plugin</artifactId>
+                    <version>${version.maven.surefire}</version>
+                    <configuration>
+                        <skip>true</skip>
+                    </configuration>
+                </plugin>
+            </plugins>
+        </pluginManagement>
         <plugins>
             <plugin>
                 <artifactId>maven-compiler-plugin</artifactId>

@@ -156,6 +156,13 @@
             <version>1.2.17</version>
             <scope>provided</scope>
         </dependency>
+
+        <dependency>
+            <groupId>org.jboss.arquillian.junit</groupId>
+            <artifactId>arquillian-junit-container</artifactId>
+            <version>1.0.3.Final</version>
+            <scope>test</scope>
+        </dependency>
     </dependencies>
 
     <build>
@@ -187,15 +194,7 @@
 
     <profiles>
         <profile>
-            <!-- The default profile skips all tests, though you can tune it
-               to run just unit tests based on a custom pattern -->
-            <!-- Seperate profiles are provided for running all tests, including
-               Arquillian tests that execute in the specified container -->
-            <id>default</id>
-            <activation>
-                <activeByDefault>true</activeByDefault>
-            </activation>
-
+            <id>wildfly-8-snapshot</id>
             <build>
                 <plugins>
                     <plugin>
@@ -207,14 +206,7 @@
                     </plugin>
                 </plugins>
             </build>
-
             <dependencies>
-                <dependency>
-                    <groupId>org.jboss.arquillian.junit</groupId>
-                    <artifactId>arquillian-junit-container</artifactId>
-                    <version>1.0.3.Final</version>
-                    <scope>test</scope>
-                </dependency>
                 <dependency>
                     <groupId>org.wildfly</groupId>
                     <artifactId>wildfly-arquillian-container-remote</artifactId>
@@ -226,7 +218,6 @@
 
         <profile>
             <id>eap62</id>
-
             <build>
                 <plugins>
                     <plugin>
@@ -238,14 +229,7 @@
                     </plugin>
                 </plugins>
             </build>
-
             <dependencies>
-                <dependency>
-                    <groupId>org.jboss.arquillian.junit</groupId>
-                    <artifactId>arquillian-junit-container</artifactId>
-                    <version>1.0.0.Final</version>
-                    <scope>test</scope>
-                </dependency>
                 <dependency>
                     <groupId>org.jboss.as</groupId>
                     <artifactId>jboss-as-arquillian-container-remote</artifactId>
