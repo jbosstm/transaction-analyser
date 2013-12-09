@@ -86,7 +86,7 @@ public class CentralisedAS8IntegrationTest {
     private static final int NO_OF_PARTICIPANTS = 3;
     private static final int INTRO_DELAY = 0;
     private static final int OUTRO_DELAY = 3000;
-    private static final int EXPECTED_NO_OF_EVENTS = 3 + (3 * NO_OF_PARTICIPANTS);
+    private static final int EXPECTED_NO_OF_EVENTS = 4 + (3 * NO_OF_PARTICIPANTS);
 
 
     @EJB
@@ -143,12 +143,12 @@ public class CentralisedAS8IntegrationTest {
         assertEquals("Incorrect number of transaction parsed", NO_OF_TX, transactionDAO.retrieveAll().size());
 
         for (Transaction tx : transactionDAO.retrieveAll()) {
-            assertEquals("Transaction " + tx.getTxuid() + " did not report the correct status", Status.COMMIT,
+            assertEquals("Transaction " + tx.getTxuid() + " did not report the correct status", Status.COMMITTED,
                     transactionDAO.retrieve(nodeid, tx.getTxuid()).getStatus());
 
             assertEvents(tx.getEvents(), EventType.BEGIN, EventType.ENLIST, EventType.ENLIST, EventType.ENLIST,
                     EventType.PREPARE, EventType.PREPARE_OK, EventType.PREPARE_OK, EventType.PREPARE_OK,
-                    EventType.COMMIT, EventType.FINISH_OK, EventType.FINISH_OK, EventType.FINISH_OK);
+                    EventType.COMMIT, EventType.FINISH_OK, EventType.FINISH_OK, EventType.FINISH_OK, EventType.FINISH_OK);
 
 
             for (ParticipantRecord rec : tx.getParticipantRecords())
@@ -187,7 +187,7 @@ public class CentralisedAS8IntegrationTest {
 
         for (Transaction tx : transactionDAO.retrieveAll()) {
             assertEquals("Transaction " + tx.getTxuid() + " did not report the correct status",
-                    Status.PHASE_TWO_ABORT, transactionDAO.retrieve(nodeid, tx.getTxuid()).getStatus());
+                    Status.ABORTED, transactionDAO.retrieve(nodeid, tx.getTxuid()).getStatus());
 
             int abortVotes = 0;
             for (ParticipantRecord rec : tx.getParticipantRecords()) {
