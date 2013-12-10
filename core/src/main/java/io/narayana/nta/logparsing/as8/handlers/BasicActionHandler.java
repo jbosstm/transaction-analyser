@@ -40,7 +40,7 @@ public class BasicActionHandler extends JbossAS8AbstractHandler {
      *
      */
     public static final String REGEX = "BasicAction::" +
-            "(?<BASICACTION>Begin|prepare|Abort|phase2Abort|phase2Commit|onePhaseCommit|End)" +
+            "(?<BASICACTION>Begin|prepare|Abort|phase2Abort|phase2Commit|onePhaseCommit)" +
             ".*?action.*?" + PATTERN_TXUID;
 
 
@@ -83,9 +83,6 @@ public class BasicActionHandler extends JbossAS8AbstractHandler {
                 break;
             case "onePhaseCommit":
                 service.onePhaseCommit(txuid, timestamp);
-                break;
-            case "End":
-                service.cleanup(txuid);
                 break;
         }
     }
