@@ -23,9 +23,8 @@ package io.narayana.txdemo;
 
 import javax.annotation.Resource;
 import javax.ejb.EJB;
-import javax.ejb.Stateless;
-import javax.ejb.TransactionAttribute;
-import javax.ejb.TransactionAttributeType;
+import javax.persistence.EntityManager;
+import javax.persistence.PersistenceContext;
 import javax.transaction.TransactionManager;
 import javax.ws.rs.GET;
 import javax.ws.rs.Path;
@@ -39,13 +38,15 @@ import java.util.List;
  * @author <a href="mailto:zfeng@redhat.com">Amos Feng</a>
  */
 @Path("/demos")
-@Stateless
 public class DemoRestService {
 
     private ArrayList<Demo> demos = new ArrayList<>();
 
     @EJB
     private DemoDao dao;
+
+    @PersistenceContext
+    private EntityManager em;
 
     @Resource(lookup = "java:jboss/TransactionManager")
     private TransactionManager tm;
@@ -60,7 +61,6 @@ public class DemoRestService {
 
     @GET
     @Produces(MediaType.APPLICATION_JSON)
-    @TransactionAttribute(TransactionAttributeType.NEVER)
     public List<Demo> listAllDemos() {
 
         return demos;
@@ -69,13 +69,12 @@ public class DemoRestService {
     @GET
     @Path("/{id:[0-9][0-9]*}")
     @Produces(MediaType.APPLICATION_JSON)
-    @TransactionAttribute(value = TransactionAttributeType.NEVER)
     public DemoResult getDemo(@PathParam("id") int id) {
 
         for (Demo demo : demos) {
             if (demo.getId() == id) {
                 try {
-                    return demo.run(tm, dao);
+                    return demo.run(tm, em);
                 } catch (Exception e) {
                     e.printStackTrace();
                     return new DemoResult(-2, "exception " + e);

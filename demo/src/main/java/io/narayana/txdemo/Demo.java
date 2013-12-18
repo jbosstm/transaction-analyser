@@ -21,6 +21,7 @@
  */
 package io.narayana.txdemo;
 
+import javax.persistence.EntityManager;
 import javax.transaction.TransactionManager;
 
 /**
@@ -57,5 +58,11 @@ public abstract class Demo {
         return desc;
     }
 
-    public abstract DemoResult run(TransactionManager utx, DemoDao dao) throws Exception;
+    public void create(EntityManager em, String name) {
+        DemoData data = new DemoData();
+        data.setName(name);
+        em.persist(data);
+    }
+
+    public abstract DemoResult run(TransactionManager utx, EntityManager em) throws Exception;
 }

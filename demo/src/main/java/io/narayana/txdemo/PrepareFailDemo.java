@@ -21,6 +21,7 @@
  */
 package io.narayana.txdemo;
 
+import javax.persistence.EntityManager;
 import javax.transaction.TransactionManager;
 
 /**
@@ -35,13 +36,13 @@ public class PrepareFailDemo extends Demo {
     }
 
     @Override
-    public DemoResult run(TransactionManager tm, DemoDao dao) throws Exception {
+    public DemoResult run(TransactionManager tm, EntityManager em) throws Exception {
 
         tm.begin();
 
         tm.getTransaction().enlistResource(new DemoDummyXAResource("demo1"));
         tm.getTransaction().enlistResource(new DemoDummyXAResource("demo2", DemoDummyXAResource.faultType.PREPARE_FAIL));
-        dao.create("prepare_fail");
+        create(em, "prepare_fail");
 
         tm.commit();
 
