@@ -33,7 +33,7 @@ public class TimeoutTransactionDemo extends Demo {
 
         super(2, "Transaction Timeout", "This demo sets the transaction timeout to 1 second and then sleeps for 2 seconds " +
                 "after the transaction has begun. This simulates a transaction timeout due to slow business logic." +
-                "The transaction outcome is PHASE_ONE_ABORT");
+                "The transaction outcome is TIMEOUT");
     }
 
     @Override
@@ -50,6 +50,6 @@ public class TimeoutTransactionDemo extends Demo {
 
         tm.commit();
 
-        return new DemoResult(0, "timeout");
+        return new DemoResult(-1, "should throw rollback exception");
     }
 }

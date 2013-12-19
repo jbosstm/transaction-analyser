@@ -40,4 +40,5 @@ public enum Status {
     HEURISTIC_ROLLBACK,
     HEURISTIC_MIXED,
     HEURISTIC_HAZARD,
+    TIMEOUT,
 }

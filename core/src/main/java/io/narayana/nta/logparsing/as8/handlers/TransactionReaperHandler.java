@@ -62,11 +62,15 @@ public class TransactionReaperHandler extends JbossAS8AbstractHandler {
 
         final String txuid = matcher.group(TXUID);
         final Timestamp timestamp = parseTimestamp(matcher.group(TIMESTAMP));
+        final String thrid = matcher.group(THREAD_ID);
 
         switch (matcher.group("ACTIONSTATUS")) {
             case "COMMITTED":
                 break;
-            case "ABORT":
+            case "ABORTED":
+                if(thrid.startsWith("Transaction Reaper Worker")) {
+                    service.end(txuid, null, "TIMEOUT", timestamp);
+                }
                 break;
             default:
                 break;
