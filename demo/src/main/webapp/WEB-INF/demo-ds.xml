@@ -9,11 +9,6 @@
                    use-java-context="true">
         <xa-datasource-property name="URL">jdbc:h2:mem:txdemo</xa-datasource-property>
         <driver>h2</driver>
-        <xa-pool>
-            <min-pool-size>10</min-pool-size>
-            <max-pool-size>20</max-pool-size>
-            <prefill>true</prefill>
-        </xa-pool>
         <security>
             <user-name>sa</user-name>
             <password>sa</password>

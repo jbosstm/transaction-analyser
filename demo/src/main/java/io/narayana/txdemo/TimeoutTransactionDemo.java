@@ -21,6 +21,7 @@
  */
 package io.narayana.txdemo;
 
+import javax.persistence.EntityManager;
 import javax.transaction.TransactionManager;
 
 /**
@@ -36,7 +37,7 @@ public class TimeoutTransactionDemo extends Demo {
     }
 
     @Override
-    public DemoResult run(TransactionManager tm, DemoDao dao) throws Exception {
+    public DemoResult run(TransactionManager tm, EntityManager em) throws Exception {
 
 
         tm.setTransactionTimeout(1);
@@ -44,7 +45,7 @@ public class TimeoutTransactionDemo extends Demo {
 
         tm.getTransaction().enlistResource(new DemoDummyXAResource("demo1"));
         tm.getTransaction().enlistResource(new DemoDummyXAResource("demo2"));
-        dao.create("timeout");
+        create(em, "timeout");
         Thread.sleep(2000);
 
         tm.commit();
