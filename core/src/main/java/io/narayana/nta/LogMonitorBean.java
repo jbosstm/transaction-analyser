@@ -97,6 +97,7 @@ public class LogMonitorBean {
         if (tailer == null) {
             try {
                 tailer = new Tailer(logFile, logParser, Configuration.LOGFILE_POLL_INTERVAL, true);
+                tailer.disable_reset_file_position();
                 tailer.run();
             } catch (Exception e) {
                 logger.error("Unhandled exception, shutting down...", e);
