@@ -148,7 +148,11 @@ public class HandlerService {
     public void abort(String txuid, Timestamp timestamp) {
 
         em.getTransaction().begin();
-        setStatus(txuid, Status.PHASE_ONE_ABORT, timestamp);
+        Transaction tx = findTransaction(this.nodeid, txuid);
+        if(tx != null && tx.getStatus() != Status.TIMEOUT) {
+            setStatus(txuid, Status.PHASE_ONE_ABORT, timestamp);
+        }
+
         em.getTransaction().commit();
     }
 
@@ -210,6 +214,9 @@ public class HandlerService {
             case "HEURISTIC_ROLLBACK":
                 tx.setStatus(Status.HEURISTIC_ROLLBACK, timestamp);
                 tx.addEvent(new Event(EventType.HEURISTIC_ROLLBACK, nodeid, timestamp));
+                break;
+            case "TIMEOUT":
+                tx.setStatus(Status.TIMEOUT, timestamp);
                 break;
         }
 

@@ -23,17 +23,7 @@
 package io.narayana.nta;
 
 import io.narayana.nta.logparsing.as8.filters.PackageFilter;
-import io.narayana.nta.logparsing.as8.handlers.BasicActionHandler;
-import io.narayana.nta.logparsing.as8.handlers.JTACreateResourceRecordHandler;
-import io.narayana.nta.logparsing.as8.handlers.JTAResourceExceptionHandler;
-import io.narayana.nta.logparsing.as8.handlers.JTAResourceRecordHandler;
-import io.narayana.nta.logparsing.as8.handlers.JTSCreateResourceRecordHandler;
-import io.narayana.nta.logparsing.as8.handlers.JTSInterpositionHandler;
-import io.narayana.nta.logparsing.as8.handlers.JTSResourceExceptionHandler;
-import io.narayana.nta.logparsing.as8.handlers.JTSResourceRecordHandler;
-import io.narayana.nta.logparsing.as8.handlers.JTSResourceStatusChangeHandler;
-import io.narayana.nta.logparsing.as8.handlers.TxFinalStatusHandler;
-import io.narayana.nta.logparsing.as8.handlers.TxPrepareFailedHandler;
+import io.narayana.nta.logparsing.as8.handlers.*;
 
 import java.io.File;
 
@@ -71,6 +61,7 @@ public final class Configuration {
             JTSResourceStatusChangeHandler.class,
             TxPrepareFailedHandler.class,
             TxFinalStatusHandler.class,
+            TransactionReaperHandler.class,
     };
 
     public static final Class[] LOG_FILTERS = new Class[]{

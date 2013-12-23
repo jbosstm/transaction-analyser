@@ -32,7 +32,7 @@ public class PrepareFailDemo extends Demo {
     public PrepareFailDemo() {
 
         super(3, "Participant Fails to Prepare", "This demo enlists three resources. Two are dummies and the third is a database. " +
-                "One dummy participant fails to prepare and the transaction outcome is PHASE_TWO_ABORT");
+                "One dummy participant fails to prepare and the transaction outcome is ABORTED");
     }
 
     @Override
@@ -46,6 +46,6 @@ public class PrepareFailDemo extends Demo {
 
         tm.commit();
 
-        return new DemoResult(0, "prepare fail");
+        return new DemoResult(-1, "should throw rollback exception");
     }
 }
