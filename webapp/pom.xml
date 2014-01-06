@@ -27,7 +27,7 @@
     <parent>
         <artifactId>nta-all</artifactId>
         <groupId>io.narayana.nta</groupId>
-        <version>1.0.0.Alpha1-SNAPSHOT</version>
+        <version>1.0.0.Alpha1</version>
     </parent>
 
     <artifactId>webapp</artifactId>
@@ -52,14 +52,14 @@
         <dependency>
             <groupId>io.narayana.nta</groupId>
             <artifactId>core</artifactId>
-            <version>1.0.0.Alpha1-SNAPSHOT</version>
+            <version>1.0.0.Alpha1</version>
             <scope>provided</scope>
         </dependency>
 
         <dependency>
             <groupId>io.narayana.nta</groupId>
             <artifactId>plugins</artifactId>
-            <version>1.0.0.Alpha1-SNAPSHOT</version>
+            <version>1.0.0.Alpha1</version>
             <scope>provided</scope>
         </dependency>
 

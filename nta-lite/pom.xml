@@ -27,7 +27,7 @@
     <parent>
         <artifactId>nta-all</artifactId>
         <groupId>io.narayana.nta</groupId>
-        <version>1.0.0.Alpha1-SNAPSHOT</version>
+        <version>1.0.0.Alpha1</version>
     </parent>
     <modelVersion>4.0.0</modelVersion>
 
@@ -47,7 +47,7 @@
             <groupId>io.narayana.nta</groupId>
             <artifactId>core</artifactId>
             <type>ejb</type>
-            <version>1.0.0.Alpha1-SNAPSHOT</version>
+            <version>1.0.0.Alpha1</version>
         </dependency>
     </dependencies>
 

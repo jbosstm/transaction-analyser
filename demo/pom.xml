@@ -27,7 +27,7 @@
     <parent>
         <artifactId>nta-all</artifactId>
         <groupId>io.narayana.nta</groupId>
-        <version>1.0.0.Alpha1-SNAPSHOT</version>
+        <version>1.0.0.Alpha1</version>
     </parent>
 
     <artifactId>demo</artifactId>

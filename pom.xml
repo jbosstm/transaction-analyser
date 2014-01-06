@@ -28,7 +28,7 @@
 
     <groupId>io.narayana.nta</groupId>
     <artifactId>nta-all</artifactId>
-    <version>1.0.0.Alpha1-SNAPSHOT</version>
+    <version>1.0.0.Alpha1</version>
 
     <packaging>pom</packaging>
     <name>Narayana Transaction Analyser</name>
