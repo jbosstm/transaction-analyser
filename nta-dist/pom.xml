@@ -33,8 +33,8 @@
         <version>1.0.0.Alpha2-SNAPSHOT</version>
     </parent>
 
-    <artifactId>nta-full</artifactId>
-    <name>Narayana Transaction Analyser Full Package</name>
+    <artifactId>nta-dist</artifactId>
+    <name>Narayana Transaction Analyser Dist Package</name>
     <description>A deployable EAR containing the core module and the web user interface and associated dependencies
     </description>
     <packaging>ear</packaging>
@@ -59,7 +59,6 @@
     </dependencies>
 
     <build>
-        <finalName>${project.artifactId}</finalName>
         <plugins>
             <plugin>  
                 <groupId>org.apache.maven.plugins</groupId>  

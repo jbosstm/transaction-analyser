@@ -60,8 +60,8 @@
                 <module>core</module>
                 <module>plugins</module>
                 <module>webapp</module>
-                <module>nta-full</module>
-                <module>nta-lite</module>
+                <module>nta-dist</module>
+                <module>nta-remote-dist</module>
                 <module>demo</module>
             </modules>
         </profile>
@@ -73,7 +73,7 @@
             <modules>
                 <module>core</module>
                 <module>webapp</module>
-                <module>nta-full</module>
+                <module>nta-dist</module>
             </modules>
         </profile>
         <profile>
@@ -82,8 +82,8 @@
                 <module>core</module>
                 <module>plugins</module>
                 <module>webapp</module>
-                <module>nta-full</module>
-                <module>nta-lite</module>
+                <module>nta-dist</module>
+                <module>nta-remote-dist</module>
             </modules>
         </profile>
     </profiles>

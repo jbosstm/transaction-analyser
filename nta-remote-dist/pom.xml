@@ -31,8 +31,8 @@
     </parent>
     <modelVersion>4.0.0</modelVersion>
 
-    <artifactId>nta-lite</artifactId>
-    <name>Narayana Transaction Analyser Lite Package</name>
+    <artifactId>nta-remote-dist</artifactId>
+    <name>Narayana Transaction Analyser Remote Dist Package</name>
     <description>
         A deployable EAR containing the core module and associated dependencies without the web user interface. This
         module is
@@ -52,7 +52,6 @@
     </dependencies>
 
     <build>
-        <finalName>${project.artifactId}</finalName>
         <plugins>
             <plugin>  
                 <groupId>org.apache.maven.plugins</groupId>  
