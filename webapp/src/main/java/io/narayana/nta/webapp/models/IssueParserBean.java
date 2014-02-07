@@ -46,7 +46,7 @@ import java.util.regex.Pattern;
 @Named
 public class IssueParserBean implements Serializable {
 
-    public static final String TXUID_LINK_FORMAT = "<a href=\"/txvis/txinfo.jsf?includeViewParams=true&amp;txuid={0}\">{1}</a>";
+    public static final String TXUID_LINK_FORMAT = "<a href=\"/nta/txinfo.jsf?includeViewParams=true&amp;txuid={0}\">{1}</a>";
     public static final String FORUM_LINK_FORMAT = "<a href=\"https://community.jboss.org/search.jspa?q={0}&containerType=14" +
             "&container=2040\">Search JBoss forums for help</a>";
 

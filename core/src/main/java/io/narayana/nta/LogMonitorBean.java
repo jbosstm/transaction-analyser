@@ -52,7 +52,7 @@ import java.io.File;
  * allow concurrent access to the bean. We need this as the start()
  * method is an asynchronous method that will run for the lifetime of the
  * application, without this we would not be able to invoke the stop()
- * method from the StartupService which prevents graceful shutdown of txvis
+ * method from the StartupService which prevents graceful shutdown of nta 
  * but also has the potential to prevent the application sever from
  * shutting down!
  *

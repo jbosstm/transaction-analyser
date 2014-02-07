@@ -37,7 +37,7 @@ import javax.naming.NamingException;
  */
 public final class LogParserFactory {
 
-    private static final Logger logger = Logger.getLogger("org.jboss.narayana.txvis");
+    private static final Logger logger = Logger.getLogger("io.narayana.nta");
 
     public static LogParser getInstance() throws NullPointerException, IllegalStateException {
 
