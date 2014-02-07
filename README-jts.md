@@ -86,10 +86,10 @@ Deploy the application to each server:
 
     mvn package jboss-as:deploy
 
-Copy the 'lite' version of the Transaction Analyser to the 2nd and 3rd servers.
+Copy the 'remote' version of the Transaction Analyser to the 2nd and 3rd servers.
 
-  cp ./nta-lite/target/nta-lite.ear <PATH TO DEPLOY DIR ON SERVER2>
-  cp ./nta-lite/target/nta-lite.ear <PATH TO DEPLOY DIR ON SERVER3>
+  cp ./nta-remote-dist/target/nta-remote-dist-1.0.0.Alpha2-SNAPSHOT.ear <PATH TO DEPLOY DIR ON SERVER2>
+  cp ./nta-remote-dist/target/nta-remote-dist-1.0.0.Alpha2-SNAPSHOT.ear <PATH TO DEPLOY DIR ON SERVER3>
 
 
 Visit the Transaction Analyser page: http://localhost:8080/nta/. This is where the transaction details will apear after they are run.

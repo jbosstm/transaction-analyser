@@ -34,7 +34,7 @@ Currently the `Transaction Analyser` can work with the WildFly 8.0.0.CR1:
 ## Deploy to WildFLy
 To run the `Transaction Analyzer` you just need to deploy the ear file to WildFly and visit the console. To do this:
 
-    cp nta-full/target/nta-full.ear $WILDFLY_HOME/standalone/deployments
+    cp nta-dist/target/nta-dist-1.0.0.Alpha2-SNAPSHOT.ear $WILDFLY_HOME/standalone/deployments
 
 Then visit: http://localhost:8080/nta/. By default the `Transaction Analyser` is disabled. To enable it click on the 'start' button at the top-right
 of the console's home page. Similarly, you can stop it by clicking the 'stop' button.
@@ -43,7 +43,7 @@ of the console's home page. Similarly, you can stop it by clicking the 'stop' bu
 ## Running the Demo Application
 The demo application provides a simple way to play with this tool if you don't have an application with failing transactions to hand. To deploy it:
 
-    cp demo/target/demo.war $WILDFLY_HOME/standalone/deployments
+    cp demo/target/demo-1.0.0.Alpha2-SNAPSHOT.war $WILDFLY_HOME/standalone/deployments
 
 The demo is now available at http://localhost:8080/txdemo. To use the demo, simply click on the button for the scenario you want to run. When the scenario
 completes you will be notified of the outcome from the transaction. For most scenarios you will get an error message returned. This is to be expected
