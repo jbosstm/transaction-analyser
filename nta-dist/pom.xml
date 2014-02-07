@@ -74,7 +74,7 @@
                             <includeGroupIds>commons-io</includeGroupIds>
                             <stripVersion>true</stripVersion>
                             <outputDirectory>  
-                                ${project.build.directory}/${project.artifactId}/lib  
+                                ${project.build.directory}/${project.artifactId}-${project.version}/lib  
                             </outputDirectory>  
                         </configuration>  
                     </execution>  
