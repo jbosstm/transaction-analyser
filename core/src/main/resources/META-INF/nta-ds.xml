@@ -23,19 +23,19 @@
   -->
 
 <datasources>
-    <!--<xa-datasource jta="false" jndi-name="java:jboss/datasources/txvisDS" pool-name="txvisDS" enabled="true"-->
+    <!--<xa-datasource jta="false" jndi-name="java:jboss/datasources/ntaDS" pool-name="ntaDS" enabled="true"-->
     <!--use-java-context="true" use-ccm="true">-->
     <!--<xa-datasource-property name="ServerName">-->
     <!--localhost-->
     <!--</xa-datasource-property>-->
     <!--<xa-datasource-property name="DatabaseName">-->
-    <!--txvis-->
+    <!--nta-->
     <!--</xa-datasource-property>-->
     <!--<xa-datasource-property name="User">-->
-    <!--txvis-->
+    <!--nta-->
     <!--</xa-datasource-property>-->
     <!--<xa-datasource-property name="Password">-->
-    <!--txvis-->
+    <!--nta-->
     <!--</xa-datasource-property>-->
     <!--<driver>MySqlXA</driver>-->
     <!--</xa-datasource>-->
