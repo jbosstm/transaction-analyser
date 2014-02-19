@@ -42,6 +42,11 @@ public final class Configuration {
      *
      */
     public static final String LOGFILE_PATH = System.getProperty("jboss.server.log.dir") + File.separator + LOGFILE_NAME;
+
+    /**
+     *
+     */
+    public static final String UPLOAD_LOGFILE_PATH = System.getProperty("jboss.server.data.dir") + File.separator + "nta" + File.separator + "log" ;
     /**
      *
      */

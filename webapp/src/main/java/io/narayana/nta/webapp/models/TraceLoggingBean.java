@@ -52,7 +52,14 @@ public class TraceLoggingBean implements Serializable {
             op.get("address").add("subsystem", "logging").add("periodic-rotating-file-handler", "FILE");
             op.get("name").set("level");
 
-            ModelNode ret = client.execute(op);
+            ModelNode ret;
+            try {
+                ret = client.execute(op);
+            } catch (java.io.IOException e) {
+                client.close();
+                client = ModelControllerClient.Factory.create("http-remoting", InetAddress.getByName("localhost"), 9990);
+                ret = client.execute(op);
+            }
             rotatingFileLogging = ret.get("result").toString().replaceAll("\"", "");
 
             op = new ModelNode();

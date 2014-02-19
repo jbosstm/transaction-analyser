@@ -74,6 +74,7 @@ public class LogMonitorBean {
     private File logFile;
     private Tailer tailer;
     public LogParser logParser;
+    private boolean end = true;
 
     @Resource
     private SessionContext sessionContext;
@@ -96,7 +97,7 @@ public class LogMonitorBean {
 
         if (tailer == null) {
             try {
-                tailer = new Tailer(logFile, logParser, Configuration.LOGFILE_POLL_INTERVAL, true);
+                tailer = new Tailer(logFile, logParser, Configuration.LOGFILE_POLL_INTERVAL, end);
                 tailer.disable_reset_file_position();
                 tailer.run();
             } catch (Exception e) {
@@ -121,6 +122,7 @@ public class LogMonitorBean {
         if (tailer != null) {
             tailer.stop();
             tailer = null;
+            end = true;
         }
     }
 
@@ -153,6 +155,14 @@ public class LogMonitorBean {
     public boolean isRunning() {
 
         return tailer != null;
+    }
+
+    public File getLogFile() {
+        return logFile;
+    }
+
+    public void reLoad() {
+        end = false;
     }
 
 }
