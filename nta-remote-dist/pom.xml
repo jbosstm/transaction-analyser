@@ -31,7 +31,7 @@
     </parent>
     <modelVersion>4.0.0</modelVersion>
 
-    <artifactId>nta-remote-dist</artifactId>
+    <artifactId>nta-remote</artifactId>
     <name>Narayana Transaction Analyser Remote Dist Package</name>
     <description>
         A deployable EAR containing the core module and associated dependencies without the web user interface. This

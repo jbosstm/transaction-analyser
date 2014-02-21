@@ -33,7 +33,7 @@
         <version>1.0.0.Alpha2-SNAPSHOT</version>
     </parent>
 
-    <artifactId>nta-dist</artifactId>
+    <artifactId>nta</artifactId>
     <name>Narayana Transaction Analyser Dist Package</name>
     <description>A deployable EAR containing the core module and the web user interface and associated dependencies
     </description>
