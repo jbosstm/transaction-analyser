@@ -24,14 +24,21 @@
 <html xmlns="http://www.w3.org/1999/xhtml"
       xmlns:ui="http://java.sun.com/jsf/facelets"
       xmlns:h="http://java.sun.com/jsf/html"
-      xmlns:f="http://java.sun.com/jsf/core">
+      xmlns:f="http://java.sun.com/jsf/core"
+      xmlns:t="http://myfaces.apache.org/tomahawk">
 
 <h:head>
-    <title>Narayana Transaction Analyser</title>
+    <title>Narayana Transaction Analyser #{switchLogBean.currentLogFile}</title>
     <h:outputStylesheet library="css" name="bootstrap.min.css"/>
     <style>
         body {
             padding-top: 10px;
+        }
+        body .modal {
+            /* new custom width */
+            width: 800px;
+            /* must be half of the width, minus scrollbar on the left (30px) */
+            margin-left: -400px;
         }
     </style>
 </h:head>
@@ -46,8 +53,8 @@
                     <h:commandButton id="test" value="#{traceLoggingBean.status}" class="btn pull-right">
                         <f:ajax execute="traceLoggingEnable" render="trace-logging"/>
                     </h:commandButton>
+                    <a id="btn-switchlog" href="#myModal" class="btn pull-right" role="button" data-toggle="modal">Switch log</a>
                 </h:form>
-
             </div>
         </div>
         <div class="row-fluid" id="content">
@@ -107,6 +114,23 @@
                     </div>
                 </ui:repeat>
             </div>
+        </div>
+    </div>
+
+    <div id="myModal" class="modal hide fade" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+        <div class="modal-header">
+            Switch Log
+            <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&#215;</button>
+        </div>
+        <div class="modal-body" id="change-log">
+            <h:form enctype="multipart/form-data">
+			    <h:selectOneRadio value="#{switchLogBean.currentLogFile}" layout="pageDirection">
+				    <f:selectItems value="#{switchLogBean.logFiles}" />
+				</h:selectOneRadio>
+                <t:inputFileUpload value="#{switchLogBean.uploadedFile}" />
+                <h:commandButton value="Change" action="#{switchLogBean.changeLog}" />
+                <h:messages />
+			</h:form>
         </div>
     </div>
 

@@ -30,7 +30,7 @@
         <version>1.0.0.Alpha2-SNAPSHOT</version>
     </parent>
 
-    <artifactId>demo</artifactId>
+    <artifactId>nta-demo</artifactId>
     <name>Narayana Transaction Analyser Demo Application</name>
     <description>A demo application that could fail transactions on demand</description>
     <packaging>war</packaging>
