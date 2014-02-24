@@ -62,7 +62,13 @@ public class SwitchLogBean implements Serializable {
     public void init() {
         currentLogFile = logMonitor.getLogFile().getPath();
         logFiles.put(Configuration.LOGFILE_PATH, Configuration.LOGFILE_PATH);
-        logFiles.put("upload", "upload");
+        File directory = new File(Configuration.UPLOAD_LOGFILE_PATH);
+        File[] files = directory.listFiles();
+        if(files != null) {
+            for(File file : files) {
+                logFiles.put(file.getPath(), file.getPath());
+            }
+        }
     }
 
     public void changeLog() throws Exception {
@@ -90,6 +96,10 @@ public class SwitchLogBean implements Serializable {
             output.close();
 
             currentLogFile = fileName;
+
+            if(!logFiles.containsKey(fileName)) {
+                logFiles.put(fileName, fileName);
+            }
         } else if(!logMonitor.getLogFile().getPath().equals(currentLogFile)){
             dao.deleteAll();
 

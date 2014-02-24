@@ -126,6 +126,7 @@
             <h:form enctype="multipart/form-data">
 			    <h:selectOneRadio value="#{switchLogBean.currentLogFile}" layout="pageDirection">
 				    <f:selectItems value="#{switchLogBean.logFiles}" />
+				    <f:selectItem itemValue="upload" itemLabel="upload" />
 				</h:selectOneRadio>
                 <t:inputFileUpload value="#{switchLogBean.uploadedFile}" />
                 <h:commandButton value="Change" action="#{switchLogBean.changeLog}" />
