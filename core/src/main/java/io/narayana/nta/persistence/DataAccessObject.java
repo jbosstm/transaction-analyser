@@ -107,10 +107,32 @@ public class DataAccessObject implements Serializable {
         return em.createNamedQuery("Transaction.findAllTopLevel", Transaction.class).getResultList();
     }
 
+    public Collection<Transaction> findAllTopLevelTransactions(int start, int offset) {
+
+        return em.createNamedQuery("Transaction.findAllTopLevel", Transaction.class).setFirstResult(start)
+                .setMaxResults(offset).getResultList();
+    }
+
     public Collection<Transaction> findAllTopLevelTransactionsWithStatus(Status status) {
 
         return em.createNamedQuery("Transaction.findAllTopLevelWithStatus", Transaction.class).setParameter("status", status)
                 .getResultList();
+    }
+
+    public Collection<Transaction> findAllTopLevelTransactionsWithStatus(Status status, int start, int offset) {
+
+        return em.createNamedQuery("Transaction.findAllTopLevelWithStatus", Transaction.class).setParameter("status", status)
+                .setFirstResult(start).setMaxResults(offset).getResultList();
+    }
+
+    public int countAllTopLevelTransactions() {
+
+        return ((Long)em.createNamedQuery("Transaction.countAllTopLevel").getSingleResult()).intValue();
+    }
+
+    public int countAllTopLevelTransactionsWithStatus(Status status) {
+
+        return ((Long)em.createNamedQuery("Transaction.countAllTopLevelWithStatus").setParameter("status", status).getSingleResult()).intValue();
     }
 
 

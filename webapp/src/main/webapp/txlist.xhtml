@@ -48,10 +48,10 @@
         <div class="navbar">
             <div class="navbar-inner">
                 <h:link value="Narayana Transaction Analyser" class="brand" outcome="txlist"/>
-                <h:form id="trace-logging">
-                    <h:inputHidden id="traceLoggingEnable" value="#{traceLoggingBean.traceLoggingEnable}"/>
-                    <h:commandButton id="test" value="#{traceLoggingBean.status}" class="btn pull-right">
-                        <f:ajax execute="traceLoggingEnable" render="trace-logging"/>
+                <h:form>
+                    <h:commandButton id="trace_logging" value="#{traceLoggingBean.status}" class="btn pull-right"
+                                     action="#{traceLoggingBean.setTraceLoggingEnable(traceLoggingBean.traceLoggingEnable)}">
+                        <f:ajax render="@this"/>
                     </h:commandButton>
                     <a id="btn-switchlog" href="#myModal" class="btn pull-right" role="button" data-toggle="modal">Switch log</a>
                 </h:form>
@@ -66,14 +66,35 @@
                         <h:selectOneMenu id="filterByStatus" value="#{transactionListBean.filterByStatus}">
                             <f:selectItem itemLabel="ALL" itemValue=""/>
                             <f:selectItems value="#{transactionListBean.statuses}"/>
-                            <f:ajax render="txlist" event="change" execute="filterByStatus"/>
+                            <f:ajax render="top_prevPage top_page_links top_nextPage txlist bottom_prevPage bottom_page_links bottom_nextPage page" event="change" execute="filterByStatus"/>
                         </h:selectOneMenu>
                     </div>
-
+                    <div id="top_paging">
+                        <h:commandButton id="top_prevPage" value="&lt; Newer" action="#{transactionListBean.prevPage}"
+                                         class="btn" disabled="#{transactionListBean.currentPage == 0}"
+                                         rendered="#{transactionListBean.totalPage > 1}">
+                            <f:ajax render="top_prevPage top_page_links top_nextPage txlist bottom_prevPage bottom_page_links bottom_nextPage page"/>
+                        </h:commandButton>
+                        <div class="pagination" style="margin: 10px; display: inline-table;">
+                            <t:dataList value="#{transactionListBean.pages}" id="top_page_links" var="page" layout="unorderedList"
+                                        rowCountVar="rcnt" rowIndexVar="rindex"
+                                        rendered="#{transactionListBean.totalPage > 1}">
+                                <h:commandLink value="..." rendered="#{rindex == 1 and page != 2}" disabled="true"/>
+                                <h:commandLink value="#{page}" actionListener="#{transactionListBean.selectPage}"
+                                               disabled="#{page == transactionListBean.currentPage + 1}"/>
+                                <h:commandLink value="..." rendered="#{rindex == rcnt - 2 and page != transactionListBean.totalPage - 1}" disabled="true"/>
+                            </t:dataList>
+                        </div>
+                        <h:commandButton id="top_nextPage" value="Older &gt;" action="#{transactionListBean.nextPage}"
+                                         class="btn" disabled="#{transactionListBean.currentPage == transactionListBean.totalPage - 1}"
+                                         rendered="#{transactionListBean.totalPage > 1}">
+                            <f:ajax render="top_prevPage top_page_links top_nextPage txlist bottom_prevPage bottom_page_links bottom_nextPage page"/>
+                        </h:commandButton>
+                    </div>
                     <div id="transactions">
                         <h:dataTable value="#{transactionListBean.transactionsList}" id="txlist" var="transaction"
-                                     styleClass="table table-striped"
-                                     rendered="#{not empty transactionListBean.transactionsList}">
+                                     rendered="#{not empty transactionListBean.transactionsList}"
+                                     styleClass="table table-striped">
                             <h:column>
                                 <f:facet name="header">Transaction ID</f:facet>
                                 <h:link value="#{transaction.txuid}" outcome="txinfo">
@@ -99,6 +120,30 @@
                             </h:column>
                         </h:dataTable>
                     </div>
+                    <div id="bottom_paging">
+                        <h:commandButton id="bottom_prevPage" value="&lt; Newer" action="#{transactionListBean.prevPage}"
+                                         class="btn" disabled="#{transactionListBean.currentPage == 0}"
+                                         rendered="#{transactionListBean.totalPage > 1}">
+                            <f:ajax render="top_prevPage top_page_links top_nextPage txlist bottom_prevPage bottom_page_links bottom_nextPage page"/>
+                        </h:commandButton>
+                        <div class="pagination" style="margin: 10px; display: inline-table;">
+                            <t:dataList value="#{transactionListBean.pages}" id="bottom_page_links" var="page" layout="unorderedList"
+                                        rowCountVar="rcnt" rowIndexVar="rindex"
+                                        rendered="#{transactionListBean.totalPage > 1}">
+                                <h:commandLink value="..." rendered="#{rindex == 1 and page != 2}" disabled="true"/>
+                                <h:commandLink value="#{page}" actionListener="#{transactionListBean.selectPage}"
+                                               disabled="#{page == transactionListBean.currentPage + 1}"/>
+                                <h:commandLink value="..." rendered="#{rindex == rcnt - 2 and page != transactionListBean.totalPage - 1}" disabled="true"/>
+                            </t:dataList>
+                        </div>
+                        <h:commandButton id="bottom_nextPage" value="Older &gt;" action="#{transactionListBean.nextPage}"
+                                         class="btn" disabled="#{transactionListBean.currentPage == transactionListBean.totalPage - 1}"
+                                         rendered="#{transactionListBean.totalPage > 1}">
+                            <f:ajax render="top_prevPage top_page_links top_nextPage txlist bottom_prevPage bottom_page_links bottom_nextPage page"/>
+                        </h:commandButton>
+                    </div>
+                    <h:outputText id="page" value="Page #{transactionListBean.currentPage + 1} / #{transactionListBean.totalPage}"
+                                  rendered="#{transactionListBean.totalPage > 1}"/>
                 </h:form>
             </div>
             <div class="span4" id="issues">
@@ -124,19 +169,20 @@
         </div>
         <div class="modal-body" id="change-log">
             <h:form enctype="multipart/form-data">
-			    <h:selectOneRadio value="#{switchLogBean.currentLogFile}" layout="pageDirection">
-				    <f:selectItems value="#{switchLogBean.logFiles}" />
-				    <f:selectItem itemValue="upload" itemLabel="upload" />
-				</h:selectOneRadio>
+                <h:selectOneRadio value="#{switchLogBean.currentLogFile}" layout="pageDirection">
+                    <f:selectItems value="#{switchLogBean.logFiles}" />
+                    <f:selectItem itemValue="upload" itemLabel="upload" />
+                </h:selectOneRadio>
                 <t:inputFileUpload value="#{switchLogBean.uploadedFile}" />
                 <h:commandButton value="Change" action="#{switchLogBean.changeLog}" />
                 <h:messages />
-			</h:form>
+            </h:form>
         </div>
     </div>
 
     <h:outputScript library="js" name="jquery-1.9.1.min.js"/>
     <h:outputScript library="js" name="bootstrap.min.js"/>
+
     <script>
         var POLL_INTERVAL = 5000;
         $(function () {

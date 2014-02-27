@@ -54,6 +54,14 @@ public final class Configuration {
     /**
      *
      */
+    public static final int DEFAULT_ITEMS_PER_PAGE = 7;
+    /**
+     *
+     */
+    public static final int MAX_PAGE_SIZE = 7;
+    /**
+     *
+     */
     public static final Class[] LOG_HANDLERS = new Class[]{
             BasicActionHandler.class,
             JTACreateResourceRecordHandler.class,

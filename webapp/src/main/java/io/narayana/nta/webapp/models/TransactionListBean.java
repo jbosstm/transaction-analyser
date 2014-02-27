@@ -22,11 +22,14 @@
 
 package io.narayana.nta.webapp.models;
 
+import io.narayana.nta.Configuration;
 import io.narayana.nta.persistence.DataAccessObject;
 import io.narayana.nta.persistence.entities.Transaction;
 import io.narayana.nta.persistence.enums.Status;
 
 import javax.enterprise.context.SessionScoped;
+import javax.faces.component.UICommand;
+import javax.faces.event.ActionEvent;
 import javax.inject.Inject;
 import javax.inject.Named;
 import java.io.Serializable;
@@ -49,6 +52,11 @@ public class TransactionListBean implements Serializable {
     private Status filterByStatus;
     private long filterByDuration;
 
+    private int currentPage;
+    private int itemsPerPage = Configuration.DEFAULT_ITEMS_PER_PAGE;
+    private int totalPage;
+    private Integer[] pages;
+
 
     public Collection<Transaction> getTransactionsList() {
 
@@ -59,12 +67,34 @@ public class TransactionListBean implements Serializable {
     public void filter() {
 
         transactionsList = filterByStatus == null
-                ? dao.findAllTopLevelTransactions()
-                : dao.findAllTopLevelTransactionsWithStatus(filterByStatus);
+                ? dao.findAllTopLevelTransactions(currentPage * itemsPerPage, itemsPerPage)
+                : dao.findAllTopLevelTransactionsWithStatus(filterByStatus, currentPage * itemsPerPage, itemsPerPage);
+    }
+
+    public void prevPage() {
+
+        if(currentPage > 0) {
+            currentPage -= 1;
+        }
+    }
+
+    public void nextPage() {
+
+        currentPage += 1;
+    }
+
+    public void selectPage(ActionEvent event) {
+        currentPage = ((Integer) ((UICommand) event.getComponent()).getValue() - 1);
+    }
+
+    public void selectPage(int page) {
+
+        currentPage = page;
     }
 
     public void setFilterByStatus(Status status) {
 
+        currentPage = 0;
         filterByStatus = status;
     }
 
@@ -87,4 +117,56 @@ public class TransactionListBean implements Serializable {
 
         return Status.values();
     }
+
+    public void setCurrentPage(int page) {
+
+        this.currentPage = page;
+    }
+
+    public int getCurrentPage() {
+
+        return currentPage;
+    }
+
+    public int getTotalPage() {
+
+        int count;
+
+        if(filterByStatus == null) {
+            count = dao.countAllTopLevelTransactions();
+        } else {
+            count = dao.countAllTopLevelTransactionsWithStatus(filterByStatus);
+        }
+
+        if(count == 0) {
+            totalPage = 1;
+        } else {
+            totalPage = count % itemsPerPage == 0 ? count / itemsPerPage : count / itemsPerPage + 1;
+        }
+
+        return totalPage;
+    }
+
+    public Integer[] getPages() {
+
+        int n = Math.min(Configuration.MAX_PAGE_SIZE, totalPage);
+        pages = new Integer[n];
+
+        if(n == totalPage) {
+            for(int i = 0; i < n; i++) {
+                pages[i] = i + 1;
+            }
+        } else {
+            pages[0] = 1;
+            pages[n - 1] = totalPage;
+            for(int i = 1; i < n - 1; i++) {
+                pages[i] = (currentPage < Configuration.MAX_PAGE_SIZE / 2) ? i + 1 :
+                        (currentPage > (totalPage - Configuration.MAX_PAGE_SIZE / 2 - 1)) ?
+                                (i + totalPage - Configuration.MAX_PAGE_SIZE + 1)
+                                :(i + currentPage - Configuration.MAX_PAGE_SIZE / 2 + 1);
+            }
+        }
+        return pages;
+    }
+
 }

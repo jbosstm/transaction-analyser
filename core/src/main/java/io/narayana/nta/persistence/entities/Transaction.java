@@ -69,10 +69,16 @@ import java.util.List;
                 query = "FROM Transaction t WHERE t.status=:status ORDER BY t.startTime"
         ),
         @NamedQuery(name = "Transaction.findAllTopLevel",
-                query = "FROM Transaction t WHERE t.parent IS EMPTY ORDER BY t.startTime"
+                query = "FROM Transaction t WHERE t.parent IS EMPTY ORDER BY t.startTime DESC"
         ),
         @NamedQuery(name = "Transaction.findAllTopLevelWithStatus",
-                query = "FROM Transaction t WHERE t.parent IS EMPTY AND t.status=:status ORDER BY t.startTime"
+                query = "FROM Transaction t WHERE t.parent IS EMPTY AND t.status=:status ORDER BY t.startTime DESC"
+        ),
+        @NamedQuery(name = "Transaction.countAllTopLevel",
+                query = "SELECT COUNT(*) FROM Transaction t WHERE t.parent IS EMPTY"
+        ),
+        @NamedQuery(name = "Transaction.countAllTopLevelWithStatus",
+                query = "SELECT COUNT(*) FROM Transaction t WHERE t.parent IS EMPTY AND t.status=:status"
         ),
 })
 public class Transaction implements Serializable {
