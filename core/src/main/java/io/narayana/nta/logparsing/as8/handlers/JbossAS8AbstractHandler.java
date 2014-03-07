@@ -107,7 +107,7 @@ public abstract class JbossAS8AbstractHandler extends AbstractHandler {
     /*
      *
      */
-    private static final String PATTERN_THREAD_ID = "\\((?<" + THREAD_ID + ">[^\\)]+)\\)\\s";
+    private static final String PATTERN_THREAD_ID = "\\((?<" + THREAD_ID + ">(.*?))\\)\\s";
     /*
      *
      */
