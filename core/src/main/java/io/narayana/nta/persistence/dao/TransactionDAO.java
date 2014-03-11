@@ -67,7 +67,7 @@ public class TransactionDAO implements Serializable {
         try {
             return em.find(Transaction.class, primaryKeyId);
         } finally {
-            em.close();
+            //em.close();
         }
     }
 
@@ -80,7 +80,7 @@ public class TransactionDAO implements Serializable {
         } catch (NoResultException e) {
             return null;
         } finally {
-            em.close();
+            //em.close();
         }
     }
 
@@ -106,7 +106,7 @@ public class TransactionDAO implements Serializable {
         try {
             return em.createNamedQuery("Transaction.findAllTopLevel", Transaction.class).getResultList();
         } finally {
-            em.close();
+            //em.close();
         }
     }
 
@@ -117,7 +117,7 @@ public class TransactionDAO implements Serializable {
             return em.createNamedQuery("Transaction.findAllTopLevelWithStatus", Transaction.class)
                     .setParameter("status", status).getResultList();
         } finally {
-            em.close();
+            //em.close();
         }
     }
 

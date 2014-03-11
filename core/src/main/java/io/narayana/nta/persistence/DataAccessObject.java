@@ -60,7 +60,7 @@ public class DataAccessObject implements Serializable {
 
     private EntityManager em;
 
-
+    private boolean close_em_at_finally = true;
     /*
      * Methods for retrieving objects of type Transaction
      */
@@ -68,12 +68,14 @@ public class DataAccessObject implements Serializable {
 
     public Transaction findTransaction(Long id) {
 
+        close_em_at_finally = false;
         return em.find(Transaction.class, id);
     }
 
     public Transaction findTransaction(String nodeid, String txuid) {
 
         try {
+            close_em_at_finally = false;
             return em.createNamedQuery("Transaction.findNatural", Transaction.class).setParameter("nodeid", nodeid)
                     .setParameter("txuid", txuid).getSingleResult();
         } catch (NoResultException nre) {
@@ -84,6 +86,7 @@ public class DataAccessObject implements Serializable {
     public Transaction findTopLevelTransaction(String txuid) {
 
         try {
+            close_em_at_finally = false;
             return em.createNamedQuery("Transaction.findTopLevel", Transaction.class).setParameter("txuid", txuid)
                     .getSingleResult();
         } catch (NoResultException | NonUniqueResultException e) {
@@ -109,6 +112,7 @@ public class DataAccessObject implements Serializable {
 
     public Collection<Transaction> findAllTopLevelTransactions(int start, int offset) {
 
+        close_em_at_finally = false;
         return em.createNamedQuery("Transaction.findAllTopLevel", Transaction.class).setFirstResult(start)
                 .setMaxResults(offset).getResultList();
     }
@@ -121,6 +125,7 @@ public class DataAccessObject implements Serializable {
 
     public Collection<Transaction> findAllTopLevelTransactionsWithStatus(Status status, int start, int offset) {
 
+        close_em_at_finally = false;
         return em.createNamedQuery("Transaction.findAllTopLevelWithStatus", Transaction.class).setParameter("status", status)
                 .setFirstResult(start).setMaxResults(offset).getResultList();
     }
@@ -206,7 +211,9 @@ public class DataAccessObject implements Serializable {
         try {
             o = ctx.proceed();
         } finally {
-            em.close();
+            if(close_em_at_finally) {
+                em.close();
+            }
         }
         return o;
     }

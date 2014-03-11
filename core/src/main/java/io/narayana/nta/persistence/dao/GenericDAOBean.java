@@ -61,6 +61,8 @@ public class GenericDAOBean implements GenericDAO {
 
     private EntityManager em;
 
+    private boolean close_em_at_finally = true;
+
     /**
      * @param entity
      * @param <E>
@@ -90,6 +92,7 @@ public class GenericDAOBean implements GenericDAO {
     public <E, K> E retrieve(Class<E> entityClass, K primaryKey) {
 
         try {
+            close_em_at_finally = false;
             return em.find(entityClass, primaryKey);
         } catch (NoResultException e) {
             return null;
@@ -105,6 +108,7 @@ public class GenericDAOBean implements GenericDAO {
     public <E> List<E> retrieveAll(Class<E> entityClass) {
 
         try {
+            close_em_at_finally = false;
             return em.createQuery("FROM " + entityClass.getSimpleName() + " e", entityClass).getResultList();
         } catch (NoResultException e) {
             return Collections.emptyList();
@@ -126,6 +130,7 @@ public class GenericDAOBean implements GenericDAO {
             throws NonUniqueResultException, NoSuchEntityException {
 
         try {
+            close_em_at_finally = false;
             return em.createQuery("FROM " + entityClass.getSimpleName() + " e WHERE e." + field + "=:value", entityClass)
                     .setParameter("value", value).getSingleResult();
         } catch (NoResultException e) {
@@ -137,6 +142,7 @@ public class GenericDAOBean implements GenericDAO {
     public <E, V> List<E> retrieveMultipleByField(Class<E> entityClass, String field, V value) {
 
         try {
+            close_em_at_finally = false;
             return em.createQuery("FROM " + entityClass.getSimpleName() + " e WHERE e." + field + "=:value", entityClass)
                     .setParameter("value", value).getResultList();
         } catch (NoResultException e) {
@@ -225,6 +231,7 @@ public class GenericDAOBean implements GenericDAO {
     public <E> E querySingle(Class<E> entityType, String query) {
 
         try {
+            close_em_at_finally = false;
             return em.createQuery(query, entityType).getSingleResult();
         } catch (NoResultException e) {
             return null;
@@ -235,6 +242,7 @@ public class GenericDAOBean implements GenericDAO {
     public <E> List<E> queryMultiple(Class<E> entityType, String query) {
 
         try {
+            close_em_at_finally = false;
             return em.createQuery(query, entityType).getResultList();
         } catch (NoResultException e) {
             return Collections.emptyList();
@@ -261,7 +269,9 @@ public class GenericDAOBean implements GenericDAO {
         try {
             o = ctx.proceed();
         } finally {
-            em.close();
+            if(close_em_at_finally == true) {
+                em.close();
+            }
         }
         return o;
     }
