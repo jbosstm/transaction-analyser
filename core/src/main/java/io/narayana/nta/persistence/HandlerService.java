@@ -218,6 +218,10 @@ public class HandlerService {
             case "TIMEOUT":
                 tx.setStatus(Status.TIMEOUT, timestamp);
                 break;
+            case "PREPARE_OK":
+                tx.addEvent(new Event(EventType.PREPARE_OK, nodeid, timestamp));
+                tx.setStatus(Status.COMMIT, timestamp);
+                break;
         }
 
         em.getTransaction().commit();
