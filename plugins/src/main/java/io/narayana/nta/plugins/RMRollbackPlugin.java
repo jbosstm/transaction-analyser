@@ -77,7 +77,7 @@ public class RMRollbackPlugin implements Plugin {
 
         Set<Issue> newIssues = new HashSet<>();
 
-        int totalTx = dao.findAllTopLevelTransactions().size();
+        int totalTx = dao.countAllTopLevelTransactions();
         int absoluteThreshold = totalTx / 100 * THRESHOLD;
 
         Collection<ResourceManager> rms = dao.findAllResourceManagers();

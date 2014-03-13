@@ -97,12 +97,12 @@ public class Transaction implements Serializable {
     private Long endTime;
 
 
-    @OneToMany(mappedBy = "transaction", cascade = {CascadeType.REMOVE, CascadeType.MERGE}, fetch = FetchType.EAGER)
+    @OneToMany(mappedBy = "transaction", cascade = {CascadeType.REMOVE, CascadeType.MERGE}, fetch = FetchType.LAZY)
     @Fetch(value = FetchMode.SUBSELECT)
     private Collection<ParticipantRecord> participantRecords = new HashSet<>();
 
     @OneToMany(mappedBy = "transaction", cascade = {CascadeType.PERSIST, CascadeType.REMOVE, CascadeType.MERGE},
-            fetch = FetchType.EAGER)
+            fetch = FetchType.LAZY)
     @Fetch(value = FetchMode.SUBSELECT)
     private Collection<Event> events = new LinkedList<>();
 
@@ -114,7 +114,7 @@ public class Transaction implements Serializable {
      * transaction across multiple nodes.
      */
 
-    @OneToMany(fetch = FetchType.EAGER)
+    @OneToMany(fetch = FetchType.LAZY)
     @JoinTable(
             name = "Transaction_Hierarchy",
             joinColumns = {@JoinColumn(name = "Parent_id")},
