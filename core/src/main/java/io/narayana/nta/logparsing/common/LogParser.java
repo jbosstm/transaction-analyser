@@ -41,6 +41,7 @@ public final class LogParser implements TailerListener {
     private final List<Handler> handlers = new LinkedList<>();
     private final List<Filter> filters = new LinkedList<>();
     private Tailer tailer;
+    private String lastline;
 
     // Enforce package-private constructor
     LogParser() {
@@ -77,6 +78,14 @@ public final class LogParser implements TailerListener {
         for (Filter filter : filters) {
             if (filter.matches(line))
                 return;
+        }
+
+        // There could be a newline in the log. so if the line does not start with timestamp,
+        // it assumes to be a part of the lastline.
+        if(!line.matches("^(\\d{4}-\\d{2}-\\d{2}\\s)?(\\d{2}:\\d{2}:\\d{2},\\d{3}).*$")) {
+            line = lastline + " " + line;
+        } else {
+            lastline = line;
         }
 
         // If there are no filter matches, test against all handlers.
