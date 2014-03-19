@@ -32,6 +32,7 @@ import io.narayana.nta.logparsing.common.Filter;
 public class PackageFilter implements Filter {
 
     public static final String PACKAGE_ARJUNA = "com.arjuna";
+    public static final String PACKAGE_JCA = "org.jboss.jca";
 
 
     @Override
@@ -39,7 +40,11 @@ public class PackageFilter implements Filter {
 
         try {
             final int startPos = line.indexOf('[') + 1;
-            return !PACKAGE_ARJUNA.equals(line.substring(startPos, startPos + 10));
+            if(startPos == 0) {
+                return false;
+            }
+            return !PACKAGE_ARJUNA.equals(line.substring(startPos, startPos + PACKAGE_ARJUNA.length())) &&
+                   !PACKAGE_JCA.equals(line.substring(startPos, startPos + PACKAGE_JCA.length()));
         } catch (IndexOutOfBoundsException e) {
             return false;
         }

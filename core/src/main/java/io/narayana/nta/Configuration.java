@@ -64,6 +64,7 @@ public final class Configuration {
      */
     public static final Class[] LOG_HANDLERS = new Class[]{
             BasicActionHandler.class,
+            JCAEnlistResourceHandler.class,
             JTACreateResourceRecordHandler.class,
             JTAResourceExceptionHandler.class,
             JTAResourceRecordHandler.class,
