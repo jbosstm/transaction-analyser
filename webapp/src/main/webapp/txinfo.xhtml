@@ -141,6 +141,10 @@
                          styleClass="table table-striped"
                          rendered="#{not empty transactionInfoBean.transaction.participantRecords}">
                 <h:column>
+                    <f:facet name="header">Branch Id</f:facet>
+                    #{rec.resourceManager.branchId}
+                </h:column>
+                <h:column>
                     <f:facet name="header">Jndi Name</f:facet>
                     #{rec.resourceManager.jndiName}
                 </h:column>
@@ -151,6 +155,10 @@
                 <h:column>
                     <f:facet name="header">Product Version</f:facet>
                     #{rec.resourceManager.productVersion}
+                </h:column>
+                <h:column>
+                    <f:facet name="header">EIS Name</f:facet>
+                    #{rec.resourceManager.eisName}
                 </h:column>
                 <h:column>
                     <f:facet name="header">Vote</f:facet>

@@ -539,12 +539,14 @@ public class HandlerService {
      * @param rmProductVersion
      * @param timestamp
      */
-    public void enlistResourceManagerJTS(String txuid, String rmuid, String rmJndiName, String rmProductName,
-                                         String rmProductVersion, Timestamp timestamp) {
+    public void enlistResourceManagerJTS(String txuid, String rmuid, String rmBranchId, String rmJndiName,
+                                         String rmProductName,String rmProductVersion, String rmEisName,
+                                         Timestamp timestamp) {
 
         try {
             em.getTransaction().begin();
-            final ResourceManager rm = retrieveOrCreateResourceManager(rmJndiName, rmProductName, rmProductVersion);
+            final ResourceManager rm = retrieveOrCreateResourceManager(rmBranchId, rmJndiName,
+                    rmProductName, rmProductVersion, rmEisName);
             final Transaction tx = findTransaction(nodeid, txuid);
 
             // Error condition which usually only occurs when the tool is deployed mid transaction
@@ -572,13 +574,14 @@ public class HandlerService {
      * @param rmProductVersion
      * @param timestamp
      */
-    public void enlistResourceManagerJTA(String txuid, String rmJndiName, String rmProductName,
-                                         String rmProductVersion, Timestamp timestamp, String rmuid) {
+    public void enlistResourceManagerJTA(String txuid, String rmBranchId, String rmJndiName, String rmProductName,
+                                         String rmProductVersion, String rmEisName, Timestamp timestamp, String rmuid) {
 
         try {
             em.getTransaction().begin();
 
-            final ResourceManager rm = retrieveOrCreateResourceManager(rmJndiName, rmProductName, rmProductVersion);
+            final ResourceManager rm = retrieveOrCreateResourceManager(rmBranchId, rmJndiName,
+                    rmProductName, rmProductVersion, rmEisName);
             final Transaction tx = findTransaction(nodeid, txuid);
 
             // Error condition which usually only occurs when the tool is deployed mid transaction
@@ -653,16 +656,16 @@ public class HandlerService {
         }
     }
 
-    private ResourceManager retrieveOrCreateResourceManager(String jndiName, String productName, String productVersion) {
+    private ResourceManager retrieveOrCreateResourceManager(String branchId, String jndiName, String productName, String productVersion, String eisName) {
 
         if (logger.isTraceEnabled())
             logger.trace(format("HandlerService.retrieveOrCreateResourceManager(( `{0}`, `{1}`, `{3}` )",
                     jndiName, productName, productVersion));
 
-        ResourceManager rm = em.find(ResourceManager.class, jndiName);
+        ResourceManager rm = em.find(ResourceManager.class, branchId);
 
         if (rm == null) {
-            rm = new ResourceManager(jndiName, productName, productVersion);
+            rm = new ResourceManager(branchId, jndiName, productName, productVersion, eisName);
             em.persist(rm);
         }
 

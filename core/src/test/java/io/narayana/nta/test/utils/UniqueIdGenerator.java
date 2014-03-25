@@ -40,6 +40,7 @@ public class UniqueIdGenerator {
     private static final String RESOURCE_ID_BASE = "io.narayana.nta.test@8aff";
     private int resourceCounter = 0;
 
+    private final String branchIdBase;
     private static final String JNDI_NAME_BASE = "java:jboss/";
     private int jndiCounter = 0;
 
@@ -47,6 +48,9 @@ public class UniqueIdGenerator {
     public UniqueIdGenerator() {
 
         this.txIdBase = MessageFormat.format("0:{0}:{1}:{2}:", randomHexString(12),
+                randomHexString(8), randomHexString(8));
+
+        this.branchIdBase = MessageFormat.format("0:{0}:{1}:{2}:", randomHexString(12),
                 randomHexString(8), randomHexString(8));
     }
 
@@ -60,9 +64,13 @@ public class UniqueIdGenerator {
         return RESOURCE_ID_BASE + resourceCounter++;
     }
 
+    public String getUniqueBranchId() {
+        return branchIdBase + jndiCounter++;
+    }
+
     public String getUniqueJndiName() {
 
-        return JNDI_NAME_BASE + randomHexString(8) + "/fakeJndiName" + jndiCounter++;
+        return JNDI_NAME_BASE + randomHexString(8) + "/fakeJndiName" + jndiCounter;
     }
 
     private String randomHexString(int length) {

@@ -34,7 +34,8 @@ public class JTSCreateResourceRecordHandler extends JbossAS8AbstractHandler {
     /**
      *
      */
-    public static final String REGEX = "enlistResource:" + "\\sresource_trace:\\stxn\\suid=" + PATTERN_TXUID + ".*?"
+    public static final String REGEX = "enlistResource:" + "\\sresource_trace:\\stxn\\suid=" + PATTERN_TXUID
+            + ".*?branch_uid=" + BRANCHUID + ".*?eis_name=" + EISNAME + ".*?"
             + PATTERN_XARESOURCEWRAPPERIMPL + ".*?uid=" + PATTERN_RMUID;
 
     /**
@@ -52,7 +53,7 @@ public class JTSCreateResourceRecordHandler extends JbossAS8AbstractHandler {
     @Override
     public void handle(Matcher matcher, String line) {
 
-        service.enlistResourceManagerJTS(matcher.group(TXUID), matcher.group(RMUID), matcher.group(RM_JNDI_NAME),
-                matcher.group(RM_PRODUCT_NAME), matcher.group(RM_PRODUCT_VERSION), parseTimestamp(matcher.group(TIMESTAMP)));
+        service.enlistResourceManagerJTS(matcher.group(TXUID), matcher.group(BRANCHUID), matcher.group(RMUID), matcher.group(RM_JNDI_NAME),
+                matcher.group(RM_PRODUCT_NAME), matcher.group(RM_PRODUCT_VERSION), matcher.group(EISNAME), parseTimestamp(matcher.group(TIMESTAMP)));
     }
 }

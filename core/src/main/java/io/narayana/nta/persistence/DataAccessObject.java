@@ -112,6 +112,10 @@ public class DataAccessObject implements Serializable {
 
     public Collection<Transaction> findAllTopLevelTransactions(int start, int offset) {
 
+        if(em != null || em.isOpen()) {
+            em.close();
+            em = emf.createEntityManager();
+        }
         close_em_at_finally = false;
         return em.createNamedQuery("Transaction.findAllTopLevel", Transaction.class).setFirstResult(start)
                 .setMaxResults(offset).getResultList();
@@ -125,6 +129,10 @@ public class DataAccessObject implements Serializable {
 
     public Collection<Transaction> findAllTopLevelTransactionsWithStatus(Status status, int start, int offset) {
 
+        if(em != null || em.isOpen()) {
+            em.close();
+            em = emf.createEntityManager();
+        }
         close_em_at_finally = false;
         return em.createNamedQuery("Transaction.findAllTopLevelWithStatus", Transaction.class).setParameter("status", status)
                 .setFirstResult(start).setMaxResults(offset).getResultList();
