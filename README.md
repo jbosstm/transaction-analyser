@@ -31,7 +31,7 @@ Currently the `Transaction Analyser` can work with the WildFly 8.0.0.Final:
 
 
 
-## Deploy to WildFLy
+## Deploy to WildFly
 To run the `Transaction Analyzer` you just need to deploy the ear file to WildFly and visit the console. To do this:
 
     cp nta-dist/target/nta-1.0.0.Alpha2-SNAPSHOT.ear $WILDFLY_HOME/standalone/deployments
