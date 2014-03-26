@@ -50,9 +50,11 @@ public class ResourceManager implements Serializable {
     private Collection<ParticipantRecord> participantRecords = new HashSet<>();
 
     @Id
+    private String branchId;
     private String jndiName;
     private String productName;
     private String productVersion;
+    private String eisName;
 
     // Restrict default constructor to EJB container
     protected ResourceManager() {
@@ -66,15 +68,17 @@ public class ResourceManager implements Serializable {
      * @throws IllegalArgumentException
      * @throws NullPointerException
      */
-    public ResourceManager(String jndiName, String productName, String productVersion)
+    public ResourceManager(String branchId, String jndiName, String productName, String productVersion, String eisName)
             throws IllegalArgumentException, NullPointerException {
 
-        if (jndiName.trim().isEmpty())
-            throw new IllegalArgumentException("Method called with empty parameter: jndiName");
-        this.jndiName = jndiName;
+        if (branchId.trim().isEmpty())
+            throw new IllegalArgumentException("Method called with empty parameter: branchId");
+        this.branchId = branchId;
 
+        this.jndiName = jndiName != null ? jndiName : "Unknown";
         this.productName = productName != null ? productName : "Unknown";
         this.productVersion = productVersion != null ? productVersion : "Unknown";
+        this.eisName = eisName != null ? eisName : "Unknown";
     }
 
     /**
@@ -82,7 +86,15 @@ public class ResourceManager implements Serializable {
      */
     public String getId() {
 
-        return getJndiName();
+        return getBranchId();
+    }
+
+    /**
+     * @return
+     */
+    public String getBranchId() {
+
+        return branchId;
     }
 
     /**
@@ -126,6 +138,14 @@ public class ResourceManager implements Serializable {
     }
 
     /**
+     * @return
+     */
+    public String getEisName() {
+
+        return eisName;
+    }
+
+    /**
      * @param rec
      */
     void addParticipantRecord(ParticipantRecord rec) {
@@ -147,7 +167,7 @@ public class ResourceManager implements Serializable {
     @Override
     public int hashCode() {
 
-        return 31 * 17 + jndiName.hashCode();
+        return 31 * 17 + branchId.hashCode();
     }
 
     @Override
@@ -160,7 +180,7 @@ public class ResourceManager implements Serializable {
             return false;
 
         ResourceManager rm = (ResourceManager) obj;
-        return rm.jndiName.equals(jndiName);
+        return rm.branchId.equals(branchId);
     }
 
     /**
@@ -171,9 +191,11 @@ public class ResourceManager implements Serializable {
 
         final StringBuilder sb = new StringBuilder();
         sb
-                .append("ResourceManager: < jndiName=`").append(jndiName)
+                .append("ResourceManager: < branchId=`").append(branchId)
+                .append("`, jndiName=`").append(jndiName)
                 .append("`, productName=`").append(productName)
                 .append("`, productVersion=`").append(productVersion)
+                .append("`, eisName=`").append(eisName)
                 .append("` >");
         return sb.toString();
     }

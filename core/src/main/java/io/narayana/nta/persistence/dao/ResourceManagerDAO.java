@@ -58,9 +58,9 @@ public class ResourceManagerDAO implements Serializable {
         dao.create(rm);
     }
 
-    public ResourceManager retrieve(String jndiName) throws NullPointerException {
+    public ResourceManager retrieve(String branchId) throws NullPointerException {
 
-        return dao.retrieve(ResourceManager.class, jndiName);
+        return dao.retrieve(ResourceManager.class, branchId);
     }
 
     public List<ResourceManager> retrieveAll() {

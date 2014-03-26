@@ -28,6 +28,7 @@ import java.util.regex.Matcher;
  */
 public class JCAEnlistResourceHandler extends JbossAS8AbstractHandler {
     public static final String REGEX = "Enlisted resource.*?xaResource=LocalXAResourceImpl.*?" + "tx_uid=" + PATTERN_TXUID +
+            ".*?branch_uid=" + PATTERN_BRANCHUID + ".*?eis_name=" + PATTERN_EISNAME +
             ".*?productName=(?<" + RM_PRODUCT_NAME + ">.*?)\\sproductVersion=(?<" + RM_PRODUCT_VERSION + ">.*?)" +
             "\\sjndiName=(?<" + RM_JNDI_NAME + ">java:[\\w/]+)\\].*";
 
@@ -40,7 +41,7 @@ public class JCAEnlistResourceHandler extends JbossAS8AbstractHandler {
 
     @Override
     public void handle(Matcher matcher, String line) {
-        service.enlistResourceManagerJTA(matcher.group(TXUID), matcher.group(RM_JNDI_NAME), matcher.group(RM_PRODUCT_NAME),
-                matcher.group(RM_PRODUCT_VERSION), parseTimestamp(matcher.group(TIMESTAMP)), LAST_RESOURCE_ID);
+        service.enlistResourceManagerJTA(matcher.group(TXUID), matcher.group(BRANCHUID), matcher.group(RM_JNDI_NAME), matcher.group(RM_PRODUCT_NAME),
+                matcher.group(RM_PRODUCT_VERSION), matcher.group(EISNAME), parseTimestamp(matcher.group(TIMESTAMP)), LAST_RESOURCE_ID);
     }
 }
