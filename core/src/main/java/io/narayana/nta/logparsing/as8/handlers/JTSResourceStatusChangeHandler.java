@@ -46,7 +46,11 @@ public class JTSResourceStatusChangeHandler extends JbossAS8AbstractHandler {
     @Override
     public void handle(Matcher matcher, String line) {
 
-        service.resourceStatusOutcomeJTS(matcher.group(RMUID), matcher.group("OUTCOME"),
+        String rmuid = matcher.group(RMUID);
+        if (rmuid.equals(LAST_RESOURCE_ID)) {
+            rmuid = matcher.group(TXUID) + ":" + LAST_RESOURCE_ID;
+        }
+        service.resourceStatusOutcomeJTS(rmuid, matcher.group("OUTCOME"),
                 parseTimestamp(matcher.group(TIMESTAMP)));
     }
 }
