@@ -78,6 +78,8 @@ public abstract class JbossAS8AbstractHandler extends AbstractHandler {
      */
     public static final String PATTERN_RMUID = "(?<" + RMUID + ">(?:-?[0-9a-f]+:){4}-?[0-9a-f]+)";
 
+    public static final String LAST_RESOURCE_ID = "0:0:0:0:1";
+
 
 
 
