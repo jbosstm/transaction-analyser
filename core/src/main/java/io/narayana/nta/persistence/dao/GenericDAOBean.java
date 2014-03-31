@@ -24,20 +24,11 @@ package io.narayana.nta.persistence.dao;
 
 import io.narayana.nta.interceptors.LoggingInterceptor;
 
-import javax.ejb.NoSuchEntityException;
-import javax.ejb.Stateless;
-import javax.ejb.TransactionAttribute;
-import javax.ejb.TransactionAttributeType;
-import javax.ejb.TransactionManagement;
-import javax.ejb.TransactionManagementType;
-import javax.interceptor.AroundInvoke;
+import javax.annotation.PostConstruct;
+import javax.annotation.PreDestroy;
+import javax.ejb.*;
 import javax.interceptor.Interceptors;
-import javax.interceptor.InvocationContext;
-import javax.persistence.EntityManager;
-import javax.persistence.EntityManagerFactory;
-import javax.persistence.NoResultException;
-import javax.persistence.NonUniqueResultException;
-import javax.persistence.PersistenceUnit;
+import javax.persistence.*;
 import java.util.Collections;
 import java.util.List;
 
@@ -50,7 +41,8 @@ import java.util.List;
  * Date: 03/05/2013
  * Time: 15:57
  */
-@Stateless
+@Singleton
+@Startup
 @TransactionManagement(TransactionManagementType.BEAN)
 @TransactionAttribute(TransactionAttributeType.NOT_SUPPORTED)
 @Interceptors(LoggingInterceptor.class)
@@ -61,7 +53,15 @@ public class GenericDAOBean implements GenericDAO {
 
     private EntityManager em;
 
-    private boolean close_em_at_finally = true;
+    @PostConstruct
+    public void init() {
+        em = emf.createEntityManager();
+    }
+
+    @PreDestroy
+    public void shutdown() {
+        em.close();
+    }
 
     /**
      * @param entity
@@ -92,7 +92,6 @@ public class GenericDAOBean implements GenericDAO {
     public <E, K> E retrieve(Class<E> entityClass, K primaryKey) {
 
         try {
-            close_em_at_finally = false;
             return em.find(entityClass, primaryKey);
         } catch (NoResultException e) {
             return null;
@@ -108,7 +107,6 @@ public class GenericDAOBean implements GenericDAO {
     public <E> List<E> retrieveAll(Class<E> entityClass) {
 
         try {
-            close_em_at_finally = false;
             return em.createQuery("FROM " + entityClass.getSimpleName() + " e", entityClass).getResultList();
         } catch (NoResultException e) {
             return Collections.emptyList();
@@ -130,7 +128,6 @@ public class GenericDAOBean implements GenericDAO {
             throws NonUniqueResultException, NoSuchEntityException {
 
         try {
-            close_em_at_finally = false;
             return em.createQuery("FROM " + entityClass.getSimpleName() + " e WHERE e." + field + "=:value", entityClass)
                     .setParameter("value", value).getSingleResult();
         } catch (NoResultException e) {
@@ -142,7 +139,6 @@ public class GenericDAOBean implements GenericDAO {
     public <E, V> List<E> retrieveMultipleByField(Class<E> entityClass, String field, V value) {
 
         try {
-            close_em_at_finally = false;
             return em.createQuery("FROM " + entityClass.getSimpleName() + " e WHERE e." + field + "=:value", entityClass)
                     .setParameter("value", value).getResultList();
         } catch (NoResultException e) {
@@ -231,7 +227,6 @@ public class GenericDAOBean implements GenericDAO {
     public <E> E querySingle(Class<E> entityType, String query) {
 
         try {
-            close_em_at_finally = false;
             return em.createQuery(query, entityType).getSingleResult();
         } catch (NoResultException e) {
             return null;
@@ -242,7 +237,6 @@ public class GenericDAOBean implements GenericDAO {
     public <E> List<E> queryMultiple(Class<E> entityType, String query) {
 
         try {
-            close_em_at_finally = false;
             return em.createQuery(query, entityType).getResultList();
         } catch (NoResultException e) {
             return Collections.emptyList();
@@ -258,6 +252,7 @@ public class GenericDAOBean implements GenericDAO {
      * transactions, but this isn't possible as we would then end up monitoring
      * our own transactions, resulting in a recursive loop.
      */
+    /*
     @AroundInvoke
     public Object intercept(InvocationContext ctx) throws Exception {
 
@@ -269,10 +264,9 @@ public class GenericDAOBean implements GenericDAO {
         try {
             o = ctx.proceed();
         } finally {
-            if(close_em_at_finally == true) {
-                em.close();
-            }
+           em.close();
         }
         return o;
     }
+    */
 }
