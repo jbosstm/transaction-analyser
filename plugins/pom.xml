@@ -27,7 +27,7 @@
     <parent>
         <artifactId>nta-all</artifactId>
         <groupId>io.narayana.nta</groupId>
-        <version>1.0.0.Alpha2-SNAPSHOT</version>
+        <version>1.0.0.Alpha2</version>
     </parent>
     <modelVersion>4.0.0</modelVersion>
 
@@ -53,7 +53,7 @@
         <dependency>
             <groupId>io.narayana.nta</groupId>
             <artifactId>core</artifactId>
-            <version>1.0.0.Alpha2-SNAPSHOT</version>
+            <version>1.0.0.Alpha2</version>
             <scope>provided</scope>
         </dependency>
 
