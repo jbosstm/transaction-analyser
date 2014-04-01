@@ -28,19 +28,11 @@ import io.narayana.nta.persistence.entities.ResourceManager;
 import io.narayana.nta.persistence.entities.Transaction;
 import io.narayana.nta.persistence.enums.Status;
 
-import javax.ejb.Stateless;
-import javax.ejb.TransactionAttribute;
-import javax.ejb.TransactionAttributeType;
-import javax.ejb.TransactionManagement;
-import javax.ejb.TransactionManagementType;
-import javax.interceptor.AroundInvoke;
+import javax.annotation.PostConstruct;
+import javax.annotation.PreDestroy;
+import javax.ejb.*;
 import javax.interceptor.Interceptors;
-import javax.interceptor.InvocationContext;
-import javax.persistence.EntityManager;
-import javax.persistence.EntityManagerFactory;
-import javax.persistence.NoResultException;
-import javax.persistence.NonUniqueResultException;
-import javax.persistence.PersistenceUnit;
+import javax.persistence.*;
 import java.io.Serializable;
 import java.util.Collection;
 
@@ -49,7 +41,8 @@ import java.util.Collection;
  * Date: 22/07/2013
  * Time: 11:28
  */
-@Stateless
+@Singleton
+@Startup
 @TransactionManagement(TransactionManagementType.BEAN)
 @TransactionAttribute(TransactionAttributeType.NOT_SUPPORTED)
 @Interceptors(LoggingInterceptor.class)
@@ -60,7 +53,15 @@ public class DataAccessObject implements Serializable {
 
     private EntityManager em;
 
-    private boolean close_em_at_finally = true;
+    @PostConstruct
+    public void init() {
+        em = emf.createEntityManager();
+    }
+
+    @PreDestroy
+    public void shutdown() {
+        em.close();
+    }
     /*
      * Methods for retrieving objects of type Transaction
      */
@@ -68,14 +69,12 @@ public class DataAccessObject implements Serializable {
 
     public Transaction findTransaction(Long id) {
 
-        close_em_at_finally = false;
         return em.find(Transaction.class, id);
     }
 
     public Transaction findTransaction(String nodeid, String txuid) {
 
         try {
-            close_em_at_finally = false;
             return em.createNamedQuery("Transaction.findNatural", Transaction.class).setParameter("nodeid", nodeid)
                     .setParameter("txuid", txuid).getSingleResult();
         } catch (NoResultException nre) {
@@ -86,7 +85,6 @@ public class DataAccessObject implements Serializable {
     public Transaction findTopLevelTransaction(String txuid) {
 
         try {
-            close_em_at_finally = false;
             return em.createNamedQuery("Transaction.findTopLevel", Transaction.class).setParameter("txuid", txuid)
                     .getSingleResult();
         } catch (NoResultException | NonUniqueResultException e) {
@@ -112,11 +110,6 @@ public class DataAccessObject implements Serializable {
 
     public Collection<Transaction> findAllTopLevelTransactions(int start, int offset) {
 
-        if(em != null || em.isOpen()) {
-            em.close();
-            em = emf.createEntityManager();
-        }
-        close_em_at_finally = false;
         return em.createNamedQuery("Transaction.findAllTopLevel", Transaction.class).setFirstResult(start)
                 .setMaxResults(offset).getResultList();
     }
@@ -129,11 +122,6 @@ public class DataAccessObject implements Serializable {
 
     public Collection<Transaction> findAllTopLevelTransactionsWithStatus(Status status, int start, int offset) {
 
-        if(em != null || em.isOpen()) {
-            em.close();
-            em = emf.createEntityManager();
-        }
-        close_em_at_finally = false;
         return em.createNamedQuery("Transaction.findAllTopLevelWithStatus", Transaction.class).setParameter("status", status)
                 .setFirstResult(start).setMaxResults(offset).getResultList();
     }
@@ -208,6 +196,7 @@ public class DataAccessObject implements Serializable {
     }
 
 
+    /*
     @AroundInvoke
     private Object intercept(InvocationContext ctx) throws Exception {
 
@@ -219,10 +208,9 @@ public class DataAccessObject implements Serializable {
         try {
             o = ctx.proceed();
         } finally {
-            if(close_em_at_finally) {
-                em.close();
-            }
+            em.close();
         }
         return o;
     }
+    */
 }
