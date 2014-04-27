@@ -65,27 +65,6 @@
                 <module>demo</module>
             </modules>
         </profile>
-        <profile>
-            <id>centralised</id>
-            <activation>
-                <activeByDefault>true</activeByDefault>
-            </activation>
-            <modules>
-                <module>core</module>
-                <module>webapp</module>
-                <module>nta-dist</module>
-            </modules>
-        </profile>
-        <profile>
-            <id>distributed</id>
-            <modules>
-                <module>core</module>
-                <module>plugins</module>
-                <module>webapp</module>
-                <module>nta-dist</module>
-                <module>nta-remote-dist</module>
-            </modules>
-        </profile>
     </profiles>
 
     <properties>
