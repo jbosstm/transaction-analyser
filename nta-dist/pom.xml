@@ -41,9 +41,14 @@
 
 
     <dependencies>
-        <dependency>
+<!--        <dependency>
             <groupId>io.narayana.nta</groupId>
             <artifactId>webapp</artifactId>
+            <type>war</type>
+        </dependency>-->
+        <dependency>
+            <groupId>io.narayana.nta</groupId>
+            <artifactId>restapi</artifactId>
             <type>war</type>
         </dependency>
         <dependency>
@@ -88,9 +93,14 @@
                     <version>6</version>
                     <defaultLibBundleDir>lib</defaultLibBundleDir>
                     <modules>
-                        <webModule>
+                       <!-- <webModule>
                             <groupId>io.narayana.nta</groupId>
                             <artifactId>webapp</artifactId>
+                            <contextRoot>/nta</contextRoot>
+                        </webModule>-->
+                        <webModule>
+                            <groupId>io.narayana.nta</groupId>
+                            <artifactId>restapi</artifactId>
                             <contextRoot>/nta</contextRoot>
                         </webModule>
                     </modules>
