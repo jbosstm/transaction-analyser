@@ -1,6 +1,9 @@
 package io.narayana.nta.restapi.services;
 
 import io.narayana.nta.persistence.enums.Status;
+import io.narayana.nta.restapi.models.Transaction.TransactionInfo;
+
+import java.util.Collection;
 
 /**
  * Created with IntelliJ IDEA.
@@ -11,8 +14,6 @@ import io.narayana.nta.persistence.enums.Status;
  */
 public interface TransactionService
 {
-    public void getTopLevelTransactions();
-    public void getTopLevelTransactions(Status status);
-    public void getLevelTransaction(String txID);
-    public void getTopLevelTransaction(String txUID);
+    public Collection<TransactionInfo> getTransactions();
+    public Collection<TransactionInfo> getTransactions(Status status);
 }
