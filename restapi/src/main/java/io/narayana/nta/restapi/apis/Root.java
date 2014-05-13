@@ -12,7 +12,7 @@ import java.util.Set;
  * Time: 17:52
  * To change this template use File | Settings | File Templates.
  */
-@ApplicationPath("rest/api/v1")
+@ApplicationPath(URIConstants.RootURI)
 public class Root extends Application
 {
 

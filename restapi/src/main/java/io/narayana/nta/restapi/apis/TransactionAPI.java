@@ -15,7 +15,7 @@ import javax.ws.rs.core.Response;
  * Time: 17:52
  * To change this template use File | Settings | File Templates.
  */
-@Path("/transaction")
+@Path(URIConstants.TransactionURI)
 public class TransactionAPI
 {
     @Inject
@@ -25,15 +25,6 @@ public class TransactionAPI
     @Produces("application/json")
     public Response getTransactions()
     {
-        return Response.ok().build();
+        return Response.ok(transactionService.getTransactions()).build();
     }
-
-   /* @GET
-    @Produces("application/json")
-    public Response getTransactionById(Long id)
-    {
-        Transaction transaction = dao.findTransaction(id);
-
-        return Response.ok(transaction).build();
-    }*/
 }
