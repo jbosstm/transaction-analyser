@@ -93,7 +93,7 @@
                     <version>6</version>
                     <defaultLibBundleDir>lib</defaultLibBundleDir>
                     <modules>
-                       <!-- <webModule>
+<!--                        <webModule>
                             <groupId>io.narayana.nta</groupId>
                             <artifactId>webapp</artifactId>
                             <contextRoot>/nta</contextRoot>

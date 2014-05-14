@@ -1,6 +1,6 @@
 package io.narayana.nta.restapi.helpers;
 
-import io.narayana.nta.restapi.apis.URIConstants;
+import io.narayana.nta.restapi.models.URIConstants;
 
 import javax.ws.rs.core.Link;
 import java.net.URI;

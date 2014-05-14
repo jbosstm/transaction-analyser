@@ -2,18 +2,17 @@ package io.narayana.nta.restapi.apis;
 
 import io.narayana.nta.restapi.models.URIConstants;
 
-import javax.ws.rs.ApplicationPath;
-import javax.ws.rs.core.Application;
+import javax.ws.rs.Path;
 
 /**
  * Created with IntelliJ IDEA.
  * User: Amila
- * Date: 04/05/14
- * Time: 17:52
+ * Date: 14/05/14
+ * Time: 23:01
  * To change this template use File | Settings | File Templates.
  */
-@ApplicationPath(URIConstants.RootURI)
-public class Root extends Application
+@Path(URIConstants.TracerURI)
+public class TracerAPI
 {
 
 }

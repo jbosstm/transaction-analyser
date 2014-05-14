@@ -1,5 +1,6 @@
 package io.narayana.nta.restapi.apis;
 
+import io.narayana.nta.restapi.models.URIConstants;
 import io.narayana.nta.restapi.services.TransactionService;
 
 import javax.inject.Inject;

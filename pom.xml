@@ -66,8 +66,6 @@
                 <module>demo</module>
             </modules>
         </profile>
-                <module>restapi</module>
-                <module>restapi</module>
     </profiles>
 
     <properties>
