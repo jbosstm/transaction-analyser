@@ -79,7 +79,9 @@ public class TransactionServiceImpl implements TransactionService
             transactionInfo.setEvents(eventLinks);
             transactionInfo.setParticipantRecords(participantRecordLinks);
             transactionInfo.setSubordinates(subordinateLinks);
-            transactionInfo.setParent(LinkBuilder.transactionLinkBuilder(transaction.getParent().getId()));
+
+            if(transaction.getParent() != null)
+                transactionInfo.setParent(LinkBuilder.transactionLinkBuilder(transaction.getParent().getId()));
 
             transactionInfos.add(transactionInfo);
         }
