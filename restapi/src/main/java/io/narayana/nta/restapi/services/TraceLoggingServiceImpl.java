@@ -72,13 +72,6 @@ public class TraceLoggingServiceImpl implements TraceLoggingService, Serializabl
         }
     }
 
-
-    @Override
-    public String getStatus()
-    {
-        return traceLoggingEnable ? "Stop" : "Start";
-    }
-
     @Override
     public boolean getTraceLoggingEnable()
     {

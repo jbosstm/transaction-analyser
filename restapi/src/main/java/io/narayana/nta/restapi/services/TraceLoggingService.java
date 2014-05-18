@@ -9,7 +9,6 @@ package io.narayana.nta.restapi.services;
  */
 public interface TraceLoggingService
 {
-    public String getStatus();
     public boolean getTraceLoggingEnable();
     public void setTraceLoggingEnable(boolean enable);
 }
