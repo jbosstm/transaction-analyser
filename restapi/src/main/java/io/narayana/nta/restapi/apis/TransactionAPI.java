@@ -1,12 +1,12 @@
 package io.narayana.nta.restapi.apis;
 
+import io.narayana.nta.persistence.enums.Status;
 import io.narayana.nta.restapi.models.URIConstants;
 import io.narayana.nta.restapi.services.TransactionService;
 
 import javax.inject.Inject;
-import javax.ws.rs.GET;
-import javax.ws.rs.Path;
-import javax.ws.rs.Produces;
+import javax.validation.constraints.NotNull;
+import javax.ws.rs.*;
 import javax.ws.rs.core.MediaType;
 import javax.ws.rs.core.Response;
 
@@ -25,8 +25,28 @@ public class TransactionAPI
 
     @GET
     @Produces(MediaType.APPLICATION_JSON)
-    public Response getTransactions()
+    public Response getTransactions(
+            @QueryParam("status")
+            String status)
     {
-        return Response.ok(transactionService.getTransactions()).build();
+
+        if(status.isEmpty() || status == null)
+        {
+            return Response.ok(transactionService.getTransactions()).build();
+        }
+
+        Status requestedTransactionStatus = Status.valueOf(status.toUpperCase());
+        return Response.ok(transactionService.getTransactions(requestedTransactionStatus)).build();
+    }
+
+    @GET
+    @Path("/{id}")
+    @Produces(MediaType.APPLICATION_JSON)
+    public Response getTransactionById(
+            @PathParam("id")
+            @NotNull
+            Long id)
+    {
+        return Response.ok(transactionService.getTransaction(id)).build();
     }
 }

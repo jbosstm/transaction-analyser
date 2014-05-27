@@ -1,5 +1,8 @@
 package io.narayana.nta.restapi.helpers;
 
+import io.narayana.nta.persistence.entities.Event;
+import io.narayana.nta.persistence.entities.ParticipantRecord;
+import io.narayana.nta.persistence.entities.Transaction;
 import io.narayana.nta.restapi.models.URIConstants;
 
 import javax.ws.rs.core.Link;
@@ -15,11 +18,16 @@ import java.net.URISyntaxException;
  */
 public final class LinkBuilder
 {
+    private static final String participantRecordType = ParticipantRecord.class.getName();
+    private static final String eventType = Event.class.getName();
+    private static final String transactionType = Transaction.class.getName();
+
     public static final Link participantRecordLinkBuilder(Long id)
     {
         try
         {
-            Link.Builder builder = Link.fromUri(new URI(URIConstants.NTA_URI+URIConstants.RootURI+URIConstants.ParticipantRecordURI+"/"+id));
+            Link.Builder builder = Link.fromUri(new URI(URIConstants.NTA_URI + URIConstants.RootURI + URIConstants.ParticipantRecordURI + "/" + id));
+            builder.type(participantRecordType);
             Link link = builder.build();
             return link;
         }

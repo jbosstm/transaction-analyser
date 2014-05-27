@@ -16,4 +16,5 @@ public interface TransactionService
 {
     public Collection<TransactionInfo> getTransactions();
     public Collection<TransactionInfo> getTransactions(Status status);
+    public TransactionInfo getTransaction(Long id);
 }

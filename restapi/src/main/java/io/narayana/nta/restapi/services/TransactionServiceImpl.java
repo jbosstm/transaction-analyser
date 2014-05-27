@@ -30,7 +30,7 @@ public class TransactionServiceImpl implements TransactionService
     {
         Collection<Transaction> transactions = dao.findAllTopLevelTransactions();
 
-        Collection<TransactionInfo> transactionInfos = processDaoTransasctions(transactions);
+        Collection<TransactionInfo> transactionInfos = processDaoTransactions(transactions);
 
         return transactionInfos;
     }
@@ -40,50 +40,64 @@ public class TransactionServiceImpl implements TransactionService
     {
         Collection<Transaction> transactions = dao.findAllTopLevelTransactionsWithStatus(status);
 
-        Collection<TransactionInfo> transactionInfos = processDaoTransasctions(transactions);
+        Collection<TransactionInfo> transactionInfos = processDaoTransactions(transactions);
 
         return transactionInfos;
     }
 
-    private Collection<TransactionInfo> processDaoTransasctions(Collection<Transaction> daoTransactions)
+    @Override
+    public TransactionInfo getTransaction(Long id)
     {
-        Collection<TransactionInfo> transactionInfos = new ArrayList<>();
+        Transaction transaction = dao.findTransaction(id);
 
-        for(Transaction transaction : daoTransactions)
-        {
+        return processDaoTransasction(transaction);
+    }
+
+
+    private TransactionInfo processDaoTransasction(Transaction daoTransaction)
+    {
             Collection<Link> participantRecordLinks = new ArrayList<>();
-            for(ParticipantRecord participantRecord : transaction.getParticipantRecords())
+            for(ParticipantRecord participantRecord : daoTransaction.getParticipantRecords())
             {
                 participantRecordLinks.add(LinkBuilder.participantRecordLinkBuilder(participantRecord.getId()));
             }
 
             Collection<Link> eventLinks = new ArrayList<>();
-            for(Event event : transaction.getEvents())
+            for(Event event : daoTransaction.getEvents())
             {
                 eventLinks.add(LinkBuilder.eventLinkBuilder(event.getId()));
             }
 
             Collection<Link> subordinateLinks = new ArrayList<>();
-            for(Transaction subordinateTransaction : transaction.getSubordinates())
+            for(Transaction subordinateTransaction : daoTransaction.getSubordinates())
             {
                 subordinateLinks.add(LinkBuilder.transactionLinkBuilder(subordinateTransaction.getId()));
             }
 
             TransactionInfo transactionInfo = new TransactionInfo();
-            transactionInfo.setId(transaction.getId());
-            transactionInfo.setEndTime(transaction.getEndTime().getTime());
-            transactionInfo.setNodeid(transaction.getNodeid());
-            transactionInfo.setStartTime(transaction.getStartTime().getTime());
-            transactionInfo.setTxuid(transaction.getTxuid());
-            transactionInfo.setStatus(transaction.getStatus());
+            transactionInfo.setId(daoTransaction.getId());
+            transactionInfo.setEndTime(daoTransaction.getEndTime().getTime());
+            transactionInfo.setNodeid(daoTransaction.getNodeid());
+            transactionInfo.setStartTime(daoTransaction.getStartTime().getTime());
+            transactionInfo.setTxuid(daoTransaction.getTxuid());
+            transactionInfo.setStatus(daoTransaction.getStatus());
             transactionInfo.setEvents(eventLinks);
             transactionInfo.setParticipantRecords(participantRecordLinks);
             transactionInfo.setSubordinates(subordinateLinks);
 
-            if(transaction.getParent() != null)
-                transactionInfo.setParent(LinkBuilder.transactionLinkBuilder(transaction.getParent().getId()));
+            if(daoTransaction.getParent() != null)
+                transactionInfo.setParent(LinkBuilder.transactionLinkBuilder(daoTransaction.getParent().getId()));
 
-            transactionInfos.add(transactionInfo);
+        return transactionInfo;
+    }
+
+    private Collection<TransactionInfo> processDaoTransactions(Collection<Transaction> daoTransactions)
+    {
+        Collection<TransactionInfo> transactionInfos = new ArrayList<>();
+
+        for(Transaction transaction : daoTransactions)
+        {
+            transactionInfos.add(processDaoTransasction(transaction));
         }
 
         return transactionInfos;
