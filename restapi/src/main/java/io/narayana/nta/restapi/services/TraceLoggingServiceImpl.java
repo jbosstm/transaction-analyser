@@ -75,7 +75,7 @@ public class TraceLoggingServiceImpl implements TraceLoggingService, Serializabl
     @Override
     public boolean getTraceLoggingEnable()
     {
-        return ! traceLoggingEnable;
+        return traceLoggingEnable;
     }
 
     @Override
