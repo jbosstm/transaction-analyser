@@ -26,7 +26,7 @@ public final class LinkBuilder
     {
         try
         {
-            Link.Builder builder = Link.fromUri(new URI(URIConstants.NTA_URI + URIConstants.RootURI + URIConstants.ParticipantRecordURI + "/" + id));
+            Link.Builder builder = Link.fromUri(new URI(URIConstants.RootURI + URIConstants.ParticipantRecordURI + "/" + id));
             builder.type(participantRecordType);
             Link link = builder.build();
             return link;
@@ -41,7 +41,7 @@ public final class LinkBuilder
     {
         try
         {
-            Link.Builder builder = Link.fromUri(new URI(URIConstants.NTA_URI+URIConstants.RootURI+URIConstants.EventURI+"/"+id));
+            Link.Builder builder = Link.fromUri(new URI(URIConstants.RootURI+URIConstants.EventURI+"/"+id));
             Link link = builder.build();
             return link;
         }
@@ -55,7 +55,7 @@ public final class LinkBuilder
     {
         try
         {
-            Link.Builder builder = Link.fromUri(new URI(URIConstants.NTA_URI+URIConstants.RootURI+URIConstants.TransactionURI+"/"+id));
+            Link.Builder builder = Link.fromUri(new URI(URIConstants.RootURI+URIConstants.TransactionURI+"/"+id));
             Link link = builder.build();
             return link;
         }

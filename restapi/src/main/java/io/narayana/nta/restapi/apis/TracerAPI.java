@@ -1,5 +1,6 @@
 package io.narayana.nta.restapi.apis;
 
+import io.narayana.nta.restapi.models.Response.BaseResponse;
 import io.narayana.nta.restapi.models.URIConstants;
 import io.narayana.nta.restapi.services.TraceLoggingService;
 
@@ -27,7 +28,10 @@ public class TracerAPI
     {
         boolean tracingStatus = traceLoggingService.getTraceLoggingEnable();
 
-        return Response.ok(tracingStatus).build();
+        BaseResponse baseResponse  = new BaseResponse();
+        baseResponse.setMessage(String.valueOf(tracingStatus));
+        baseResponse.setStatus(Response.Status.OK);
+        return Response.ok(baseResponse).build();
     }
 
     @POST
@@ -37,7 +41,10 @@ public class TracerAPI
         traceLoggingService.setTraceLoggingEnable(enable);
 
         String status = enable ? "Enabled" : "Disabled";
+        BaseResponse baseResponse  = new BaseResponse();
+        baseResponse.setMessage("Trace logging has been " + status);
+        baseResponse.setStatus(Response.Status.OK);
 
-        return Response.ok("Trace logging has been " + status).build();
+        return Response.ok(baseResponse).build();
     }
 }

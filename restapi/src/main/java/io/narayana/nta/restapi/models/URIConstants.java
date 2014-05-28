@@ -9,7 +9,6 @@ package io.narayana.nta.restapi.models;
  */
 public final class URIConstants
 {
-    public static final String NTA_URI = "http://localhost:8080/nta/";
     public static final String RootURI = "rest/api/v1";
     public static final String TransactionURI = "/transaction";
     public static final String ParticipantRecordURI = "/participantRecord";

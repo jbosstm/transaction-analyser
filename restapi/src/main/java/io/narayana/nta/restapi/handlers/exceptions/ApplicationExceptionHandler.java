@@ -1,5 +1,7 @@
 package io.narayana.nta.restapi.handlers.exceptions;
 
+import io.narayana.nta.restapi.models.Response.ErrorResponse;
+
 import javax.ws.rs.core.MediaType;
 import javax.ws.rs.core.Response;
 import javax.ws.rs.ext.ExceptionMapper;
@@ -20,23 +22,27 @@ public class ApplicationExceptionHandler implements ExceptionMapper<Exception>
     @Override
     public Response toResponse(Exception exception)
     {
-        StringBuilder stringBuilder = new StringBuilder();
-        stringBuilder.append("Message : " + exception.getMessage());
-        stringBuilder.append(System.getProperty("line.separator"));
-        stringBuilder.append("Cause : " + exception.getCause());
-        stringBuilder.append(System.getProperty("line.separator"));
-        stringBuilder.append("Class : " + exception.getClass());
+        ErrorResponse errorResponse = new ErrorResponse();
+        errorResponse.setMessage(exception.getMessage());
+        errorResponse.setExceptionClass(exception.getClass());
+        errorResponse.setException(exception);
+        if(exception.getCause() != null)
+        {
+            errorResponse.setCause(exception.getCause().toString());
+        }
 
         if(exception instanceof IllegalArgumentException)
         {
-            return BadRequestResponse(stringBuilder.toString());
+            errorResponse.setStatus(Response.Status.BAD_REQUEST);
+            return BadRequestResponse(errorResponse);
         }
 
-        return Response.status(Response.Status.INTERNAL_SERVER_ERROR).entity(stringBuilder.toString()).type(MediaType.APPLICATION_JSON).build();
+        errorResponse.setStatus(Response.Status.INTERNAL_SERVER_ERROR);
+        return Response.status(Response.Status.INTERNAL_SERVER_ERROR).entity(errorResponse).type(MediaType.APPLICATION_JSON).build();
     }
 
-    public Response BadRequestResponse(String errorMessage)
+    private Response BadRequestResponse(ErrorResponse errorResponse)
     {
-        return Response.status(Response.Status.BAD_REQUEST).entity(errorMessage).type(MediaType.APPLICATION_JSON).build();
+        return Response.status(Response.Status.BAD_REQUEST).entity(errorResponse).type(MediaType.APPLICATION_JSON).build();
     }
 }

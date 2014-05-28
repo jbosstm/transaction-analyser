@@ -1,5 +1,7 @@
 package io.narayana.nta.restapi.handlers.exceptions;
 
+import io.narayana.nta.restapi.models.Response.ErrorResponse;
+
 import javax.validation.ConstraintViolationException;
 import javax.ws.rs.core.MediaType;
 import javax.ws.rs.core.Response;
@@ -17,15 +19,17 @@ public class ValidationExceptionHandler implements ExceptionMapper<ConstraintVio
     @Override
     public Response toResponse(ConstraintViolationException exception)
     {
-        StringBuilder stringBuilder = new StringBuilder();
-        stringBuilder.append("Message : " + exception.getMessage());
-        stringBuilder.append(System.getProperty("line.separator"));
-        stringBuilder.append("Class : " + exception.getClass());
-        stringBuilder.append(System.getProperty("line.separator"));
-        stringBuilder.append("Cause : " + exception.getCause());
-        stringBuilder.append(System.getProperty("line.separator"));
-        stringBuilder.append("Violations : " + exception.getConstraintViolations());
+        ErrorResponse errorResponse = new ErrorResponse();
+        errorResponse.setMessage(exception.getMessage());
+        errorResponse.setExceptionClass(exception.getClass());
+        errorResponse.setException(exception);
+        errorResponse.setViolations(exception.getConstraintViolations().toString());
+        if(exception.getCause() != null)
+        {
+            errorResponse.setCause(exception.getCause().toString());
+        }
+        errorResponse.setStatus(Response.Status.BAD_REQUEST);
 
-        return Response.status(Response.Status.BAD_REQUEST).entity(stringBuilder.toString()).type(MediaType.APPLICATION_JSON).build();
+        return Response.status(Response.Status.BAD_REQUEST).entity(errorResponse).type(MediaType.APPLICATION_JSON).build();
     }
 }

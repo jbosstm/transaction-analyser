@@ -1,6 +1,7 @@
 package io.narayana.nta.restapi.apis;
 
 import io.narayana.nta.persistence.enums.Status;
+import io.narayana.nta.restapi.models.Response.PayloadResponse;
 import io.narayana.nta.restapi.models.URIConstants;
 import io.narayana.nta.restapi.services.TransactionService;
 
@@ -29,14 +30,18 @@ public class TransactionAPI
             @QueryParam("status")
             String status)
     {
+        PayloadResponse payloadResponse = new PayloadResponse();
+        payloadResponse.setStatus(Response.Status.OK);
 
-        if(status.isEmpty() || status == null)
+        if(status == null)
         {
-            return Response.ok(transactionService.getTransactions()).build();
+            payloadResponse.setPayload(transactionService.getTransactions());
+            return Response.ok(payloadResponse).build();
         }
 
         Status requestedTransactionStatus = Status.valueOf(status.toUpperCase());
-        return Response.ok(transactionService.getTransactions(requestedTransactionStatus)).build();
+        payloadResponse.setPayload(transactionService.getTransactions(requestedTransactionStatus));
+        return Response.ok(payloadResponse).build();
     }
 
     @GET
@@ -47,6 +52,9 @@ public class TransactionAPI
             @NotNull
             Long id)
     {
-        return Response.ok(transactionService.getTransaction(id)).build();
+        PayloadResponse payloadResponse = new PayloadResponse();
+        payloadResponse.setStatus(Response.Status.OK);
+        payloadResponse.setPayload(transactionService.getTransaction(id));
+        return Response.ok(payloadResponse).build();
     }
 }
