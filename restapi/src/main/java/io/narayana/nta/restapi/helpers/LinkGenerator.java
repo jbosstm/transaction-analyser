@@ -20,36 +20,28 @@
  * 02110-1301 USA, or see the FSF site: http://www.fsf.org.
  */
 
-package io.narayana.nta.restapi.handlers.exceptions;
-
-import io.narayana.nta.restapi.models.Response.ErrorResponse;
-
-import javax.validation.ConstraintViolationException;
-import javax.ws.rs.core.MediaType;
-import javax.ws.rs.core.Response;
-import javax.ws.rs.ext.ExceptionMapper;
+package io.narayana.nta.restapi.helpers;
+import io.narayana.nta.restapi.models.URIConstants;
 
 /**
  * @Author Palahepitiya Gamage Amila Prabandhika &lt;amila_fiz@hotmail.com$gt;
- * Date: 27/05/14
- * Time: 23:30
+ * Date: 14/05/14
+ * Time: 00:14
  */
-public class ValidationExceptionHandler implements ExceptionMapper<ConstraintViolationException>
+public final class LinkGenerator
 {
-    @Override
-    public Response toResponse(ConstraintViolationException exception)
+    public static String participantRecordURI(Long id)
     {
-        ErrorResponse errorResponse = new ErrorResponse();
-        errorResponse.setMessage(exception.getMessage());
-        errorResponse.setExceptionClass(exception.getClass());
-        errorResponse.setException(exception);
-        errorResponse.setViolations(exception.getConstraintViolations().toString());
-        if(exception.getCause() != null)
-        {
-            errorResponse.setCause(exception.getCause().toString());
-        }
-        errorResponse.setStatus(Response.Status.BAD_REQUEST);
+        return URIConstants.RootURI + URIConstants.ParticipantRecordURI + "/" + id;
+    }
 
-        return Response.status(Response.Status.BAD_REQUEST).entity(errorResponse).type(MediaType.APPLICATION_JSON).build();
+    public static String eventURI(Long id)
+    {
+        return URIConstants.RootURI+URIConstants.EventURI+"/"+id;
+    }
+
+    public static String transactionURI(Long id)
+    {
+        return URIConstants.RootURI+URIConstants.TransactionURI+"/"+id;
     }
 }

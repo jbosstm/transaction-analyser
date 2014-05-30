@@ -96,12 +96,12 @@
                         <webModule>
                             <groupId>io.narayana.nta</groupId>
                             <artifactId>webapp</artifactId>
-                            <contextRoot>/ntaweb</contextRoot>
+                            <contextRoot>/nta</contextRoot>
                         </webModule>
                         <webModule>
                             <groupId>io.narayana.nta</groupId>
                             <artifactId>restapi</artifactId>
-                            <contextRoot>/nta</contextRoot>
+                            <contextRoot>/nta/rest</contextRoot>
                         </webModule>
                     </modules>
                     <fileNameMapping>no-version</fileNameMapping>
