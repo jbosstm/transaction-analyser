@@ -42,6 +42,9 @@ import java.util.HashSet;
 @NamedQueries({
         @NamedQuery(name = "ResourceManager.findAll",
                 query = "FROM ResourceManager r"
+        ),
+        @NamedQuery(name = "ResourceManager.findByBranchId",
+                query = "FROM ResourceManager r WHERE r.branchId=:branchId"
         )
 })
 public class ResourceManager implements Serializable {

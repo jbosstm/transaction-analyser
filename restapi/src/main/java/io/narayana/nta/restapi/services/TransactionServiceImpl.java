@@ -57,6 +57,11 @@ public class TransactionServiceImpl implements TransactionService
     @Override
     public Collection<TransactionInfo> getTransactions(Status status)
     {
+        if(status == null)
+        {
+            throw new IllegalArgumentException("Transaction status cannot be null.");
+        }
+
         Collection<Transaction> transactions = dao.findAllTopLevelTransactionsWithStatus(status);
 
         Collection<TransactionInfo> transactionInfos = processDaoTransactions(transactions);
@@ -67,13 +72,18 @@ public class TransactionServiceImpl implements TransactionService
     @Override
     public TransactionInfo getTransaction(Long id)
     {
+        if(id == null)
+        {
+            throw new IllegalArgumentException("Transaction id cannot be null.");
+        }
+
         Transaction transaction = dao.findTransaction(id);
 
-        return processDaoTransasction(transaction);
+        return processDaoTransaction(transaction);
     }
 
 
-    private TransactionInfo processDaoTransasction(Transaction daoTransaction)
+    private TransactionInfo processDaoTransaction(Transaction daoTransaction)
     {
         if(daoTransaction != null)
         {
@@ -122,7 +132,7 @@ public class TransactionServiceImpl implements TransactionService
 
         for(Transaction transaction : daoTransactions)
         {
-            transactionInfos.add(processDaoTransasction(transaction));
+            transactionInfos.add(processDaoTransaction(transaction));
         }
 
         return transactionInfos;

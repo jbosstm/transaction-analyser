@@ -22,47 +22,40 @@
 
 package io.narayana.nta.restapi.apis;
 
-import io.narayana.nta.persistence.enums.Status;
+import io.narayana.nta.restapi.models.ResourceManager.ResourceManagerInfo;
 import io.narayana.nta.restapi.models.Response.PayloadResponse;
-import io.narayana.nta.restapi.models.Transaction.TransactionInfo;
 import io.narayana.nta.restapi.models.URIConstants;
-import io.narayana.nta.restapi.services.TransactionService;
+import io.narayana.nta.restapi.services.ResourceManagerService;
 
 import javax.inject.Inject;
 import javax.validation.constraints.NotNull;
-import javax.ws.rs.*;
+import javax.ws.rs.GET;
+import javax.ws.rs.Path;
+import javax.ws.rs.PathParam;
+import javax.ws.rs.Produces;
 import javax.ws.rs.core.MediaType;
 import javax.ws.rs.core.Response;
 import java.util.Collection;
 
 /**
  * @Author Palahepitiya Gamage Amila Prabandhika &lt;amila_fiz@hotmail.com$gt;
- * Date: 04/05/14
- * Time: 17:52
+ * Date: 02/06/14
+ * Time: 05:14
  */
-@Path(URIConstants.TransactionURI)
-public class TransactionAPI
+@Path(URIConstants.ResourceManagerURI)
+public class ResourceManagerAPI
 {
     @Inject
-    private TransactionService transactionService;
+    ResourceManagerService resourceManagerService;
+
 
     @GET
     @Produces(MediaType.APPLICATION_JSON)
-    public Response getTransactions(
-            @QueryParam("status")
-            String status)
+    public Response getResourceManagers()
     {
-        Collection<TransactionInfo> payload;
+        Collection<ResourceManagerInfo> payload;
 
-        if(status == null)
-        {
-            payload = transactionService.getTransactions();
-        }
-        else
-        {
-            Status requestedTransactionStatus = Status.valueOf(status.toUpperCase());
-            payload = transactionService.getTransactions(requestedTransactionStatus);
-        }
+        payload = resourceManagerService.getResourceManagers();
 
         if(payload!= null && payload.size() == 0)
         {
@@ -70,29 +63,31 @@ public class TransactionAPI
         }
 
         PayloadResponse payloadResponse = new PayloadResponse();
-        payloadResponse.setStatus(Response.Status.OK);
         payloadResponse.setPayload(payload);
+        payloadResponse.setStatus(Response.Status.OK);
+
         return Response.ok(payloadResponse).build();
     }
 
     @GET
-    @Path("/{id}")
+    @Path("/{branchId}")
     @Produces(MediaType.APPLICATION_JSON)
-    public Response getTransactionById(
-            @PathParam("id")
+    public Response getResourceManagerByBranchId(
+            @PathParam("branchId")
             @NotNull
-            Long id)
+            String branchId
+    )
     {
-        PayloadResponse payloadResponse = new PayloadResponse();
-
-        Object payload = transactionService.getTransaction(id);
+        Object payload = resourceManagerService.getResourceManager(branchId);
 
         if(payload == null)
         {
             return Response.noContent().build();
         }
-        payloadResponse.setStatus(Response.Status.OK);
+
+        PayloadResponse payloadResponse = new PayloadResponse();
         payloadResponse.setPayload(payload);
+        payloadResponse.setStatus(Response.Status.OK);
         return Response.ok(payloadResponse).build();
     }
 }

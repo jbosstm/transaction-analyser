@@ -20,19 +20,19 @@
  * 02110-1301 USA, or see the FSF site: http://www.fsf.org.
  */
 
-package io.narayana.nta.restapi.models;
+package io.narayana.nta.restapi.services;
+
+import io.narayana.nta.restapi.models.ResourceManager.ResourceManagerInfo;
+
+import java.util.Collection;
 
 /**
  * @Author Palahepitiya Gamage Amila Prabandhika &lt;amila_fiz@hotmail.com$gt;
- * Date: 13/05/14
- * Time: 23:58
+ * Date: 02/06/14
+ * Time: 05:28
  */
-public final class URIConstants
+public interface ResourceManagerService
 {
-    public static final String RootURI = "api/v1";
-    public static final String TransactionURI = "/transaction";
-    public static final String ParticipantRecordURI = "/participantRecord";
-    public static final String ResourceManagerURI = "/resourceManager";
-    public static final String EventURI = "/event";
-    public static final String TracerURI = "/tracer";
+    Collection<ResourceManagerInfo> getResourceManagers();
+    ResourceManagerInfo getResourceManager(String branchId);
 }

@@ -195,6 +195,19 @@ public class DataAccessObject implements Serializable {
         return em.createNamedQuery("ResourceManager.findAll", ResourceManager.class).getResultList();
     }
 
+    public ResourceManager findResourceManagerByBranchId(String branchId)
+    {
+        try
+        {
+            return em.createNamedQuery("ResourceManager.findByBranchId", ResourceManager.class)
+                    .setParameter("branchId", branchId).getSingleResult();
+        }
+        catch(NoResultException nre)
+        {
+            return null;
+        }
+    }
+
 
     /*
     @AroundInvoke
