@@ -20,7 +20,7 @@
  * 02110-1301 USA, or see the FSF site: http://www.fsf.org.
  */
 
-package io.narayana.nta.restapi.models.Response;
+package io.narayana.nta.restapi.models.response;
 
 import javax.ws.rs.core.Response;
 import java.util.Calendar;

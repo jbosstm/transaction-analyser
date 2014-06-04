@@ -20,11 +20,10 @@
  * 02110-1301 USA, or see the FSF site: http://www.fsf.org.
  */
 
-package io.narayana.nta.restapi.models.Transaction;
+package io.narayana.nta.restapi.models.transaction;
 
 import io.narayana.nta.persistence.enums.Status;
 
-import javax.ws.rs.core.Link;
 import java.util.ArrayList;
 import java.util.Collection;
 

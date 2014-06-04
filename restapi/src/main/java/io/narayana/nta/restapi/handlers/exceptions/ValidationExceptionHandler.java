@@ -22,7 +22,7 @@
 
 package io.narayana.nta.restapi.handlers.exceptions;
 
-import io.narayana.nta.restapi.models.Response.ErrorResponse;
+import io.narayana.nta.restapi.models.response.ErrorResponse;
 
 import javax.validation.ConstraintViolationException;
 import javax.ws.rs.core.MediaType;

@@ -28,7 +28,7 @@ import io.narayana.nta.persistence.entities.ParticipantRecord;
 import io.narayana.nta.persistence.entities.Transaction;
 import io.narayana.nta.persistence.enums.Status;
 import io.narayana.nta.restapi.helpers.LinkGenerator;
-import io.narayana.nta.restapi.models.Transaction.TransactionInfo;
+import io.narayana.nta.restapi.models.transaction.TransactionInfo;
 
 import javax.inject.Inject;
 import java.util.ArrayList;
@@ -55,7 +55,7 @@ public class TransactionServiceImpl implements TransactionService {
     @Override
     public Collection<TransactionInfo> getTransactions(Status status) {
         if (status == null) {
-            throw new IllegalArgumentException("Transaction status cannot be null.");
+            throw new IllegalArgumentException("transaction status cannot be null.");
         }
 
         Collection<Transaction> transactions = dao.findAllTopLevelTransactionsWithStatus(status);
@@ -68,7 +68,7 @@ public class TransactionServiceImpl implements TransactionService {
     @Override
     public TransactionInfo getTransaction(Long id) {
         if (id == null) {
-            throw new IllegalArgumentException("Transaction id cannot be null.");
+            throw new IllegalArgumentException("transaction id cannot be null.");
         }
 
         Transaction transaction = dao.findTransaction(id);

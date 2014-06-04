@@ -26,7 +26,7 @@ import io.narayana.nta.persistence.DataAccessObject;
 import io.narayana.nta.persistence.entities.ParticipantRecord;
 import io.narayana.nta.persistence.entities.ResourceManager;
 import io.narayana.nta.restapi.helpers.LinkGenerator;
-import io.narayana.nta.restapi.models.ResourceManager.ResourceManagerInfo;
+import io.narayana.nta.restapi.models.resourceManager.ResourceManagerInfo;
 
 import javax.inject.Inject;
 import java.util.ArrayList;

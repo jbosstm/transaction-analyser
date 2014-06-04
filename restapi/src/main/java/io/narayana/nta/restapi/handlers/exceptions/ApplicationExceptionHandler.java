@@ -22,14 +22,12 @@
 
 package io.narayana.nta.restapi.handlers.exceptions;
 
-import io.narayana.nta.restapi.models.Response.ErrorResponse;
+import io.narayana.nta.restapi.models.response.ErrorResponse;
 
 import javax.ws.rs.core.MediaType;
 import javax.ws.rs.core.Response;
 import javax.ws.rs.ext.ExceptionMapper;
 import javax.ws.rs.ext.Provider;
-import java.util.HashMap;
-import java.util.Map;
 
 /**
  * @Author Palahepitiya Gamage Amila Prabandhika &lt;amila_fiz@hotmail.com$gt;

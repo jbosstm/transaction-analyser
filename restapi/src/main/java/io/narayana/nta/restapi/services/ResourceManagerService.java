@@ -22,7 +22,7 @@
 
 package io.narayana.nta.restapi.services;
 
-import io.narayana.nta.restapi.models.ResourceManager.ResourceManagerInfo;
+import io.narayana.nta.restapi.models.resourceManager.ResourceManagerInfo;
 
 import java.util.Collection;
 

@@ -22,7 +22,7 @@
 
 package io.narayana.nta.restapi.apis;
 
-import io.narayana.nta.restapi.models.Response.BaseResponse;
+import io.narayana.nta.restapi.models.response.BaseResponse;
 import io.narayana.nta.restapi.models.URIConstants;
 import io.narayana.nta.restapi.services.TraceLoggingService;
 

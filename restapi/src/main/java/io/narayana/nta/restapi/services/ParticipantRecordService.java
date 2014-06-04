@@ -22,20 +22,18 @@
 
 package io.narayana.nta.restapi.services;
 
-import io.narayana.nta.persistence.enums.Status;
-import io.narayana.nta.restapi.models.transaction.TransactionInfo;
+import io.narayana.nta.restapi.models.participantRecord.ParticipantRecordInfo;
 
+import java.io.UnsupportedEncodingException;
 import java.util.Collection;
 
 /**
  * @Author Palahepitiya Gamage Amila Prabandhika &lt;amila_fiz@hotmail.com$gt;
- * Date: 10/05/14
- * Time: 01:22
+ * Date: 04/06/14
+ * Time: 12:12
  */
-public interface TransactionService {
-    public Collection<TransactionInfo> getTransactions();
+public interface ParticipantRecordService {
+    Collection<ParticipantRecordInfo> getParticipantRecords() throws UnsupportedEncodingException;
 
-    public Collection<TransactionInfo> getTransactions(Status status);
-
-    public TransactionInfo getTransaction(Long id);
+    ParticipantRecordInfo getParticipantRecordById(Long id) throws UnsupportedEncodingException;
 }

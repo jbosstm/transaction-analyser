@@ -24,6 +24,9 @@ package io.narayana.nta.restapi.helpers;
 
 import io.narayana.nta.restapi.models.URIConstants;
 
+import java.io.UnsupportedEncodingException;
+import java.net.URLEncoder;
+
 /**
  * @Author Palahepitiya Gamage Amila Prabandhika &lt;amila_fiz@hotmail.com$gt;
  * Date: 14/05/14
@@ -40,5 +43,9 @@ public final class LinkGenerator {
 
     public static String transactionURI(Long id) {
         return URIConstants.RootURI + URIConstants.TransactionURI + "/" + id;
+    }
+
+    public static String resourceManagerURI(String branchId) throws UnsupportedEncodingException {
+        return URIConstants.RootURI + URIConstants.ResourceManagerURI + "/" + URLEncoder.encode(branchId,"UTF-8");
     }
 }

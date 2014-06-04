@@ -20,7 +20,7 @@
  * 02110-1301 USA, or see the FSF site: http://www.fsf.org.
  */
 
-package io.narayana.nta.restapi.models.ResourceManager;
+package io.narayana.nta.restapi.models.resourceManager;
 
 import java.util.ArrayList;
 import java.util.Collection;

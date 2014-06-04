@@ -22,8 +22,8 @@
 
 package io.narayana.nta.restapi.apis;
 
-import io.narayana.nta.restapi.models.ResourceManager.ResourceManagerInfo;
-import io.narayana.nta.restapi.models.Response.PayloadResponse;
+import io.narayana.nta.restapi.models.resourceManager.ResourceManagerInfo;
+import io.narayana.nta.restapi.models.response.PayloadResponse;
 import io.narayana.nta.restapi.models.URIConstants;
 import io.narayana.nta.restapi.services.ResourceManagerService;
 
@@ -51,11 +51,10 @@ public class ResourceManagerAPI {
     @GET
     @Produces(MediaType.APPLICATION_JSON)
     public Response getResourceManagers() {
-        Collection<ResourceManagerInfo> payload;
 
-        payload = resourceManagerService.getResourceManagers();
+        Collection<ResourceManagerInfo> payload = resourceManagerService.getResourceManagers();
 
-        if (payload != null && payload.size() == 0) {
+        if ((payload == null) || (payload != null && payload.size() == 0)) {
             return Response.noContent().build();
         }
 
