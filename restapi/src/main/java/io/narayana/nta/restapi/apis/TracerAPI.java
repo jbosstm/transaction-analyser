@@ -37,18 +37,16 @@ import javax.ws.rs.core.Response;
  * Time: 23:01
  */
 @Path(URIConstants.TracerURI)
-public class TracerAPI
-{
+public class TracerAPI {
     @Inject
     private TraceLoggingService traceLoggingService;
 
     @GET
     @Produces(MediaType.APPLICATION_JSON)
-    public Response getTraceStatus()
-    {
+    public Response getTraceStatus() {
         boolean tracingStatus = traceLoggingService.getTraceLoggingEnable();
 
-        BaseResponse baseResponse  = new BaseResponse();
+        BaseResponse baseResponse = new BaseResponse();
         baseResponse.setMessage(String.valueOf(tracingStatus));
         baseResponse.setStatus(Response.Status.OK);
         return Response.ok(baseResponse).build();
@@ -56,12 +54,11 @@ public class TracerAPI
 
     @POST
     @Produces(MediaType.APPLICATION_JSON)
-    public Response setTransactionStatus(@QueryParam("enable") boolean enable)
-    {
+    public Response setTransactionStatus(@QueryParam("enable") boolean enable) {
         traceLoggingService.setTraceLoggingEnable(enable);
 
         String status = enable ? "Enabled" : "Disabled";
-        BaseResponse baseResponse  = new BaseResponse();
+        BaseResponse baseResponse = new BaseResponse();
         baseResponse.setMessage("Trace logging has been " + status);
         baseResponse.setStatus(Response.Status.OK);
 

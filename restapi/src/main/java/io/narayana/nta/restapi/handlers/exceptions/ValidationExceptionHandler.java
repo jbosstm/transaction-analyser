@@ -34,18 +34,15 @@ import javax.ws.rs.ext.ExceptionMapper;
  * Date: 27/05/14
  * Time: 23:30
  */
-public class ValidationExceptionHandler implements ExceptionMapper<ConstraintViolationException>
-{
+public class ValidationExceptionHandler implements ExceptionMapper<ConstraintViolationException> {
     @Override
-    public Response toResponse(ConstraintViolationException exception)
-    {
+    public Response toResponse(ConstraintViolationException exception) {
         ErrorResponse errorResponse = new ErrorResponse();
         errorResponse.setMessage(exception.getMessage());
         errorResponse.setExceptionClass(exception.getClass());
         errorResponse.setException(exception);
         errorResponse.setViolations(exception.getConstraintViolations().toString());
-        if(exception.getCause() != null)
-        {
+        if (exception.getCause() != null) {
             errorResponse.setCause(exception.getCause().toString());
         }
         errorResponse.setStatus(Response.Status.BAD_REQUEST);

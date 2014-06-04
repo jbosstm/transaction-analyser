@@ -27,17 +27,14 @@ package io.narayana.nta.restapi.models.Response;
  * Date: 28/05/14
  * Time: 20:42
  */
-public class PayloadResponse extends BaseResponse
-{
+public class PayloadResponse extends BaseResponse {
     private Object payload;
 
-    public Object getPayload()
-    {
+    public Object getPayload() {
         return payload;
     }
 
-    public void setPayload(Object payload)
-    {
+    public void setPayload(Object payload) {
         this.payload = payload;
     }
 }

@@ -27,8 +27,8 @@ package io.narayana.nta.restapi.services;
  * Date: 14/05/14
  * Time: 23:08
  */
-public interface TraceLoggingService
-{
+public interface TraceLoggingService {
     public boolean getTraceLoggingEnable();
+
     public void setTraceLoggingEnable(boolean enable);
 }

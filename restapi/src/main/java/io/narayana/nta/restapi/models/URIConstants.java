@@ -27,8 +27,7 @@ package io.narayana.nta.restapi.models;
  * Date: 13/05/14
  * Time: 23:58
  */
-public final class URIConstants
-{
+public final class URIConstants {
     public static final String RootURI = "api/v1";
     public static final String TransactionURI = "/transaction";
     public static final String ParticipantRecordURI = "/participantRecord";

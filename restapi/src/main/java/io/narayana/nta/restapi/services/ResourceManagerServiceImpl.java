@@ -37,24 +37,20 @@ import java.util.Collection;
  * Date: 02/06/14
  * Time: 05:30
  */
-public class ResourceManagerServiceImpl implements ResourceManagerService
-{
+public class ResourceManagerServiceImpl implements ResourceManagerService {
     @Inject
     DataAccessObject dao;
 
     @Override
-    public Collection<ResourceManagerInfo> getResourceManagers()
-    {
+    public Collection<ResourceManagerInfo> getResourceManagers() {
         Collection<ResourceManager> resourceManagers = dao.findAllResourceManagers();
 
         return processDaoResourceManagers(resourceManagers);
     }
 
     @Override
-    public ResourceManagerInfo getResourceManager(String branchId)
-    {
-        if(branchId == null)
-        {
+    public ResourceManagerInfo getResourceManager(String branchId) {
+        if (branchId == null) {
             throw new IllegalArgumentException("Branch Id cannot be null.");
         }
 
@@ -63,13 +59,10 @@ public class ResourceManagerServiceImpl implements ResourceManagerService
         return processDaoResourceManager(resourceManager);
     }
 
-    private Collection<ResourceManagerInfo> processDaoResourceManagers(Collection<ResourceManager> daoResourceManagers)
-    {
-        if(daoResourceManagers != null)
-        {
+    private Collection<ResourceManagerInfo> processDaoResourceManagers(Collection<ResourceManager> daoResourceManagers) {
+        if (daoResourceManagers != null) {
             Collection<ResourceManagerInfo> resourceManagers = new ArrayList<>();
-            for(ResourceManager resourceManager : daoResourceManagers)
-            {
+            for (ResourceManager resourceManager : daoResourceManagers) {
                 resourceManagers.add(processDaoResourceManager(resourceManager));
             }
 
@@ -78,14 +71,11 @@ public class ResourceManagerServiceImpl implements ResourceManagerService
         return null;
     }
 
-    private ResourceManagerInfo processDaoResourceManager(ResourceManager daoResourceManager)
-    {
-        if(daoResourceManager != null)
-        {
+    private ResourceManagerInfo processDaoResourceManager(ResourceManager daoResourceManager) {
+        if (daoResourceManager != null) {
             Collection<String> participantRecords = new ArrayList<>();
 
-            for(ParticipantRecord participantRecord : daoResourceManager.getParticipantRecords())
-            {
+            for (ParticipantRecord participantRecord : daoResourceManager.getParticipantRecords()) {
                 participantRecords.add(LinkGenerator.participantRecordURI(participantRecord.getId()));
             }
 

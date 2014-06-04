@@ -30,39 +30,32 @@ import java.util.Calendar;
  * Date: 28/05/14
  * Time: 20:35
  */
-public class BaseResponse
-{
+public class BaseResponse {
     private String timeStamp;
     private Response.Status status;
     private String message;
 
-    public BaseResponse()
-    {
+    public BaseResponse() {
         this.timeStamp = Calendar.getInstance().getTime().toString();
     }
 
-    public String getTimeStamp()
-    {
+    public String getTimeStamp() {
         return timeStamp;
     }
 
-    public String getMessage()
-    {
+    public String getMessage() {
         return message;
     }
 
-    public void setMessage(String message)
-    {
+    public void setMessage(String message) {
         this.message = message;
     }
 
-    public Response.Status getStatus()
-    {
+    public Response.Status getStatus() {
         return status;
     }
 
-    public void setStatus(Response.Status status)
-    {
+    public void setStatus(Response.Status status) {
         this.status = status;
     }
 }

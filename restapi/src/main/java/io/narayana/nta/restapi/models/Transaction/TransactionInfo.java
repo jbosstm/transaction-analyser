@@ -27,13 +27,13 @@ import io.narayana.nta.persistence.enums.Status;
 import javax.ws.rs.core.Link;
 import java.util.ArrayList;
 import java.util.Collection;
+
 /**
  * @Author Palahepitiya Gamage Amila Prabandhika &lt;amila_fiz@hotmail.com$gt;
  * Date: 10/05/14
  * Time: 12:01
  */
-public class TransactionInfo
-{
+public class TransactionInfo {
     private Long id;
     private String txuid;
     private Status status;
@@ -45,110 +45,89 @@ public class TransactionInfo
     private Collection<String> subordinates;
     private String parentTransaction;
 
-    public TransactionInfo()
-    {
+    public TransactionInfo() {
         participantRecords = new ArrayList<>();
         events = new ArrayList<>();
         subordinates = new ArrayList<>();
     }
 
-    public Long getId()
-    {
+    public Long getId() {
         return id;
     }
 
-    public void setId(Long id)
-    {
+    public void setId(Long id) {
         this.id = id;
     }
 
-    public String getTxuid()
-    {
+    public String getTxuid() {
         return txuid;
     }
 
-    public void setTxuid(String txuid)
-    {
+    public void setTxuid(String txuid) {
         this.txuid = txuid;
     }
 
-    public Status getStatus()
-    {
+    public Status getStatus() {
         return status;
     }
 
-    public void setStatus(Status status)
-    {
+    public void setStatus(Status status) {
         this.status = status;
     }
 
-    public String getNodeid()
-    {
+    public String getNodeid() {
         return nodeid;
     }
 
-    public void setNodeid(String nodeid)
-    {
+    public void setNodeid(String nodeid) {
         this.nodeid = nodeid;
     }
 
-    public Long getStartTime()
-    {
+    public Long getStartTime() {
         return startTime;
     }
 
-    public void setStartTime(Long startTime)
-    {
+    public void setStartTime(Long startTime) {
         this.startTime = startTime;
     }
 
-    public Long getEndTime()
-    {
+    public Long getEndTime() {
         return endTime;
     }
 
-    public void setEndTime(Long endTime)
-    {
+    public void setEndTime(Long endTime) {
         this.endTime = endTime;
     }
 
-    public Collection<String> getParticipantRecords()
-    {
+    public Collection<String> getParticipantRecords() {
         return participantRecords;
     }
 
-    public void setParticipantRecords(Collection<String> participantRecords)
-    {
+    public void setParticipantRecords(Collection<String> participantRecords) {
         this.participantRecords = participantRecords;
     }
 
-    public Collection<String> getEvents()
-    {
+    public Collection<String> getEvents() {
         return events;
     }
 
-    public void setEvents(Collection<String> events)
-    {
+    public void setEvents(Collection<String> events) {
         this.events = events;
     }
 
-    public Collection<String> getSubordinates()
-    {
+    public Collection<String> getSubordinates() {
         return subordinates;
     }
 
-    public void setSubordinates(Collection<String> subordinates)
-    {
+    public void setSubordinates(Collection<String> subordinates) {
         this.subordinates = subordinates;
     }
 
-    public String getParent()
-    {
+    public String getParent() {
         return parentTransaction;
     }
 
-    public void setParent(String parentTransaction)
-    {
+    public void setParent(String parentTransaction) {
         this.parentTransaction = parentTransaction;
     }
 }

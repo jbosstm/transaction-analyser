@@ -41,8 +41,7 @@ import java.util.Collection;
  * Time: 17:52
  */
 @Path(URIConstants.TransactionURI)
-public class TransactionAPI
-{
+public class TransactionAPI {
     @Inject
     private TransactionService transactionService;
 
@@ -50,22 +49,17 @@ public class TransactionAPI
     @Produces(MediaType.APPLICATION_JSON)
     public Response getTransactions(
             @QueryParam("status")
-            String status)
-    {
+            String status) {
         Collection<TransactionInfo> payload;
 
-        if(status == null)
-        {
+        if (status == null) {
             payload = transactionService.getTransactions();
-        }
-        else
-        {
+        } else {
             Status requestedTransactionStatus = Status.valueOf(status.toUpperCase());
             payload = transactionService.getTransactions(requestedTransactionStatus);
         }
 
-        if(payload!= null && payload.size() == 0)
-        {
+        if (payload != null && payload.size() == 0) {
             return Response.noContent().build();
         }
 
@@ -81,14 +75,12 @@ public class TransactionAPI
     public Response getTransactionById(
             @PathParam("id")
             @NotNull
-            Long id)
-    {
+            Long id) {
         PayloadResponse payloadResponse = new PayloadResponse();
 
         Object payload = transactionService.getTransaction(id);
 
-        if(payload == null)
-        {
+        if (payload == null) {
             return Response.noContent().build();
         }
         payloadResponse.setStatus(Response.Status.OK);

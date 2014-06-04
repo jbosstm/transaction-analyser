@@ -39,14 +39,12 @@ import java.util.Collection;
  * Date: 13/05/14
  * Time: 23:46
  */
-public class TransactionServiceImpl implements TransactionService
-{
+public class TransactionServiceImpl implements TransactionService {
     @Inject
     DataAccessObject dao;
 
     @Override
-    public Collection<TransactionInfo> getTransactions()
-    {
+    public Collection<TransactionInfo> getTransactions() {
         Collection<Transaction> transactions = dao.findAllTopLevelTransactions();
 
         Collection<TransactionInfo> transactionInfos = processDaoTransactions(transactions);
@@ -55,10 +53,8 @@ public class TransactionServiceImpl implements TransactionService
     }
 
     @Override
-    public Collection<TransactionInfo> getTransactions(Status status)
-    {
-        if(status == null)
-        {
+    public Collection<TransactionInfo> getTransactions(Status status) {
+        if (status == null) {
             throw new IllegalArgumentException("Transaction status cannot be null.");
         }
 
@@ -70,10 +66,8 @@ public class TransactionServiceImpl implements TransactionService
     }
 
     @Override
-    public TransactionInfo getTransaction(Long id)
-    {
-        if(id == null)
-        {
+    public TransactionInfo getTransaction(Long id) {
+        if (id == null) {
             throw new IllegalArgumentException("Transaction id cannot be null.");
         }
 
@@ -83,26 +77,21 @@ public class TransactionServiceImpl implements TransactionService
     }
 
 
-    private TransactionInfo processDaoTransaction(Transaction daoTransaction)
-    {
-        if(daoTransaction != null)
-        {
+    private TransactionInfo processDaoTransaction(Transaction daoTransaction) {
+        if (daoTransaction != null) {
             Collection<String> participantRecordLinks = new ArrayList<>();
 
-            for(ParticipantRecord participantRecord : daoTransaction.getParticipantRecords())
-            {
+            for (ParticipantRecord participantRecord : daoTransaction.getParticipantRecords()) {
                 participantRecordLinks.add(LinkGenerator.participantRecordURI(participantRecord.getId()));
             }
 
             Collection<String> eventLinks = new ArrayList<>();
-            for(Event event : daoTransaction.getEvents())
-            {
+            for (Event event : daoTransaction.getEvents()) {
                 eventLinks.add(LinkGenerator.eventURI(event.getId()));
             }
 
             Collection<String> subordinateLinks = new ArrayList<>();
-            for(Transaction subordinateTransaction : daoTransaction.getSubordinates())
-            {
+            for (Transaction subordinateTransaction : daoTransaction.getSubordinates()) {
                 subordinateLinks.add(LinkGenerator.transactionURI(subordinateTransaction.getId()));
             }
 
@@ -117,7 +106,7 @@ public class TransactionServiceImpl implements TransactionService
             transactionInfo.setParticipantRecords(participantRecordLinks);
             transactionInfo.setSubordinates(subordinateLinks);
 
-            if(daoTransaction.getParent() != null)
+            if (daoTransaction.getParent() != null)
                 transactionInfo.setParent(LinkGenerator.transactionURI(daoTransaction.getParent().getId()));
 
             return transactionInfo;
@@ -126,12 +115,10 @@ public class TransactionServiceImpl implements TransactionService
         return null;
     }
 
-    private Collection<TransactionInfo> processDaoTransactions(Collection<Transaction> daoTransactions)
-    {
+    private Collection<TransactionInfo> processDaoTransactions(Collection<Transaction> daoTransactions) {
         Collection<TransactionInfo> transactionInfos = new ArrayList<>();
 
-        for(Transaction transaction : daoTransactions)
-        {
+        for (Transaction transaction : daoTransactions) {
             transactionInfos.add(processDaoTransaction(transaction));
         }
 

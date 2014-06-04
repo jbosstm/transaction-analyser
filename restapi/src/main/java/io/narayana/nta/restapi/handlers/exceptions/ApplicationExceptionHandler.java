@@ -37,22 +37,18 @@ import java.util.Map;
  * Time: 22:51
  */
 @Provider
-public class ApplicationExceptionHandler implements ExceptionMapper<Exception>
-{
+public class ApplicationExceptionHandler implements ExceptionMapper<Exception> {
     @Override
-    public Response toResponse(Exception exception)
-    {
+    public Response toResponse(Exception exception) {
         ErrorResponse errorResponse = new ErrorResponse();
         errorResponse.setMessage(exception.getMessage());
         errorResponse.setExceptionClass(exception.getClass());
         errorResponse.setException(exception);
-        if(exception.getCause() != null)
-        {
+        if (exception.getCause() != null) {
             errorResponse.setCause(exception.getCause().toString());
         }
 
-        if(exception instanceof IllegalArgumentException)
-        {
+        if (exception instanceof IllegalArgumentException) {
             errorResponse.setStatus(Response.Status.BAD_REQUEST);
             return BadRequestResponse(errorResponse);
         }
@@ -61,8 +57,7 @@ public class ApplicationExceptionHandler implements ExceptionMapper<Exception>
         return Response.status(Response.Status.INTERNAL_SERVER_ERROR).entity(errorResponse).type(MediaType.APPLICATION_JSON).build();
     }
 
-    private Response BadRequestResponse(ErrorResponse errorResponse)
-    {
+    private Response BadRequestResponse(ErrorResponse errorResponse) {
         return Response.status(Response.Status.BAD_REQUEST).entity(errorResponse).type(MediaType.APPLICATION_JSON).build();
     }
 }

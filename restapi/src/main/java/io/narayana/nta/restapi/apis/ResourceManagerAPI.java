@@ -43,22 +43,19 @@ import java.util.Collection;
  * Time: 05:14
  */
 @Path(URIConstants.ResourceManagerURI)
-public class ResourceManagerAPI
-{
+public class ResourceManagerAPI {
     @Inject
     ResourceManagerService resourceManagerService;
 
 
     @GET
     @Produces(MediaType.APPLICATION_JSON)
-    public Response getResourceManagers()
-    {
+    public Response getResourceManagers() {
         Collection<ResourceManagerInfo> payload;
 
         payload = resourceManagerService.getResourceManagers();
 
-        if(payload!= null && payload.size() == 0)
-        {
+        if (payload != null && payload.size() == 0) {
             return Response.noContent().build();
         }
 
@@ -76,12 +73,10 @@ public class ResourceManagerAPI
             @PathParam("branchId")
             @NotNull
             String branchId
-    )
-    {
+    ) {
         Object payload = resourceManagerService.getResourceManager(branchId);
 
-        if(payload == null)
-        {
+        if (payload == null) {
             return Response.noContent().build();
         }
 

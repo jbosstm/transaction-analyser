@@ -40,8 +40,7 @@ import java.net.InetAddress;
  */
 @SessionScoped
 @Named
-public class TraceLoggingServiceImpl implements TraceLoggingService, Serializable
-{
+public class TraceLoggingServiceImpl implements TraceLoggingService, Serializable {
     private boolean traceLoggingEnable = false;
     private ModelControllerClient client = null;
     private String rotatingFileLogging;
@@ -76,14 +75,14 @@ public class TraceLoggingServiceImpl implements TraceLoggingService, Serializabl
             arjunaLogging = ret.get("result").toString().replaceAll("\"", "");
 
             traceLoggingEnable = rotatingFileLogging.equals("TRACE") && arjunaLogging.equals("TRACE");
-        } catch(Exception e) {
+        } catch (Exception e) {
             e.printStackTrace();
         }
     }
 
     @PreDestroy
     public void destroy() {
-        if(client != null) {
+        if (client != null) {
             try {
                 client.close();
             } catch (IOException e) {
@@ -93,14 +92,12 @@ public class TraceLoggingServiceImpl implements TraceLoggingService, Serializabl
     }
 
     @Override
-    public boolean getTraceLoggingEnable()
-    {
+    public boolean getTraceLoggingEnable() {
         return traceLoggingEnable;
     }
 
     @Override
-    public void setTraceLoggingEnable(boolean enable)
-    {
+    public void setTraceLoggingEnable(boolean enable) {
         try {
             setTraceLogging(enable);
             traceLoggingEnable = enable;
@@ -115,7 +112,7 @@ public class TraceLoggingServiceImpl implements TraceLoggingService, Serializabl
         op.get("operation").set("write-attribute");
         op.get("address").add("subsystem", "logging").add("periodic-rotating-file-handler", "FILE");
         op.get("name").set("level");
-        if(!enable) {
+        if (!enable) {
             op.get("value").set(rotatingFileLogging.equals("TRACE") ? "INFO" : rotatingFileLogging);
         } else {
             op.get("value").set("TRACE");
@@ -126,7 +123,7 @@ public class TraceLoggingServiceImpl implements TraceLoggingService, Serializabl
         op.get("operation").set("write-attribute");
         op.get("address").add("subsystem", "logging").add("logger", "com.arjuna");
         op.get("name").set("level");
-        if(!enable) {
+        if (!enable) {
             op.get("value").set(arjunaLogging.equals("TRACE") ? "INFO" : arjunaLogging);
         } else {
             op.get("value").set("TRACE");

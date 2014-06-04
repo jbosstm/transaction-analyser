@@ -31,8 +31,8 @@ import java.util.Collection;
  * Date: 02/06/14
  * Time: 05:28
  */
-public interface ResourceManagerService
-{
+public interface ResourceManagerService {
     Collection<ResourceManagerInfo> getResourceManagers();
+
     ResourceManagerInfo getResourceManager(String branchId);
 }

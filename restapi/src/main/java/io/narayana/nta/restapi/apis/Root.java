@@ -33,7 +33,6 @@ import javax.ws.rs.core.Application;
  * Time: 17:52
  */
 @ApplicationPath(URIConstants.RootURI)
-public class Root extends Application
-{
+public class Root extends Application {
 
 }

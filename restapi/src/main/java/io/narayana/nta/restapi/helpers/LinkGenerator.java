@@ -21,6 +21,7 @@
  */
 
 package io.narayana.nta.restapi.helpers;
+
 import io.narayana.nta.restapi.models.URIConstants;
 
 /**
@@ -28,20 +29,16 @@ import io.narayana.nta.restapi.models.URIConstants;
  * Date: 14/05/14
  * Time: 00:14
  */
-public final class LinkGenerator
-{
-    public static String participantRecordURI(Long id)
-    {
+public final class LinkGenerator {
+    public static String participantRecordURI(Long id) {
         return URIConstants.RootURI + URIConstants.ParticipantRecordURI + "/" + id;
     }
 
-    public static String eventURI(Long id)
-    {
-        return URIConstants.RootURI+URIConstants.EventURI+"/"+id;
+    public static String eventURI(Long id) {
+        return URIConstants.RootURI + URIConstants.EventURI + "/" + id;
     }
 
-    public static String transactionURI(Long id)
-    {
-        return URIConstants.RootURI+URIConstants.TransactionURI+"/"+id;
+    public static String transactionURI(Long id) {
+        return URIConstants.RootURI + URIConstants.TransactionURI + "/" + id;
     }
 }

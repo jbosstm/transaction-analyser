@@ -32,9 +32,10 @@ import java.util.Collection;
  * Date: 10/05/14
  * Time: 01:22
  */
-public interface TransactionService
-{
+public interface TransactionService {
     public Collection<TransactionInfo> getTransactions();
+
     public Collection<TransactionInfo> getTransactions(Status status);
+
     public TransactionInfo getTransaction(Long id);
 }

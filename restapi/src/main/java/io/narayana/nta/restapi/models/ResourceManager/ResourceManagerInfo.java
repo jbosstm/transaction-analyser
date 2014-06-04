@@ -30,8 +30,7 @@ import java.util.Collection;
  * Date: 02/06/14
  * Time: 05:20
  */
-public class ResourceManagerInfo
-{
+public class ResourceManagerInfo {
     private String branchId;
     private String jndiName;
     private String productName;
@@ -39,68 +38,55 @@ public class ResourceManagerInfo
     private String eisName;
     private Collection<String> participantsRecords;
 
-    public ResourceManagerInfo()
-    {
+    public ResourceManagerInfo() {
         participantsRecords = new ArrayList<>();
     }
 
-    public String getBranchId()
-    {
+    public String getBranchId() {
         return branchId;
     }
 
-    public void setBranchId(String branchId)
-    {
+    public void setBranchId(String branchId) {
         this.branchId = branchId;
     }
 
-    public String getJndiName()
-    {
+    public String getJndiName() {
         return jndiName;
     }
 
-    public void setJndiName(String jndiName)
-    {
+    public void setJndiName(String jndiName) {
         this.jndiName = jndiName;
     }
 
-    public String getProductName()
-    {
+    public String getProductName() {
         return productName;
     }
 
-    public void setProductName(String productName)
-    {
+    public void setProductName(String productName) {
         this.productName = productName;
     }
 
-    public String getProductVersion()
-    {
+    public String getProductVersion() {
         return productVersion;
     }
 
-    public void setProductVersion(String productVersion)
-    {
+    public void setProductVersion(String productVersion) {
         this.productVersion = productVersion;
     }
 
-    public String getEisName()
-    {
+    public String getEisName() {
         return eisName;
     }
 
-    public void setEisName(String eisName)
-    {
+    public void setEisName(String eisName) {
         this.eisName = eisName;
     }
 
-    public Collection<String> getParticipantsRecords()
-    {
+    public Collection<String> getParticipantsRecords() {
         return participantsRecords;
     }
 
-    public void setParticipantsRecords(Collection<String> participantsRecords)
-    {
+    public void setParticipantsRecords(Collection<String> participantsRecords) {
         this.participantsRecords = participantsRecords;
     }
 }
