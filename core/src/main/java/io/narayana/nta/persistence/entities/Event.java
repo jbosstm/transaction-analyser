@@ -24,13 +24,7 @@ package io.narayana.nta.persistence.entities;
 
 import io.narayana.nta.persistence.enums.EventType;
 
-import javax.persistence.Entity;
-import javax.persistence.EnumType;
-import javax.persistence.Enumerated;
-import javax.persistence.GeneratedValue;
-import javax.persistence.GenerationType;
-import javax.persistence.Id;
-import javax.persistence.ManyToOne;
+import javax.persistence.*;
 import java.io.Serializable;
 import java.sql.Timestamp;
 
@@ -40,6 +34,10 @@ import java.sql.Timestamp;
  * Time: 22:57
  */
 @Entity
+@NamedQueries({
+        @NamedQuery(name = "Event.findAll",
+                query = "FROM Event e ORDER BY e.timestamp"
+        )})
 public class Event implements Serializable, Comparable {
 
     @Id
