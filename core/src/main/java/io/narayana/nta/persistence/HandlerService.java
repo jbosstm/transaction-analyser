@@ -175,7 +175,9 @@ public class HandlerService {
 
         em.getTransaction().begin();
         Transaction tx = findTransaction(this.nodeid, txuid);
-        tx.addEvent(new Event(EventType.PREPARE_FAILED, this.nodeid, timestamp));
+        if(tx != null) {
+            tx.addEvent(new Event(EventType.PREPARE_FAILED, this.nodeid, timestamp));
+        }
         em.getTransaction().commit();
 
     }

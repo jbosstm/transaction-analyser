@@ -54,7 +54,7 @@ public final class Configuration {
     /**
      *
      */
-    public static final int DEFAULT_ITEMS_PER_PAGE = 7;
+    public static final int DEFAULT_ITEMS_PER_PAGE = 50;
     /**
      *
      */
