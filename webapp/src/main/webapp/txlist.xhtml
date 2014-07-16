@@ -174,6 +174,9 @@
                     <f:selectItem itemValue="upload" itemLabel="upload" />
                 </h:selectOneRadio>
                 <t:inputFileUpload value="#{switchLogBean.uploadedFile}" />
+                <div class="alert alert-info">
+					<p>Only files less than 20M in size can be uploaded.<br/>For larger files, copy them to the $JBOSS_HOME/standalone/data/nta/log/ directory. <br/>Then restart the server and when you revisit this page, the new log file(s) should appear in this list for selection.</p>
+                </div>
                 <h:commandButton value="Change" action="#{switchLogBean.changeLog}" />
                 <h:messages />
             </h:form>
