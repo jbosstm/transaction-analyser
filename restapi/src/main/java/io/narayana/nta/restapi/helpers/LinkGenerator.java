@@ -45,7 +45,13 @@ public final class LinkGenerator {
         return URIConstants.RootURI + URIConstants.TransactionURI + "/" + id;
     }
 
-    public static String resourceManagerURI(String branchId) throws UnsupportedEncodingException {
-        return URIConstants.RootURI + URIConstants.ResourceManagerURI + "/" + URLEncoder.encode(branchId,"UTF-8");
+    public static String resourceManagerURI(String branchId) {
+        try{
+            return URIConstants.RootURI + URIConstants.ResourceManagerURI + "/" + URLEncoder.encode(branchId,"UTF-8");
+        }
+        catch(UnsupportedEncodingException ex){
+            return "";
+        }
+
     }
 }

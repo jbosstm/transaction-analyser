@@ -20,19 +20,18 @@
  * 02110-1301 USA, or see the FSF site: http://www.fsf.org.
  */
 
-package io.narayana.nta.restapi.apis;
+package io.narayana.nta.restapi.services;
 
-import io.narayana.nta.restapi.models.URIConstants;
-
-import javax.ws.rs.Path;
+import java.util.Collection;
 
 /**
  * @Author Palahepitiya Gamage Amila Prabandhika &lt;amila_fiz@hotmail.com$gt;
- * Date: 6/22/2014
- * Time: 11:42 AM
+ * Date: 7/31/2014
+ * Time: 9:44 PM
  */
-@Path(URIConstants.EventURI)
-public class EventAPI {
+public interface CommonService<T> {
 
+    public Collection<T> get();
 
+    public T getById(Long id);
 }

@@ -36,13 +36,13 @@ import java.util.Collection;
  * Date: 6/24/2014
  * Time: 11:04 PM
  */
-public class EventServiceImpl implements EventService {
+public class EventServiceImpl implements CommonService<EventInfo> {
 
     @Inject
     DataAccessObject dao;
 
     @Override
-    public Collection<EventInfo> getEvents() {
+    public Collection<EventInfo> get() {
         Collection<Event> events = dao.findAllEvents();
 
         Collection<EventInfo> eventInfos = processDaoEvents(events);
@@ -51,7 +51,7 @@ public class EventServiceImpl implements EventService {
     }
 
     @Override
-    public EventInfo getEvent(Long id) {
+    public EventInfo getById(Long id) {
         if (id == null) {
             throw new IllegalArgumentException("event id cannot be null.");
         }
@@ -63,11 +63,16 @@ public class EventServiceImpl implements EventService {
 
     private Collection<EventInfo> processDaoEvents(Collection<Event> events) {
 
-        Collection<EventInfo> eventInfos = new ArrayList<EventInfo>();
+        if (events != null) {
 
-        for(Event event : events){
-            eventInfos.add(processDoaEvent(event));
+            Collection<EventInfo> eventInfos = new ArrayList<EventInfo>();
+
+            for (Event event : events) {
+                eventInfos.add(processDoaEvent(event));
+            }
+            return eventInfos;
         }
+
         return null;
     }
 

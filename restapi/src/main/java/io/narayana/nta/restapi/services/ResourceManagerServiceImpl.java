@@ -27,6 +27,7 @@ import io.narayana.nta.persistence.entities.ParticipantRecord;
 import io.narayana.nta.persistence.entities.ResourceManager;
 import io.narayana.nta.restapi.helpers.LinkGenerator;
 import io.narayana.nta.restapi.models.resourceManager.ResourceManagerInfo;
+import sun.reflect.generics.reflectiveObjects.NotImplementedException;
 
 import javax.inject.Inject;
 import java.util.ArrayList;
@@ -37,19 +38,24 @@ import java.util.Collection;
  * Date: 02/06/14
  * Time: 05:30
  */
-public class ResourceManagerServiceImpl implements ResourceManagerService {
+public class ResourceManagerServiceImpl implements ResourceManagerService{
     @Inject
     DataAccessObject dao;
 
     @Override
-    public Collection<ResourceManagerInfo> getResourceManagers() {
+    public Collection<ResourceManagerInfo> get() {
         Collection<ResourceManager> resourceManagers = dao.findAllResourceManagers();
 
         return processDaoResourceManagers(resourceManagers);
     }
 
     @Override
-    public ResourceManagerInfo getResourceManager(String branchId) {
+    public ResourceManagerInfo getById(Long id) {
+        throw new NotImplementedException();
+    }
+
+    @Override
+    public ResourceManagerInfo getById(String branchId) {
         if (branchId == null) {
             throw new IllegalArgumentException("Branch Id cannot be null.");
         }

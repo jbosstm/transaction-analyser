@@ -52,7 +52,7 @@ public class ResourceManagerAPI {
     @Produces(MediaType.APPLICATION_JSON)
     public Response getResourceManagers() {
 
-        Collection<ResourceManagerInfo> payload = resourceManagerService.getResourceManagers();
+        Collection<ResourceManagerInfo> payload = resourceManagerService.get();
 
         if ((payload == null) || (payload != null && payload.size() == 0)) {
             return Response.noContent().build();
@@ -73,10 +73,10 @@ public class ResourceManagerAPI {
             @NotNull
             String branchId
     ) {
-        Object payload = resourceManagerService.getResourceManager(branchId);
+        Object payload = resourceManagerService.getById(branchId);
 
         if (payload == null) {
-            return Response.noContent().build();
+            return Response.status(Response.Status.BAD_REQUEST).build();
         }
 
         PayloadResponse payloadResponse = new PayloadResponse();

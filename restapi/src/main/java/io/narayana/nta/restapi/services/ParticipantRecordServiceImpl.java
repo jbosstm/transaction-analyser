@@ -28,7 +28,6 @@ import io.narayana.nta.restapi.helpers.LinkGenerator;
 import io.narayana.nta.restapi.models.participantRecord.ParticipantRecordInfo;
 
 import javax.inject.Inject;
-import java.io.UnsupportedEncodingException;
 import java.util.ArrayList;
 import java.util.Collection;
 
@@ -37,13 +36,13 @@ import java.util.Collection;
  * Date: 04/06/14
  * Time: 12:14
  */
-public class ParticipantRecordServiceImpl implements ParticipantRecordService {
+public class ParticipantRecordServiceImpl implements CommonService<ParticipantRecordInfo> {
 
     @Inject
     DataAccessObject dao;
 
     @Override
-    public Collection<ParticipantRecordInfo> getParticipantRecords() throws UnsupportedEncodingException {
+    public Collection<ParticipantRecordInfo> get() {
 
         Collection<ParticipantRecord> participantRecords = dao.findAllParticipantRecords();
 
@@ -51,7 +50,7 @@ public class ParticipantRecordServiceImpl implements ParticipantRecordService {
     }
 
     @Override
-    public ParticipantRecordInfo getParticipantRecordById(Long id) throws UnsupportedEncodingException {
+    public ParticipantRecordInfo getById(Long id){
 
         if (id == null) {
             throw new IllegalArgumentException("The passed in parameter Id cannot be null.");
@@ -60,7 +59,7 @@ public class ParticipantRecordServiceImpl implements ParticipantRecordService {
         return processDaoParticipantRecord(daoParticipantRecord);
     }
 
-    private Collection<ParticipantRecordInfo> processDaoParticipantRecords(Collection<ParticipantRecord> daoParticipantRecords) throws UnsupportedEncodingException {
+    private Collection<ParticipantRecordInfo> processDaoParticipantRecords(Collection<ParticipantRecord> daoParticipantRecords) {
         if (daoParticipantRecords != null) {
             Collection<ParticipantRecordInfo> participantRecords = new ArrayList<>();
             for (ParticipantRecord participantRecord : daoParticipantRecords) {
@@ -72,7 +71,7 @@ public class ParticipantRecordServiceImpl implements ParticipantRecordService {
         return null;
     }
 
-    private ParticipantRecordInfo processDaoParticipantRecord(ParticipantRecord daoParticipantRecord) throws UnsupportedEncodingException {
+    private ParticipantRecordInfo processDaoParticipantRecord(ParticipantRecord daoParticipantRecord) {
         if (daoParticipantRecord != null) {
 
             ParticipantRecordInfo participantRecordInfo = new ParticipantRecordInfo();

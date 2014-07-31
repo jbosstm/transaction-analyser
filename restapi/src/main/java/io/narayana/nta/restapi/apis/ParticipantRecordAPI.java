@@ -25,7 +25,7 @@ package io.narayana.nta.restapi.apis;
 import io.narayana.nta.restapi.models.URIConstants;
 import io.narayana.nta.restapi.models.participantRecord.ParticipantRecordInfo;
 import io.narayana.nta.restapi.models.response.PayloadResponse;
-import io.narayana.nta.restapi.services.ParticipantRecordService;
+import io.narayana.nta.restapi.services.CommonService;
 
 import javax.inject.Inject;
 import javax.validation.constraints.NotNull;
@@ -44,13 +44,13 @@ import java.util.Collection;
 public class ParticipantRecordAPI {
 
     @Inject
-    ParticipantRecordService participantRecordService;
+    CommonService<ParticipantRecordInfo> participantRecordService;
 
     @GET
     @Produces(MediaType.APPLICATION_JSON)
     public Response getParticipantRecords() throws UnsupportedEncodingException {
 
-        Collection<ParticipantRecordInfo> participantRecords = participantRecordService.getParticipantRecords();
+        Collection<ParticipantRecordInfo> participantRecords = participantRecordService.get();
 
         if((participantRecords == null) || (participantRecords != null && participantRecords.size() == 0)){
             return Response.noContent().build();
@@ -72,10 +72,10 @@ public class ParticipantRecordAPI {
             Long id
     ) throws UnsupportedEncodingException {
 
-        Object payload = participantRecordService.getParticipantRecordById(id);
+        Object payload = participantRecordService.getById(id);
 
         if(payload == null){
-            return Response.noContent().build();
+            return Response.status(Response.Status.BAD_REQUEST).build();
         }
 
         PayloadResponse payloadResponse = new PayloadResponse();

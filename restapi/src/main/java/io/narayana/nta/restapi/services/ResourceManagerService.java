@@ -24,15 +24,12 @@ package io.narayana.nta.restapi.services;
 
 import io.narayana.nta.restapi.models.resourceManager.ResourceManagerInfo;
 
-import java.util.Collection;
-
 /**
  * @Author Palahepitiya Gamage Amila Prabandhika &lt;amila_fiz@hotmail.com$gt;
- * Date: 02/06/14
- * Time: 05:28
+ * Date: 7/31/2014
+ * Time: 10:05 PM
  */
-public interface ResourceManagerService {
-    Collection<ResourceManagerInfo> getResourceManagers();
+public interface ResourceManagerService extends CommonService<ResourceManagerInfo> {
 
-    ResourceManagerInfo getResourceManager(String branchId);
+    public ResourceManagerInfo getById(String id);
 }

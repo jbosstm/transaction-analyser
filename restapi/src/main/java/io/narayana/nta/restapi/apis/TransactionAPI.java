@@ -53,14 +53,14 @@ public class TransactionAPI {
         Collection<TransactionInfo> payload;
 
         if (status == null) {
-            payload = transactionService.getTransactions();
+            payload = transactionService.get();
         } else {
             Status requestedTransactionStatus = Status.valueOf(status.toUpperCase());
-            payload = transactionService.getTransactions(requestedTransactionStatus);
+            payload = transactionService.getByStatus(requestedTransactionStatus);
         }
 
         if ((payload == null) || (payload != null && payload.size() == 0)) {
-            return Response.noContent().build();
+            return Response.status(Response.Status.BAD_REQUEST).build();
         }
 
         PayloadResponse payloadResponse = new PayloadResponse();
@@ -77,10 +77,10 @@ public class TransactionAPI {
             @NotNull
             Long id) {
 
-        Object payload = transactionService.getTransaction(id);
+        Object payload = transactionService.getById(id);
 
         if (payload == null) {
-            return Response.noContent().build();
+            return Response.status(Response.Status.BAD_REQUEST).build();
         }
         PayloadResponse payloadResponse = new PayloadResponse();
         payloadResponse.setStatus(Response.Status.OK);

@@ -44,7 +44,7 @@ public class TransactionServiceImpl implements TransactionService {
     DataAccessObject dao;
 
     @Override
-    public Collection<TransactionInfo> getTransactions() {
+    public Collection<TransactionInfo> get() {
         Collection<Transaction> transactions = dao.findAllTopLevelTransactions();
 
         Collection<TransactionInfo> transactionInfos = processDaoTransactions(transactions);
@@ -53,7 +53,7 @@ public class TransactionServiceImpl implements TransactionService {
     }
 
     @Override
-    public Collection<TransactionInfo> getTransactions(Status status) {
+    public Collection<TransactionInfo> getByStatus(Status status) {
         if (status == null) {
             throw new IllegalArgumentException("transaction status cannot be null.");
         }
@@ -66,7 +66,7 @@ public class TransactionServiceImpl implements TransactionService {
     }
 
     @Override
-    public TransactionInfo getTransaction(Long id) {
+    public TransactionInfo getById(Long id) {
         if (id == null) {
             throw new IllegalArgumentException("transaction id cannot be null.");
         }
@@ -116,12 +116,17 @@ public class TransactionServiceImpl implements TransactionService {
     }
 
     private Collection<TransactionInfo> processDaoTransactions(Collection<Transaction> daoTransactions) {
-        Collection<TransactionInfo> transactionInfos = new ArrayList<>();
 
-        for (Transaction transaction : daoTransactions) {
-            transactionInfos.add(processDaoTransaction(transaction));
+        if(daoTransactions != null){
+            Collection<TransactionInfo> transactionInfos = new ArrayList<>();
+
+            for (Transaction transaction : daoTransactions) {
+                transactionInfos.add(processDaoTransaction(transaction));
+            }
+
+            return transactionInfos;
         }
 
-        return transactionInfos;
+        return null;
     }
 }
