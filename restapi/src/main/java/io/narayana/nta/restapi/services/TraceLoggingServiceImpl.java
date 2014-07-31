@@ -39,7 +39,6 @@ import java.net.InetAddress;
  * Time: 23:09
  */
 @SessionScoped
-@Named
 public class TraceLoggingServiceImpl implements TraceLoggingService, Serializable {
     private boolean traceLoggingEnable = false;
     private ModelControllerClient client = null;
