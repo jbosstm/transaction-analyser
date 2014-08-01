@@ -28,6 +28,7 @@ import javax.ws.rs.core.MediaType;
 import javax.ws.rs.core.Response;
 import javax.ws.rs.ext.ExceptionMapper;
 import javax.ws.rs.ext.Provider;
+import java.io.UnsupportedEncodingException;
 
 /**
  * @Author Palahepitiya Gamage Amila Prabandhika &lt;amila_fiz@hotmail.com$gt;
@@ -47,6 +48,11 @@ public class ApplicationExceptionHandler implements ExceptionMapper<Exception> {
         }
 
         if (exception instanceof IllegalArgumentException) {
+            errorResponse.setStatus(Response.Status.BAD_REQUEST);
+            return BadRequestResponse(errorResponse);
+        }
+
+        if(exception instanceof UnsupportedEncodingException){
             errorResponse.setStatus(Response.Status.BAD_REQUEST);
             return BadRequestResponse(errorResponse);
         }

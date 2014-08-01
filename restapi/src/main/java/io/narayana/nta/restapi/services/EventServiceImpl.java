@@ -85,7 +85,7 @@ public class EventServiceImpl implements CommonService<EventInfo> {
             eventInfo.setTimestamp(event.getTimestamp());
             eventInfo.setEventType(event.getEventType());
             eventInfo.setEventEntity(event.getEventEntity());
-            eventInfo.setTransaction(LinkGenerator.eventURI(event.getId()));
+            eventInfo.setTransaction(LinkGenerator.transactionURI(event.getTransaction().getId()));
 
             return eventInfo;
         }
