@@ -22,52 +22,26 @@
 
 package io.narayana.nta.restapi.apis;
 
-import io.narayana.nta.persistence.enums.Status;
-import io.narayana.nta.restapi.models.response.PayloadResponse;
-import io.narayana.nta.restapi.models.transaction.TransactionInfo;
 import io.narayana.nta.restapi.models.URIConstants;
-import io.narayana.nta.restapi.services.TransactionService;
 
-import javax.inject.Inject;
 import javax.validation.constraints.NotNull;
 import javax.ws.rs.*;
 import javax.ws.rs.core.MediaType;
 import javax.ws.rs.core.Response;
-import java.util.Collection;
 
 /**
  * @Author Palahepitiya Gamage Amila Prabandhika &lt;amila_fiz@hotmail.com$gt;
- * Date: 04/05/14
- * Time: 17:52
+ * Date: 8/20/2014
+ * Time: 12:13 AM
  */
 @Path(URIConstants.TransactionURI)
-public class TransactionAPI {
-    @Inject
-    private TransactionService transactionService;
+public interface TransactionAPI {
 
     @GET
     @Produces(MediaType.APPLICATION_JSON)
     public Response getTransactions(
             @QueryParam("status")
-            String status) {
-        Collection<TransactionInfo> payload;
-
-        if (status == null) {
-            payload = transactionService.get();
-        } else {
-            Status requestedTransactionStatus = Status.valueOf(status.toUpperCase());
-            payload = transactionService.getByStatus(requestedTransactionStatus);
-        }
-
-        if ((payload == null) || (payload != null && payload.size() == 0)) {
-            return Response.status(Response.Status.BAD_REQUEST).build();
-        }
-
-        PayloadResponse payloadResponse = new PayloadResponse();
-        payloadResponse.setStatus(Response.Status.OK);
-        payloadResponse.setPayload(payload);
-        return Response.ok(payloadResponse).build();
-    }
+            String status);
 
     @GET
     @Path("/{id}")
@@ -75,16 +49,5 @@ public class TransactionAPI {
     public Response getTransactionById(
             @PathParam("id")
             @NotNull
-            Long id) {
-
-        Object payload = transactionService.getById(id);
-
-        if (payload == null) {
-            return Response.status(Response.Status.BAD_REQUEST).build();
-        }
-        PayloadResponse payloadResponse = new PayloadResponse();
-        payloadResponse.setStatus(Response.Status.OK);
-        payloadResponse.setPayload(payload);
-        return Response.ok(payloadResponse).build();
-    }
+            Long id);
 }
