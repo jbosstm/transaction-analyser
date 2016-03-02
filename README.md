@@ -23,11 +23,11 @@ To build the `Transaction Analyser` from source you need Maven 3.0.0+ installed 
 
 ## Download and Configure WildFly
 
-Currently the `Transaction Analyser` can work with the WildFly 8.0.0.Final:
+Currently the `Transaction Analyser` can work with the WildFly 10.0.0.Final:
 
-    wget http://download.jboss.org/wildfly/9.0.0.Alpha1/wildfly-9.0.0.Alpha1.zip
-    unzip wildfly-9.0.0.Alpha1.zip
-    export WILDFLY_HOME=/path/to/wildfly-9.0.0.Alpha1
+    wget http://download.jboss.org/wildfly/10.0.0.Final/wildfly-10.0.0.Final.zip
+    unzip wildfly-10.0.0.Final.zip
+    export WILDFLY_HOME=/path/to/wildfly-10.0.0.Final.zip
 
 ## Run Wildfly
 
