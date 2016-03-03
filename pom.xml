@@ -120,24 +120,33 @@
 
     <properties>
         <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
-
         <version.maven.surefire>2.15</version.maven.surefire>
-
         <version.jboss.maven.plugin>7.3.Final</version.jboss.maven.plugin>
-
-        <version.jboss.spec.javaee.6.0>3.0.2.Final</version.jboss.spec.javaee.6.0>
-
+        <version.jboss.spec.javaee.7.0>1.0.3.Final</version.jboss.spec.javaee.7.0>
         <version.compiler.plugin>2.3.1</version.compiler.plugin>
-
         <version.junit>4.8.1</version.junit>
-
         <version.ear.plugin>2.6</version.ear.plugin>
         <version.ejb.plugin>2.3</version.ejb.plugin>
         <version.war.plugin>2.1.1</version.war.plugin>
         <version.source.plugin>2.2.1</version.source.plugin>
-
         <maven.compiler.target>1.7</maven.compiler.target>
         <maven.compiler.source>1.7</maven.compiler.source>
+	<version.jboss.shrinkwrap.resolver>2.2.2</version.jboss.shrinkwrap.resolver>
+	<version.jboss.bom.javaee-6.0-with-tools>1.0.7.Final</version.jboss.bom.javaee-6.0-with-tools>
+	<version.hibernate.annotations>3.5.6-Final</version.hibernate.annotations>
+	<version.jboss.narayana.jta>5.2.14.Final</version.jboss.narayana.jta>
+	<version.jboss.spec.javac.transaction.api_1.2>1.0.0.Final</version.jboss.spec.javac.transaction.api_1.2>
+	<version.log4j>1.2.17</version.log4j>
+	<version.jboss.arquillian.junit.container>1.1.9.Final</version.jboss.arquillian.junit.container>
+	<version.commons-io>2.5-SNAPSHOT</version.commons-io>
+	<version.google.code.gson>2.6.2</version.google.code.gson>
+	<version.apache.myfaces.tomahawk>1.1.14</version.apache.myfaces.tomahawk>
+	<version.wildfly.controller-client>8.2.1.Final</version.wildfly.controller-client>
+	<version.ejb>3.1</version.ejb>
+	<version.maven.jar.plugin>2.3.1</version.maven.jar.plugin>
+	<version.wildfly.arquillian-container-remote>8.2.1.Final</version.wildfly.arquillian-container-remote>
+	<version.jboss.as.arquillian-container-remote>7.3.0.Final-redhat-SNAPSHOT</version.jboss.as.arquillian-container-remote>
+	
     </properties>
 
     <dependencyManagement>
@@ -164,14 +173,113 @@
                 <scope>compile</scope>
             </dependency>
 
+	    <dependency>
+                <groupId>org.jboss.shrinkwrap.resolver</groupId>
+                <artifactId>shrinkwrap-resolver-bom</artifactId>
+	        <version>${version.jboss.shrinkwrap.resolver}</version>
+                <scope>import</scope>
+		<type>pom</type>
+            </dependency>
+
             <dependency>
-                <groupId>org.jboss.spec</groupId>
-                <artifactId>jboss-javaee-6.0</artifactId>
-                <version>${version.jboss.spec.javaee.6.0}</version>
+                <groupId>org.jboss.bom</groupId>
+                <artifactId>jboss-javaee-6.0-with-tools</artifactId>
+                <version>${version.jboss.bom.javaee-6.0-with-tools}</version>
                 <type>pom</type>
                 <scope>import</scope>
             </dependency>
-        </dependencies>
+
+            <dependency>
+                <groupId>org.jboss.spec</groupId>
+                <artifactId>jboss-javaee-7.0</artifactId>
+                <version>${version.jboss.spec.javaee.7.0}</version>
+                <type>pom</type>
+                <scope>import</scope>
+            </dependency>
+ 	    
+	    <dependency>
+            	<groupId>org.jboss.shrinkwrap.resolver</groupId>
+            	<artifactId>shrinkwrap-resolver-api</artifactId>
+            	<version>${version.jboss.shrinkwrap.resolver}</version>
+            	<scope>test</scope>
+            </dependency>
+	    
+	    <dependency>
+            	<groupId>org.jboss.shrinkwrap.resolver</groupId>
+            	<artifactId>shrinkwrap-resolver-impl-maven</artifactId>
+            	<version>${version.jboss.shrinkwrap.resolver}</version>
+            	<scope>test</scope>
+            </dependency>
+
+	    <dependency>
+            	<groupId>org.jboss.shrinkwrap.resolver</groupId>
+            	<artifactId>shrinkwrap-resolver-api-maven</artifactId>
+            	<version>${version.jboss.shrinkwrap.resolver}</version>
+            	<scope>test</scope>
+            </dependency>
+
+            <dependency>
+    	        <groupId>org.hibernate</groupId>
+    	        <artifactId>hibernate-annotations</artifactId>
+    	        <version>${version.hibernate.annotations}</version>
+    	        <scope>provided</scope>
+    	    </dependency>
+
+	    <dependency>
+            	<groupId>org.jboss.narayana.jta</groupId>
+            	<artifactId>narayana-jta</artifactId>
+            	<version>${version.jboss.narayana.jta}</version>
+            	<scope>provided</scope>
+            </dependency>
+
+            <dependency>
+            	<groupId>org.jboss.spec.javax.transaction</groupId>
+            	<artifactId>jboss-transaction-api_1.2_spec</artifactId>
+            	<scope>provided</scope>
+            	<version>${version.jboss.spec.javac.transaction.api_1.2}</version>
+            </dependency>
+
+   	    <dependency>
+            	<groupId>commons-io</groupId>
+            	<artifactId>commons-io</artifactId>
+            	<version>${version.commons-io}</version>
+		<systemPath>${basedir}/../etc/lib/commons-io-2.5-SNAPSHOT.jar</systemPath>
+            	<scope>system</scope>
+            </dependency>
+
+            <dependency>
+            	<groupId>log4j</groupId>
+            	<artifactId>log4j</artifactId>
+            	<version>${version.log4j}</version>
+            	<scope>provided</scope>
+            </dependency>
+
+            <dependency>
+            	<groupId>org.jboss.arquillian.junit</groupId>
+            	<artifactId>arquillian-junit-container</artifactId>
+            	<version>${version.jboss.arquillian.junit.container}</version>
+            	<scope>test</scope>
+            </dependency>
+
+ 	    <dependency>
+            	<groupId>com.google.code.gson</groupId>
+            	<artifactId>gson</artifactId>
+            	<version>${version.google.code.gson}</version>
+            </dependency>
+	    
+	    <dependency>
+            	<groupId>org.apache.myfaces.tomahawk</groupId>
+            	<artifactId>tomahawk20</artifactId>
+            	<version>${version.apache.myfaces.tomahawk}</version>
+            </dependency>
+
+            <dependency>
+            	<groupId>org.wildfly</groupId>
+            	<artifactId>wildfly-controller-client</artifactId>
+           	 <version>${version.wildfly.controller-client}</version>
+            	<scope>provided</scope>
+            </dependency>
+    	</dependencies>
     </dependencyManagement>
 
     <build>
