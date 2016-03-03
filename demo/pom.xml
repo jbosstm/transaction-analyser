@@ -25,8 +25,8 @@
     <modelVersion>4.0.0</modelVersion>
 
     <parent>
-        <artifactId>nta-all</artifactId>
         <groupId>io.narayana.nta</groupId>
+        <artifactId>nta-all</artifactId>
         <version>1.0.0.Alpha3-SNAPSHOT</version>
     </parent>
 
@@ -35,20 +35,7 @@
     <description>A demo application that could fail transactions on demand</description>
     <packaging>war</packaging>
 
-    <dependencyManagement>
-        <dependencies>
-            <dependency>
-                <groupId>org.jboss.spec</groupId>
-                <artifactId>jboss-javaee-6.0</artifactId>
-                <version>${version.jboss.spec.javaee.6.0}</version>
-                <type>pom</type>
-                <scope>import</scope>
-            </dependency>
-        </dependencies>
-    </dependencyManagement>
-
     <dependencies>
-
         <dependency>
             <groupId>javax.enterprise</groupId>
             <artifactId>cdi-api</artifactId>
@@ -88,9 +75,7 @@
         <dependency>
             <groupId>com.google.code.gson</groupId>
             <artifactId>gson</artifactId>
-            <version>2.2.4</version>
         </dependency>
-
     </dependencies>
 
     <build>

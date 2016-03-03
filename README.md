@@ -32,7 +32,7 @@ Currently the `Transaction Analyser` can work with the WildFly 10.0.0.Final:
 ## Run Wildfly
 
     cd $WILDFLY_HOME/bin
-    ./standalone.sh
+    ./standalone.sh -c standalone-full.xml
 
 ## Deploy to WildFly
 To run the `Transaction Analyzer` you just need to deploy the ear file to WildFly and visit the console. To do this:

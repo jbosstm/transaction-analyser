@@ -50,32 +50,11 @@
         </snapshotRepository>
     </distributionManagement>
 
-    <dependencyManagement>
-        <dependencies>
-            <dependency>
-                <groupId>org.jboss.shrinkwrap.resolver</groupId>
-                <artifactId>shrinkwrap-resolver-bom</artifactId>
-                <version>2.0.0-beta-1</version>
-                <scope>import</scope>
-                <type>pom</type>
-            </dependency>
-
-            <dependency>
-                <groupId>org.jboss.bom</groupId>
-                <artifactId>jboss-javaee-6.0-with-tools</artifactId>
-                <version>1.0.0.Final</version>
-                <type>pom</type>
-                <scope>import</scope>
-            </dependency>
-        </dependencies>
-    </dependencyManagement>
-
     <dependencies>
         <dependency>
             <groupId>org.jboss.shrinkwrap.resolver</groupId>
             <artifactId>shrinkwrap-resolver-api</artifactId>
-            <version>2.0.0-beta-1</version>
-            <scope>test</scope>
+	    <scope>test</scope>
         </dependency>
 
         <dependency>
@@ -93,34 +72,31 @@
         <dependency>
             <groupId>org.jboss.shrinkwrap.resolver</groupId>
             <artifactId>shrinkwrap-resolver-impl-maven</artifactId>
-            <version>2.0.0-beta-1</version>
-            <scope>test</scope>
+	    <scope>test</scope>
         </dependency>
 
         <dependency>
             <groupId>org.jboss.shrinkwrap.resolver</groupId>
             <artifactId>shrinkwrap-resolver-api-maven</artifactId>
-            <version>2.0.0-beta-1</version>
-            <scope>test</scope>
+	    <scope>test</scope>
         </dependency>
 
         <dependency>
             <groupId>org.hibernate</groupId>
             <artifactId>hibernate-annotations</artifactId>
-            <version>3.5.6-Final</version>
             <scope>provided</scope>
         </dependency>
+
         <dependency>
             <groupId>org.jboss.narayana.jta</groupId>
             <artifactId>narayana-jta</artifactId>
-            <version>5.0.0.M2</version>
             <scope>provided</scope>
         </dependency>
+
         <dependency>
             <groupId>org.jboss.spec.javax.transaction</groupId>
             <artifactId>jboss-transaction-api_1.1_spec</artifactId>
             <scope>provided</scope>
-            <version>1.0.1.Final</version>
         </dependency>
 
         <dependency>
@@ -145,7 +121,6 @@
         <dependency>
             <groupId>commons-io</groupId>
             <artifactId>commons-io</artifactId>
-            <version>2.5-SNAPSHOT</version>
             <scope>system</scope>
             <systemPath>${basedir}/../etc/lib/commons-io-2.5-SNAPSHOT.jar</systemPath>
         </dependency>
@@ -153,14 +128,12 @@
         <dependency>
             <groupId>log4j</groupId>
             <artifactId>log4j</artifactId>
-            <version>1.2.17</version>
             <scope>provided</scope>
         </dependency>
 
         <dependency>
             <groupId>org.jboss.arquillian.junit</groupId>
             <artifactId>arquillian-junit-container</artifactId>
-            <version>1.0.3.Final</version>
             <scope>test</scope>
         </dependency>
     </dependencies>
@@ -173,13 +146,13 @@
                 <version>${version.ejb.plugin}</version>
                 <configuration>
                     <!-- Tell Maven we are using EJB 3.1 -->
-                    <ejbVersion>3.1</ejbVersion>
+                    <ejbVersion>${version.ejb}</ejbVersion>
                 </configuration>
             </plugin>
             <plugin>
                 <groupId>org.apache.maven.plugins</groupId>
                 <artifactId>maven-jar-plugin</artifactId>
-                <version>2.3.1</version>
+                <version>${version.maven.jar.plugin}</version>
                 <configuration>
                     <archive>
                         <manifestEntries>
@@ -210,7 +183,7 @@
                 <dependency>
                     <groupId>org.wildfly</groupId>
                     <artifactId>wildfly-arquillian-container-remote</artifactId>
-                    <version>8.0.0.Final</version>
+                    <version>${version.wildfly.arquillian-container-remote}</version>
                     <scope>test</scope>
                 </dependency>
             </dependencies>
@@ -233,7 +206,7 @@
                 <dependency>
                     <groupId>org.jboss.as</groupId>
                     <artifactId>jboss-as-arquillian-container-remote</artifactId>
-                    <version>7.3.0.Final-redhat-SNAPSHOT</version>
+                    <version>${version.jboss.as.arquillian-container-remote}</version>
                     <scope>test</scope>
                 </dependency>
             </dependencies>
