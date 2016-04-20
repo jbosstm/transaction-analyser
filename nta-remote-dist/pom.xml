@@ -47,7 +47,6 @@
             <groupId>io.narayana.nta</groupId>
             <artifactId>core</artifactId>
             <type>ejb</type>
-            <version>1.0.0.Alpha3-SNAPSHOT</version>
         </dependency>
     </dependencies>
 
