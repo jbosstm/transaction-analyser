@@ -16,9 +16,16 @@ public class GetFilterKeywords {
  
 		try {
 			Properties prop = new Properties();
+<<<<<<< HEAD
 			String propFileName = "filter.properties";			
 			inputStream = getClass().getClassLoader().getResourceAsStream(propFileName);
 
+=======
+			String propFileName = "filter.properties";
+			
+			inputStream = getClass().getClassLoader().getResourceAsStream("src/main/resources/"+propFileName);
+ 
+>>>>>>> 286cbc1a35401e2cebb1f7b1b07bea9afd98cd4b
 			if (inputStream != null) {
 				prop.load(inputStream);
 			} else {
