@@ -38,10 +38,15 @@ import java.net.InetAddress;
 @SessionScoped
 @Named
 public class TraceLoggingBean implements Serializable {
+
+    private final String ARJUNA_CATEGORY = "com.arjuna";
+    private final String IJTRACER_CATEGORY = "org.jboss.jca.core.tracer";
+
     private boolean traceLoggingEnable = false;
     private ModelControllerClient client = null;
     private String rotatingFileLogging;
     private String arjunaLogging;
+    private String jcaTracerLogging;
 
     @PostConstruct
     public void init() {
@@ -64,11 +69,33 @@ public class TraceLoggingBean implements Serializable {
 
             op = new ModelNode();
             op.get("operation").set("read-attribute");
-            op.get("address").add("subsystem", "logging").add("logger", "com.arjuna");
+            op.get("address").add("subsystem", "logging").add("logger", ARJUNA_CATEGORY);
             op.get("name").set("level");
 
             ret = client.execute(op);
             arjunaLogging = ret.get("result").toString().replaceAll("\"", "");
+
+            op = new ModelNode();
+            op.get("operation").set("read-attribute");
+            op.get("address").add("subsystem", "logging").add("logger", IJTRACER_CATEGORY);
+            op.get("name").set("level");
+
+            ret = client.execute(op);
+            jcaTracerLogging = ret.get("result").toString().replaceAll("\"", "");
+
+            if (jcaTracerLogging != null && jcaTracerLogging.equals("undefined")) {
+                op = new ModelNode();
+                op.get("operation").set("add");
+                op.get("address").add("subsystem", "logging").add("logger", IJTRACER_CATEGORY);
+                ret = client.execute(op);
+
+                op = new ModelNode();
+                op.get("operation").set("write-attribute");
+                op.get("address").add("subsystem", "logging").add("logger", IJTRACER_CATEGORY);
+                op.get("name").set("level");
+                op.get("value").set("INFO");
+                ret = client.execute(op);
+            }
 
             traceLoggingEnable = rotatingFileLogging.equals("TRACE") && arjunaLogging.equals("TRACE");
         } catch(Exception e) {
@@ -119,10 +146,21 @@ public class TraceLoggingBean implements Serializable {
 
         op = new ModelNode();
         op.get("operation").set("write-attribute");
-        op.get("address").add("subsystem", "logging").add("logger", "com.arjuna");
+        op.get("address").add("subsystem", "logging").add("logger", ARJUNA_CATEGORY);
         op.get("name").set("level");
         if(!enable) {
             op.get("value").set(arjunaLogging.equals("TRACE") ? "INFO" : arjunaLogging);
+        } else {
+            op.get("value").set("TRACE");
+        }
+        client.execute(op);
+
+        op = new ModelNode();
+        op.get("operation").set("write-attribute");
+        op.get("address").add("subsystem", "logging").add("logger", IJTRACER_CATEGORY);
+        op.get("name").set("level");
+        if(!enable) {
+            op.get("value").set(jcaTracerLogging.equals("TRACE") ? "INFO" : jcaTracerLogging);
         } else {
             op.get("value").set("TRACE");
         }

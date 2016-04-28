@@ -30,7 +30,7 @@
     <parent>
         <groupId>io.narayana.nta</groupId>
         <artifactId>nta-all</artifactId>
-        <version>1.0.0.Alpha2-SNAPSHOT</version>
+        <version>1.0.0.Alpha3-SNAPSHOT</version>
     </parent>
 
     <artifactId>nta</artifactId>
@@ -38,7 +38,6 @@
     <description>A deployable EAR containing the core module and the web user interface and associated dependencies
     </description>
     <packaging>ear</packaging>
-
 
     <dependencies>
         <dependency>

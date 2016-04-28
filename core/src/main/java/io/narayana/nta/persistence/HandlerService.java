@@ -48,6 +48,7 @@ import javax.persistence.NoResultException;
 import javax.persistence.PersistenceException;
 import javax.persistence.PersistenceUnit;
 import javax.persistence.RollbackException;
+import javax.persistence.PersistenceException;
 import java.sql.Timestamp;
 import java.util.HashMap;
 import java.util.Map;
@@ -175,7 +176,9 @@ public class HandlerService {
 
         em.getTransaction().begin();
         Transaction tx = findTransaction(this.nodeid, txuid);
-        tx.addEvent(new Event(EventType.PREPARE_FAILED, this.nodeid, timestamp));
+        if(tx != null) {
+            tx.addEvent(new Event(EventType.PREPARE_FAILED, this.nodeid, timestamp));
+        }
         em.getTransaction().commit();
 
     }
@@ -539,12 +542,14 @@ public class HandlerService {
      * @param rmProductVersion
      * @param timestamp
      */
-    public void enlistResourceManagerJTS(String txuid, String rmuid, String rmJndiName, String rmProductName,
-                                         String rmProductVersion, Timestamp timestamp) {
+    public void enlistResourceManagerJTS(String txuid, String rmuid, String rmBranchId, String rmJndiName,
+                                         String rmProductName,String rmProductVersion, String rmEisName,
+                                         Timestamp timestamp) {
 
         try {
             em.getTransaction().begin();
-            final ResourceManager rm = retrieveOrCreateResourceManager(rmJndiName, rmProductName, rmProductVersion);
+            final ResourceManager rm = retrieveOrCreateResourceManager(rmBranchId, rmJndiName,
+                    rmProductName, rmProductVersion, rmEisName);
             final Transaction tx = findTransaction(nodeid, txuid);
 
             // Error condition which usually only occurs when the tool is deployed mid transaction
@@ -572,13 +577,14 @@ public class HandlerService {
      * @param rmProductVersion
      * @param timestamp
      */
-    public void enlistResourceManagerJTA(String txuid, String rmJndiName, String rmProductName,
-                                         String rmProductVersion, Timestamp timestamp, String rmuid) {
-
+    public void enlistResourceManagerJTA(String txuid, String rmBranchId, String rmJndiName, String rmProductName,
+                                         String rmProductVersion, String rmEisName, Timestamp timestamp, String rmuid) {
+        ParticipantRecord rec = null;
         try {
             em.getTransaction().begin();
 
-            final ResourceManager rm = retrieveOrCreateResourceManager(rmJndiName, rmProductName, rmProductVersion);
+            final ResourceManager rm = retrieveOrCreateResourceManager(rmBranchId, rmJndiName,
+                    rmProductName, rmProductVersion, rmEisName);
             final Transaction tx = findTransaction(nodeid, txuid);
 
             // Error condition which usually only occurs when the tool is deployed mid transaction
@@ -587,7 +593,7 @@ public class HandlerService {
                 throw new RollbackException();
             }
 
-            final ParticipantRecord rec = new ParticipantRecord(tx, rm, timestamp);
+            rec = new ParticipantRecord(tx, rm, timestamp);
             rec.setRmuid(rmuid);
 
             em.persist(rec);
@@ -596,6 +602,9 @@ public class HandlerService {
         } catch (RollbackException e) {
             if (logger.isTraceEnabled())
                 logger.trace("Unable to find transaction");
+        } catch (PersistenceException e1) {
+            logger.warn("the rec is " + rec);
+            em.getTransaction().rollback();
         }
     }
 
@@ -653,16 +662,16 @@ public class HandlerService {
         }
     }
 
-    private ResourceManager retrieveOrCreateResourceManager(String jndiName, String productName, String productVersion) {
+    private ResourceManager retrieveOrCreateResourceManager(String branchId, String jndiName, String productName, String productVersion, String eisName) {
 
         if (logger.isTraceEnabled())
             logger.trace(format("HandlerService.retrieveOrCreateResourceManager(( `{0}`, `{1}`, `{3}` )",
                     jndiName, productName, productVersion));
 
-        ResourceManager rm = em.find(ResourceManager.class, jndiName);
+        ResourceManager rm = em.find(ResourceManager.class, branchId);
 
         if (rm == null) {
-            rm = new ResourceManager(jndiName, productName, productVersion);
+            rm = new ResourceManager(branchId, jndiName, productName, productVersion, eisName);
             em.persist(rm);
         }
 

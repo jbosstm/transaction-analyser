@@ -35,7 +35,7 @@ public class JTACreateResourceRecordHandler extends JbossAS8AbstractHandler {
     /**
      *
      */
-    public static final String REGEX = "XAResourceRecord\\.XAResourceRecord.*?" + "tx_uid=" + PATTERN_TXUID + ".*?" + PATTERN_XARESOURCEWRAPPERIMPL + "\\] \\), record id=" + PATTERN_RESOURCE_UID;
+    public static final String REGEX = "XAResourceRecord\\.XAResourceRecord.*?" + "tx_uid=" + PATTERN_TXUID + ".*?branch_uid=" + PATTERN_BRANCHUID + ".*?eis_name=" + PATTERN_EISNAME + ".*?(" + PATTERN_XARESOURCEWRAPPERIMPL + ")?\\] \\), record id=" + PATTERN_RESOURCE_UID + "$";
 
     public static final String LINE = "XAResourceRecord.XAResourceRecord ( < formatId=131077, gtrid_length=29, " +
             "bqual_length=36, tx_uid=0:ffff7f000001:-3713c968:5243fb29:25, node_name=1, branch_uid=0:ffff7f000001:-3713c968:5243fb29:2c, " +
@@ -57,8 +57,8 @@ public class JTACreateResourceRecordHandler extends JbossAS8AbstractHandler {
     @Override
     public void handle(Matcher matcher, String line) {
 
-        service.enlistResourceManagerJTA(matcher.group(TXUID), matcher.group(RM_JNDI_NAME), matcher.group(RM_PRODUCT_NAME),
-                matcher.group(RM_PRODUCT_VERSION), parseTimestamp(matcher.group(TIMESTAMP)), matcher.group(RESUID));
+        service.enlistResourceManagerJTA(matcher.group(TXUID), matcher.group(BRANCHUID), matcher.group(RM_JNDI_NAME), matcher.group(RM_PRODUCT_NAME),
+                matcher.group(RM_PRODUCT_VERSION), matcher.group(EISNAME), parseTimestamp(matcher.group(TIMESTAMP)), matcher.group(RESUID));
     }
 
     public static void main(String[] args) {

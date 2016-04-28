@@ -25,13 +25,9 @@ package io.narayana.nta.persistence.dao;
 import io.narayana.nta.persistence.entities.Transaction;
 import io.narayana.nta.persistence.enums.Status;
 
-import javax.ejb.EJB;
-import javax.ejb.LocalBean;
-import javax.ejb.Stateless;
-import javax.ejb.TransactionAttribute;
-import javax.ejb.TransactionAttributeType;
-import javax.ejb.TransactionManagement;
-import javax.ejb.TransactionManagementType;
+import javax.annotation.PostConstruct;
+import javax.annotation.PreDestroy;
+import javax.ejb.*;
 import javax.persistence.EntityManager;
 import javax.persistence.EntityManagerFactory;
 import javax.persistence.NoResultException;
@@ -44,8 +40,9 @@ import java.util.List;
  * Date: 20/06/2013
  * Time: 13:14
  */
-@Stateless
+@Singleton
 @LocalBean
+@Startup
 @TransactionManagement(TransactionManagementType.BEAN)
 @TransactionAttribute(TransactionAttributeType.NOT_SUPPORTED)
 public class TransactionDAO implements Serializable {
@@ -56,6 +53,19 @@ public class TransactionDAO implements Serializable {
     @PersistenceUnit
     private EntityManagerFactory emf;
 
+    private EntityManager em;
+
+    @PostConstruct
+    public void init() {
+
+        em = emf.createEntityManager();
+    }
+
+    @PreDestroy
+    public void shutdown() {
+        em.close();
+    }
+
     public void create(Transaction tx) throws NullPointerException {
 
         dao.create(tx);
@@ -63,24 +73,17 @@ public class TransactionDAO implements Serializable {
 
     public Transaction retrieve(Long primaryKeyId) throws NullPointerException {
 
-        EntityManager em = emf.createEntityManager();
-        try {
-            return em.find(Transaction.class, primaryKeyId);
-        } finally {
-            //em.close();
-        }
+
+        return em.find(Transaction.class, primaryKeyId);
     }
 
     public Transaction retrieve(String nodeid, String txuid) {
 
-        EntityManager em = emf.createEntityManager();
         try {
             return em.createNamedQuery("Transaction.findNatural", Transaction.class).setParameter("nodeid", nodeid)
                     .setParameter("txuid", txuid).getSingleResult();
         } catch (NoResultException e) {
             return null;
-        } finally {
-            //em.close();
         }
     }
 
@@ -102,23 +105,15 @@ public class TransactionDAO implements Serializable {
 
     public List<Transaction> findAllTopLevel() {
 
-        EntityManager em = emf.createEntityManager();
-        try {
-            return em.createNamedQuery("Transaction.findAllTopLevel", Transaction.class).getResultList();
-        } finally {
-            //em.close();
-        }
+        return em.createNamedQuery("Transaction.findAllTopLevel", Transaction.class).getResultList();
+
     }
 
     public List<Transaction> findAllTopLevelWithStatus(Status status) {
 
-        EntityManager em = emf.createEntityManager();
-        try {
-            return em.createNamedQuery("Transaction.findAllTopLevelWithStatus", Transaction.class)
-                    .setParameter("status", status).getResultList();
-        } finally {
-            //em.close();
-        }
+        return em.createNamedQuery("Transaction.findAllTopLevelWithStatus", Transaction.class)
+                .setParameter("status", status).getResultList();
+
     }
 
 }

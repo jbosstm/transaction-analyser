@@ -28,7 +28,7 @@
 
     <groupId>io.narayana.nta</groupId>
     <artifactId>nta-all</artifactId>
-    <version>1.0.0.Alpha2-SNAPSHOT</version>
+    <version>1.0.0.Alpha3-SNAPSHOT</version>
 
     <packaging>pom</packaging>
     <name>Narayana Transaction Analyser</name>
@@ -36,6 +36,57 @@
         Narayana Transaction Analyser is a tool for helping to diagnose issues with JTA and JTS
         transactions in WildFly and JBoss EAP 6.
     </description>
+
+    <issueManagement>
+        <system>JIRA</system>
+        <url>https://jira.jboss.org/jira/browse/NTA/</url>
+    </issueManagement>
+
+    <developers>
+        <developer>
+            <id>paulrobinson</id>
+            <name>Paul Robinson</name>
+            <email>paul.robinson@redhat.com</email>
+            <organization>JBoss</organization>
+            <organizationUrl>http://www.jboss.org/</organizationUrl>
+            <roles>
+                <role>project lead</role>
+            </roles>
+            <timezone>0</timezone>
+        </developer>
+        <developer>
+            <id>zhfeng</id>
+            <name>Amos Feng</name>
+            <email>zfeng@redhat.com</email>
+            <organization>JBoss</organization>
+            <organizationUrl>http://www.jboss.org/</organizationUrl>
+            <roles>
+                <role>Core Developer</role>
+            </roles>
+            <timezone>0</timezone>
+        </developer>
+        <developer>
+            <id>alexcreasy</id>
+            <name>Alex Creasy</name>
+            <email>a.r.creasy@newcastle.ac.uk</email>
+            <roles>
+                <role>Core Developer</role>
+            </roles>
+            <timezone>0</timezone>
+        </developer>
+    </developers>
+
+    <licenses>
+        <license>
+            <name>LGPL 2.1</name>
+            <url>http://www.gnu.org/licenses/lgpl-2.1.html</url>
+        </license>
+    </licenses>
+    <scm>
+        <connection>scm:git:git@github.com:jbosstm/transaction-analyser.git</connection>
+        <developerConnection>scm:git:git@github.com:jbosstm/transaction-analyser.git</developerConnection>
+        <url>https://github.com/jbosstm/transaction-analyser</url>
+    </scm>
 
     <distributionManagement>
         <repository>
@@ -65,48 +116,36 @@
                 <module>demo</module>
             </modules>
         </profile>
-        <profile>
-            <id>centralised</id>
-            <activation>
-                <activeByDefault>true</activeByDefault>
-            </activation>
-            <modules>
-                <module>core</module>
-                <module>webapp</module>
-                <module>nta-dist</module>
-            </modules>
-        </profile>
-        <profile>
-            <id>distributed</id>
-            <modules>
-                <module>core</module>
-                <module>plugins</module>
-                <module>webapp</module>
-                <module>nta-dist</module>
-                <module>nta-remote-dist</module>
-            </modules>
-        </profile>
     </profiles>
 
     <properties>
         <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
-
         <version.maven.surefire>2.15</version.maven.surefire>
-
         <version.jboss.maven.plugin>7.3.Final</version.jboss.maven.plugin>
-
         <version.jboss.spec.javaee.6.0>3.0.2.Final</version.jboss.spec.javaee.6.0>
-
         <version.compiler.plugin>2.3.1</version.compiler.plugin>
-
         <version.junit>4.8.1</version.junit>
-
         <version.ear.plugin>2.6</version.ear.plugin>
         <version.ejb.plugin>2.3</version.ejb.plugin>
         <version.war.plugin>2.1.1</version.war.plugin>
-
+        <version.source.plugin>2.2.1</version.source.plugin>
         <maven.compiler.target>1.7</maven.compiler.target>
         <maven.compiler.source>1.7</maven.compiler.source>
+	<maven.plugins>2.3.1</maven.plugins>
+	<version.jboss.shrinkwrap.resolver>2.0.0-beta-1</version.jboss.shrinkwrap.resolver>
+	<version.jboss.bom>1.0.0.Final</version.jboss.bom>
+	<version.hibernate>3.5.6-Final</version.hibernate>
+	<version.jboss.narayana.jta>5.0.0.M2</version.jboss.narayana.jta>
+	<version.jboss.spec.javax.transaction>1.0.1.Final</version.jboss.spec.javax.transaction>
+	<version.commons-io>2.5-SNAPSHOT</version.commons-io>
+	<version.log4j>1.2.17</version.log4j>
+	<version.jboss.arquillian.junit>1.0.3.Final</version.jboss.arquillian.junit>
+	<version.com.google.code.gson>2.2.4</version.com.google.code.gson>
+	<version.org.apache.myfaces.tomahawk>1.1.10</version.org.apache.myfaces.tomahawk>
+	<version.wildfly>8.0.0.Final</version.wildfly>
+	<version.io.narayana.nta>1.0.0.Alpha3-SNAPSHOT</version.io.narayana.nta>
+	<jboss.as>7.3.0.Final-redhat-SNAPSHOT</jboss.as>
+	
     </properties>
 
     <dependencyManagement>
@@ -115,7 +154,7 @@
                 <groupId>io.narayana.nta</groupId>
                 <artifactId>core</artifactId>
                 <version>${project.version}</version>
-                <type>ejb</type>
+		<type>ejb</type>
             </dependency>
 
             <dependency>
@@ -140,6 +179,113 @@
                 <type>pom</type>
                 <scope>import</scope>
             </dependency>
+
+            <dependency>
+                <groupId>org.jboss.shrinkwrap.resolver</groupId>
+                <artifactId>shrinkwrap-resolver-bom</artifactId>
+                <version>${version.jboss.shrinkwrap.resolver}</version>
+                <scope>import</scope>
+                <type>pom</type>
+            </dependency>
+
+            <dependency>
+                <groupId>org.jboss.bom</groupId>
+                <artifactId>jboss-javaee-6.0-with-tools</artifactId>
+                <version>${version.jboss.bom}</version>
+                <type>pom</type>
+                <scope>import</scope>
+            </dependency>
+
+            <dependency>
+                <groupId>org.jboss.shrinkwrap.resolver</groupId>
+                <artifactId>shrinkwrap-resolver-api</artifactId>
+                <version>${version.jboss.shrinkwrap.resolver}</version>
+                <scope>test</scope>
+            </dependency>
+
+            <dependency>
+                <groupId>org.jboss.shrinkwrap.resolver</groupId>
+                <artifactId>shrinkwrap-resolver-impl-maven</artifactId>
+                <version>${version.jboss.shrinkwrap.resolver}</version>
+                <scope>test</scope>
+            </dependency>
+
+	    <dependency>
+                <groupId>org.jboss.shrinkwrap.resolver</groupId>
+                <artifactId>shrinkwrap-resolver-api-maven</artifactId>
+                <version>${version.jboss.shrinkwrap.resolver}</version>
+                <scope>test</scope>
+            </dependency>
+
+	    <dependency>
+                <groupId>org.hibernate</groupId>
+                <artifactId>hibernate-annotations</artifactId>
+                <version>${version.hibernate}</version>
+                <scope>provided</scope>
+            </dependency>
+
+            <dependency>
+                <groupId>org.jboss.narayana.jta</groupId>
+                <artifactId>narayana-jta</artifactId>
+                <version>${version.jboss.narayana.jta}</version>
+                <scope>provided</scope>
+            </dependency>
+
+            <dependency>
+                <groupId>org.jboss.spec.javax.transaction</groupId>
+                <artifactId>jboss-transaction-api_1.1_spec</artifactId>
+                <scope>provided</scope>
+                <version>${version.jboss.spec.javax.transaction}</version>
+            </dependency>
+
+	    <dependency>
+                <groupId>commons-io</groupId>
+                <artifactId>commons-io</artifactId>
+                <version>${version.commons-io}</version>
+                <scope>system</scope>
+                <systemPath>${basedir}/../etc/lib/commons-io-2.5-SNAPSHOT.jar</systemPath>
+            </dependency>
+
+	    <dependency>
+               <groupId>log4j</groupId>
+               <artifactId>log4j</artifactId>
+               <version>${version.log4j}</version>
+               <scope>provided</scope>
+            </dependency>
+
+ 	    <dependency>
+               <groupId>org.jboss.arquillian.junit</groupId>
+               <artifactId>arquillian-junit-container</artifactId>
+               <version>${version.jboss.arquillian.junit}</version>
+               <scope>test</scope>
+            </dependency>
+
+   	    <dependency>
+                <groupId>com.google.code.gson</groupId>
+                <artifactId>gson</artifactId>
+                <version>${version.com.google.code.gson}</version>
+            </dependency>
+
+	    <dependency>
+                <groupId>io.narayana.nta</groupId>
+                <artifactId>plugins</artifactId>
+                <version>${version.io.narayana.nta}</version>
+                <scope>provided</scope>
+            </dependency>
+
+ 	    <dependency>
+                <groupId>org.apache.myfaces.tomahawk</groupId>
+                <artifactId>tomahawk20</artifactId>
+                <version>${version.org.apache.myfaces.tomahawk}</version>
+            </dependency>
+
+ 	    <dependency>
+                <groupId>org.wildfly</groupId>
+                <artifactId>wildfly-controller-client</artifactId>
+                <version>${version.wildfly}</version>
+                <scope>provided</scope>
+            </dependency>
+
         </dependencies>
     </dependencyManagement>
 
@@ -173,6 +319,19 @@
                     <execute-commands/>
                     <skip>true</skip>
                 </configuration>
+            </plugin>
+            <plugin>
+                <groupId>org.apache.maven.plugins</groupId>
+                <artifactId>maven-source-plugin</artifactId>
+                <version>${version.source.plugin}</version>
+                <executions>
+                    <execution>
+                        <id>attach-sources</id>
+                        <goals>
+                            <goal>jar</goal>
+                        </goals>
+                    </execution>
+                </executions>
             </plugin>
         </plugins>
     </build>
