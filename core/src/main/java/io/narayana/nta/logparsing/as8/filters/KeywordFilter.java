@@ -40,9 +40,10 @@ public class KeywordFilter implements Filter{
     	
     	String keywordList = filterKeywords.getPropValues();
     	String[] keywords = keywordList.split(",");
-    	System.out.println(keywords);
+
         try {
         	for (int i=0; i<keywords.length;i++){
+            	System.out.println(keywords[i]);
     			if(line.indexOf(keywords[i]) != -1)
     					return true;
     		}
