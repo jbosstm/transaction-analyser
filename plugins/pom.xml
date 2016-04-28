@@ -34,27 +34,13 @@
     <artifactId>plugins</artifactId>
     <name>Narayana Transaction Analyser Plugin Module</name>
 
-    <dependencyManagement>
-
-        <dependencies>
-            <dependency>
-                <groupId>org.jboss.spec</groupId>
-                <artifactId>jboss-javaee-6.0</artifactId>
-                <version>${version.jboss.spec.javaee.6.0}</version>
-                <type>pom</type>
-                <scope>import</scope>
-            </dependency>
-        </dependencies>
-
-    </dependencyManagement>
-
     <dependencies>
 
         <dependency>
             <groupId>io.narayana.nta</groupId>
             <artifactId>core</artifactId>
-            <version>1.0.0.Alpha3-SNAPSHOT</version>
             <scope>provided</scope>
+	    <type>ejb</type>
         </dependency>
 
         <dependency>
@@ -72,7 +58,6 @@
         <dependency>
             <groupId>log4j</groupId>
             <artifactId>log4j</artifactId>
-            <version>1.2.17</version>
             <scope>provided</scope>
         </dependency>
 

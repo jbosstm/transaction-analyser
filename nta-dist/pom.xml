@@ -39,7 +39,6 @@
     </description>
     <packaging>ear</packaging>
 
-
     <dependencies>
         <dependency>
             <groupId>io.narayana.nta</groupId>

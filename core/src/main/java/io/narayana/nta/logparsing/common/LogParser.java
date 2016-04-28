@@ -53,14 +53,13 @@ public final class LogParser implements TailerListener {
      * @throws NullPointerException
      */
     void addHandler(Handler handler) throws NullPointerException {
-
+    	
         if (handler == null)
             throw new NullPointerException("Method called with null parameter: handler");
         handlers.add(handler);
     }
 
     void addFilter(Filter filter) throws NullPointerException {
-
         if (filter == null)
             throw new NullPointerException("Method called with null parameter: filter");
         filters.add(filter);
@@ -72,14 +71,14 @@ public final class LogParser implements TailerListener {
      */
     @Override
     public void handle(String line) {
-
         // First check the line against all loaded matches, if there is a positive match skip
         // processing.
+
         for (Filter filter : filters) {
             if (filter.matches(line))
-                return;
-        }
-
+        	return;
+	} 
+        
         // There could be a newline in the log. so if the line does not start with timestamp,
         // it assumes to be a part of the lastline.
         if(!line.matches("^(\\d{4}-\\d{2}-\\d{2}\\s)?(\\d{2}:\\d{2}:\\d{2},\\d{3}).*$")) {
@@ -91,7 +90,9 @@ public final class LogParser implements TailerListener {
         // If there are no filter matches, test against all handlers.
         for (Handler handler : handlers) {
             final Matcher matcher = handler.getPattern().matcher(line);
-
+            final int baPos = line.indexOf("BasicAction::");
+            if(baPos == -1)
+            	break;
             if (matcher.find()) {
                 if (logger.isDebugEnabled())
                     logger.debug(logFormat(handler, matcher));
