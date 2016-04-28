@@ -79,7 +79,7 @@ public class HandlerServiceTest {
                 .addAsWebInfResource(new FileAsset(new File("src/test/resources/persistence.xml")),
                         "classes/META-INF/persistence.xml")
                 .addAsManifestResource(new FileAsset(new File("src/test/resources/nta-test-ds.xml")), "nta-test-ds.xml")
-                .addAsManifestResource(new FileAsset(new File("src/main/resources/filter.properties")), "fliter.propreties")
+                .addAsManifestResource(new FileAsset(new File("src/test/resources/filter.properties")), "fliter.propreties")
                 .addAsLibraries(libs)
                 .setManifest(new StringAsset(ManifestMF));
     }
