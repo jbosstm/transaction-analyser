@@ -23,18 +23,21 @@ To build the `Transaction Analyser` from source you need Maven 3.0.0+ installed 
 
 ## Download and Configure WildFly
 
-Currently the `Transaction Analyser` can work with the WildFly 8.0.0.Final:
+Currently the `Transaction Analyser` can work with the WildFly 10.0.0.Final:
 
-    wget http://download.jboss.org/wildfly/8.0.0.Final/wildfly-8.0.0.Final.zip
-    unzip wildfly-8.0.0.Final.zip
-    export WILDFLY_HOME=/path/to/wildfly-8.0.0.Final
+    wget http://download.jboss.org/wildfly/10.0.0.Final/wildfly-10.0.0.Final.zip
+    unzip wildfly-10.0.0.Final.zip
+    export WILDFLY_HOME=/path/to/wildfly-10.0.0.Final.zip
 
+## Run Wildfly
 
+    cd $WILDFLY_HOME/bin
+    ./standalone.sh -c standalone-full.xml
 
 ## Deploy to WildFly
 To run the `Transaction Analyzer` you just need to deploy the ear file to WildFly and visit the console. To do this:
 
-    cp nta-dist/target/nta-1.0.0.Alpha2-SNAPSHOT.ear $WILDFLY_HOME/standalone/deployments
+    cp nta-dist/target/nta-1.0.0.Alpha3-SNAPSHOT.ear $WILDFLY_HOME/standalone/deployments
 
 Then visit: http://localhost:8080/nta/. By default the `Transaction Analyser` is disabled. To enable it click on the 'start' button at the top-right
 of the console's home page. Similarly, you can stop it by clicking the 'stop' button.
@@ -43,7 +46,7 @@ of the console's home page. Similarly, you can stop it by clicking the 'stop' bu
 ## Running the Demo Application
 The demo application provides a simple way to play with this tool if you don't have an application with failing transactions to hand. To deploy it:
 
-    cp demo/target/nta-demo-1.0.0.Alpha2-SNAPSHOT.war $WILDFLY_HOME/standalone/deployments
+    cp demo/target/nta-demo-1.0.0.Alpha3-SNAPSHOT.war $WILDFLY_HOME/standalone/deployments
 
 The demo is now available at http://localhost:8080/txdemo. To use the demo, simply click on the button for the scenario you want to run. When the scenario
 completes you will be notified of the outcome from the transaction. For most scenarios you will get an error message returned. This is to be expected

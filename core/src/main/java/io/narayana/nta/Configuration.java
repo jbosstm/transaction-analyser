@@ -23,6 +23,7 @@
 package io.narayana.nta;
 
 import io.narayana.nta.logparsing.as8.filters.PackageFilter;
+import io.narayana.nta.logparsing.as8.filters.KeywordFilter;
 import io.narayana.nta.logparsing.as8.handlers.*;
 
 import java.io.File;
@@ -54,7 +55,7 @@ public final class Configuration {
     /**
      *
      */
-    public static final int DEFAULT_ITEMS_PER_PAGE = 7;
+    public static final int DEFAULT_ITEMS_PER_PAGE = 50;
     /**
      *
      */
@@ -80,6 +81,7 @@ public final class Configuration {
 
     public static final Class[] LOG_FILTERS = new Class[]{
             PackageFilter.class,
+            KeywordFilter.class,
     };
 
     /**

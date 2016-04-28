@@ -48,6 +48,7 @@ import javax.persistence.NoResultException;
 import javax.persistence.PersistenceException;
 import javax.persistence.PersistenceUnit;
 import javax.persistence.RollbackException;
+import javax.persistence.PersistenceException;
 import java.sql.Timestamp;
 import java.util.HashMap;
 import java.util.Map;
@@ -175,7 +176,9 @@ public class HandlerService {
 
         em.getTransaction().begin();
         Transaction tx = findTransaction(this.nodeid, txuid);
-        tx.addEvent(new Event(EventType.PREPARE_FAILED, this.nodeid, timestamp));
+        if(tx != null) {
+            tx.addEvent(new Event(EventType.PREPARE_FAILED, this.nodeid, timestamp));
+        }
         em.getTransaction().commit();
 
     }
@@ -576,7 +579,7 @@ public class HandlerService {
      */
     public void enlistResourceManagerJTA(String txuid, String rmBranchId, String rmJndiName, String rmProductName,
                                          String rmProductVersion, String rmEisName, Timestamp timestamp, String rmuid) {
-
+        ParticipantRecord rec = null;
         try {
             em.getTransaction().begin();
 
@@ -590,7 +593,7 @@ public class HandlerService {
                 throw new RollbackException();
             }
 
-            final ParticipantRecord rec = new ParticipantRecord(tx, rm, timestamp);
+            rec = new ParticipantRecord(tx, rm, timestamp);
             rec.setRmuid(rmuid);
 
             em.persist(rec);
@@ -599,6 +602,9 @@ public class HandlerService {
         } catch (RollbackException e) {
             if (logger.isTraceEnabled())
                 logger.trace("Unable to find transaction");
+        } catch (PersistenceException e1) {
+            logger.warn("the rec is " + rec);
+            em.getTransaction().rollback();
         }
     }
 
