@@ -63,7 +63,7 @@ public class TransactionDAOTest {
                 .addAsWebInfResource(new FileAsset(new File("src/test/resources/persistence.xml")),
                         "classes/META-INF/persistence.xml")
                 .addAsManifestResource(new FileAsset(new File("src/test/resources/nta-test-ds.xml")), "nta-test-ds.xml")
-		.addAsManifestResource(new FileAsset(new File("src/test/resources/filter.properties")), "filter.properties") 
+                .addAsManifestResource("filter.properties")
                 .setManifest(new StringAsset(ManifestMF));
     }
 

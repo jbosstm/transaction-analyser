@@ -24,28 +24,25 @@ package io.narayana.nta.logparsing.as8.filters;
 
 import io.narayana.nta.logparsing.common.Filter;
 
-import java.util.List;
-
 /**
  * @author huyuan
  */
 public class KeywordFilter implements Filter {
 
-
     @Override
     public boolean matches(String line) throws IndexOutOfBoundsException {
-
-        List<String> keywordList = GetFilterKeywords.getInstance().getFilterKeywords();
-
-        try {
-            for (String s : keywordList) {
-                if (line.contains(s)) { // if black list use !line.contains(s)
-                    return true;
-                }
-            }
-            return false;
-        } catch (IndexOutOfBoundsException e) {
-            return false;
+        String keywordList = GetFilterKeywords.getInstance().getFilterKeywords();
+        if (keywordList != null) {
+            if ("".equals(keywordList))
+                return true;
+        } else {
+            return true;
         }
+        String[] keywords = keywordList.split(",");
+        for (String keyword : keywords) {
+            if (line.contains(keyword))
+                return true;
+        }
+        return false;
     }
 }

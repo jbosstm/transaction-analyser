@@ -2,15 +2,14 @@ package io.narayana.nta.logparsing.as8.filters;
 
 import org.apache.log4j.Logger;
 
+import java.io.File;
 import java.io.FileNotFoundException;
 import java.io.IOException;
 import java.io.InputStream;
-import java.util.ArrayList;
-import java.util.List;
 import java.util.Properties;
 
 public class GetFilterKeywords {
-    private List<String> filterKeywords;
+    private String filterKeywords;
     private static final Logger logger = Logger.getLogger(GetFilterKeywords.class.getName());
 
     private static class GetFilterKeywordsHolder {
@@ -22,36 +21,25 @@ public class GetFilterKeywords {
     }
 
     private GetFilterKeywords() {
-        InputStream inputStream = null;
         try {
+            InputStream in;
             Properties prop = new Properties();
-            filterKeywords = new ArrayList<>();
 
             String propFileName = "filter.properties";
-            logger.warn(getClass().getClassLoader().getResource(""));
-            inputStream = getClass().getClassLoader().getResourceAsStream(propFileName);
-            if (inputStream != null) {
-                prop.load(inputStream);
+            in = getClass().getClassLoader().getResourceAsStream(File.separator + propFileName);
+            if (in != null) {
+                prop.load(in);
+                filterKeywords = prop.getProperty("keywords");
+                in.close();
             } else {
-                throw new FileNotFoundException("property file '" + propFileName + "' not found in the classpath");
+                logger.error("Oops: the " + propFileName + " file does not exist!", new FileNotFoundException(propFileName + "not found!"));
             }
-
-            for (String name : prop.stringPropertyNames()) {
-                if (name.contains("keywords"))
-                    filterKeywords.add(prop.getProperty(name));
-            }
-        } catch (Exception e) {
-            e.printStackTrace();
-        } finally {
-            try {
-                inputStream.close();
-            } catch (IOException ignored) {
-            }
+        } catch (IOException ex) {
+            logger.error("the filter keyword list init error!", ex);
         }
     }
 
-    public List<String> getFilterKeywords() {
+    public String getFilterKeywords() {
         return filterKeywords;
     }
 }
-
