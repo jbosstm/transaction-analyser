@@ -14,6 +14,14 @@ with a demo application allowing you to trigger failing transactions on-demand. 
 these issues would be reported.
 
 
+## Getting help
+If you have any questions about this project, please ask them on the Narayana forums:
+https://developer.jboss.org/en/jbosstm/content?filterID=contentstatus%5bpublished%5d~objecttype~objecttype%5bthread%5d
+
+If you have identified an issue, please do discuss it on the forum and then raise an issue over here:
+https://issues.jboss.org/browse/NTA
+
+
 ## Building from source
 If you have a binary release of this tool, you can skip to the 'Deploy to WildFly' and 'Running the Demo Application' sections.
 
