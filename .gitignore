@@ -1,5 +1,7 @@
 .idea
 target
+/tools/maven
+/tools/maven.zip
 *.iml
 .DS_Store
 .project
