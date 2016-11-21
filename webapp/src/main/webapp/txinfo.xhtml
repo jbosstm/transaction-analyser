@@ -91,6 +91,7 @@
                 <h:link value="Narayana Transaction Analyser" class="brand" outcome="txlist"/>
                 <a id="btn-visualise" href="#myModal" class="btn pull-right" role="button" data-toggle="modal">Visualise
                     Transaction</a>
+                <h:inputHidden id="jsonGraph_data" value="#{graphPlotterBean.jsonGraph}" />
             </div>
         </div>
         <ul class="breadcrumb">
@@ -244,19 +245,13 @@
     <h:outputScript library="js" name="jit-yc.js"/>
     <h:outputScript library="js" name="infoviz-graph.js"/>
     <script>
-        <![CDATA[
-        var json =
-        <
-        h:outputText
-        value = "#{graphPlotterBean.jsonGraph}"
-        escape = "false" / >;
+        var json = JSON.parse($('#jsonGraph_data').val());
 
         $(init())
 
         $('#myModal').on('shown', function () {
             init();
         })
-        ]]>
     </script>
 </h:body>
 </html>
