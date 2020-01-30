@@ -24,7 +24,8 @@ package io.narayana.nta.logparsing.common;
 
 import io.narayana.nta.Configuration;
 import io.narayana.nta.persistence.HandlerService;
-import org.apache.log4j.Logger;
+import org.apache.logging.log4j.LogManager;
+import org.apache.logging.log4j.Logger;
 
 import javax.naming.Context;
 import javax.naming.InitialContext;
@@ -37,7 +38,7 @@ import javax.naming.NamingException;
  */
 public final class LogParserFactory {
 
-    private static final Logger logger = Logger.getLogger("io.narayana.nta");
+    private static final Logger logger = LogManager.getLogger("io.narayana.nta");
 
     public static LogParser getInstance() throws NullPointerException, IllegalStateException {
 

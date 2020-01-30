@@ -22,7 +22,8 @@
 
 package io.narayana.nta.interceptors;
 
-import org.apache.log4j.Logger;
+import org.apache.logging.log4j.LogManager;
+import org.apache.logging.log4j.Logger;
 
 import javax.interceptor.AroundInvoke;
 import javax.interceptor.InvocationContext;
@@ -38,7 +39,7 @@ public class LoggingInterceptor implements Serializable {
     @AroundInvoke
     public Object intercept(InvocationContext ctx) throws Exception {
 
-        final Logger logger = Logger.getLogger(ctx.getMethod().getDeclaringClass().getName());
+        final Logger logger = LogManager.getLogger(ctx.getMethod().getDeclaringClass().getName());
 
         if (logger.isTraceEnabled()) {
             final StringBuilder sb = new StringBuilder();

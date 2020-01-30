@@ -138,7 +138,6 @@
 	<version.jboss.narayana.jta>5.0.0.M2</version.jboss.narayana.jta>
 	<version.jboss.spec.javax.transaction>1.0.1.Final</version.jboss.spec.javax.transaction>
 	<version.commons-io>2.5-SNAPSHOT</version.commons-io>
-	<version.log4j>1.2.17</version.log4j>
 	<version.jboss.arquillian.junit>1.0.3.Final</version.jboss.arquillian.junit>
 	<version.com.google.code.gson>2.2.4</version.com.google.code.gson>
 	<version.org.apache.myfaces.tomahawk>1.1.10</version.org.apache.myfaces.tomahawk>
@@ -246,13 +245,55 @@
                 <systemPath>${basedir}/../etc/lib/commons-io-2.5-SNAPSHOT.jar</systemPath>
             </dependency>
 
-	    <dependency>
-               <groupId>log4j</groupId>
-               <artifactId>log4j</artifactId>
-               <version>${version.log4j}</version>
-               <scope>provided</scope>
-            </dependency>
-
+        <dependency>
+            <groupId>org.apache.logging.log4j</groupId>
+            <artifactId>log4j-api</artifactId>
+            <version>2.13.0</version>
+            <scope>provided</scope>
+            <exclusions>
+                <exclusion>
+                    <groupId>com.sun.jmx</groupId>
+                    <artifactId>jmxri</artifactId>
+                </exclusion>
+                <exclusion>
+                    <groupId>com.sun.jdmk</groupId>
+                    <artifactId>jmxtools</artifactId>
+                </exclusion>
+                <exclusion>
+                    <groupId>javax.jms</groupId>
+                    <artifactId>jms</artifactId>
+                </exclusion>
+                <exclusion>
+                    <groupId>javax.mail</groupId>
+                    <artifactId>mail</artifactId>
+                </exclusion>
+            </exclusions>
+        </dependency>
+        <dependency>
+            <groupId>org.apache.logging.log4j</groupId>
+            <artifactId>log4j-core</artifactId>
+            <version>2.13.0</version>
+            <scope>provided</scope>
+            <exclusions>
+                <exclusion>
+                    <groupId>com.sun.jmx</groupId>
+                    <artifactId>jmxri</artifactId>
+                </exclusion>
+                <exclusion>
+                    <groupId>com.sun.jdmk</groupId>
+                    <artifactId>jmxtools</artifactId>
+                </exclusion>
+                <exclusion>
+                    <groupId>javax.jms</groupId>
+                    <artifactId>jms</artifactId>
+                </exclusion>
+                <exclusion>
+                    <groupId>javax.mail</groupId>
+                    <artifactId>mail</artifactId>
+                </exclusion>
+            </exclusions>
+        </dependency>
+        
  	    <dependency>
                <groupId>org.jboss.arquillian.junit</groupId>
                <artifactId>arquillian-junit-container</artifactId>

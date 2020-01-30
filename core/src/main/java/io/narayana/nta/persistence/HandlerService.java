@@ -32,7 +32,8 @@ import io.narayana.nta.persistence.entities.RequestRecord;
 import io.narayana.nta.persistence.entities.ResourceManager;
 import io.narayana.nta.persistence.enums.Status;
 import io.narayana.nta.persistence.enums.Vote;
-import org.apache.log4j.Logger;
+import org.apache.logging.log4j.LogManager;
+import org.apache.logging.log4j.Logger;
 
 import javax.ejb.Stateful;
 import javax.ejb.TransactionAttribute;
@@ -66,7 +67,7 @@ import static java.text.MessageFormat.format;
 @Interceptors(LoggingInterceptor.class)
 public class HandlerService {
 
-    private final Logger logger = Logger.getLogger(this.getClass().getName());
+    private final Logger logger = LogManager.getLogger(this.getClass().getName());
 
     private final String nodeid = System.getProperty(Configuration.NODEID_SYS_PROP_NAME);
 

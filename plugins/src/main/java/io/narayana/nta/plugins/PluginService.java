@@ -23,7 +23,8 @@
 package io.narayana.nta.plugins;
 
 import io.narayana.nta.persistence.DataAccessObject;
-import org.apache.log4j.Logger;
+import org.apache.logging.log4j.LogManager;
+import org.apache.logging.log4j.Logger;
 
 import javax.annotation.PostConstruct;
 import javax.annotation.PreDestroy;
@@ -55,7 +56,7 @@ import java.util.Set;
 @TransactionAttribute(TransactionAttributeType.NOT_SUPPORTED)
 public class PluginService implements Serializable {
 
-    private final Logger logger = Logger.getLogger(this.getClass().getName());
+    private final Logger logger = LogManager.getLogger(this.getClass().getName());
 
     private Collection<Plugin> plugins = new LinkedList<>();
 

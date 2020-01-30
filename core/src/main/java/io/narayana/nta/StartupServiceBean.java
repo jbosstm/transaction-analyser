@@ -23,7 +23,8 @@
 package io.narayana.nta;
 
 import com.arjuna.ats.arjuna.common.arjPropertyManager;
-import org.apache.log4j.Logger;
+import org.apache.logging.log4j.LogManager;
+import org.apache.logging.log4j.Logger;
 
 import javax.annotation.PostConstruct;
 import javax.annotation.PreDestroy;
@@ -66,7 +67,7 @@ import java.io.File;
 @TransactionAttribute(TransactionAttributeType.NOT_SUPPORTED)
 public class StartupServiceBean {
 
-    private final Logger logger = Logger.getLogger(this.getClass().getName());
+    private final Logger logger = LogManager.getLogger(this.getClass().getName());
 
     @EJB
     private LogMonitorBean logMonitor;

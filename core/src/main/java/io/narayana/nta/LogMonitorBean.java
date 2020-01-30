@@ -25,7 +25,8 @@ package io.narayana.nta;
 import io.narayana.nta.logparsing.common.LogParserFactory;
 import io.narayana.nta.logparsing.common.LogParser;
 import org.apache.commons.io.input.Tailer;
-import org.apache.log4j.Logger;
+import org.apache.logging.log4j.LogManager;
+import org.apache.logging.log4j.Logger;
 
 import javax.annotation.Resource;
 import javax.ejb.Asynchronous;
@@ -69,7 +70,7 @@ import java.io.File;
 @Lock(LockType.READ)
 public class LogMonitorBean {
 
-    private final Logger logger = Logger.getLogger(this.getClass().getName());
+    private final Logger logger = LogManager.getLogger(this.getClass().getName());
 
     private File logFile;
     private Tailer tailer;
