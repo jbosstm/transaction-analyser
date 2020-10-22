@@ -37,6 +37,9 @@
         transactions in WildFly and JBoss EAP 6.
     </description>
 
+    <properties>
+        <version.log4j-core>[2.13.2,)</version.log4j-core>
+    </properties>
     <issueManagement>
         <system>JIRA</system>
         <url>https://jira.jboss.org/jira/browse/NTA/</url>
