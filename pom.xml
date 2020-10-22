@@ -124,7 +124,7 @@
         <version.jboss.maven.plugin>7.3.Final</version.jboss.maven.plugin>
         <version.jboss.spec.javaee.6.0>3.0.2.Final</version.jboss.spec.javaee.6.0>
         <version.compiler.plugin>2.3.1</version.compiler.plugin>
-        <version.junit>4.8.1</version.junit>
+        <version.junit>4.13.1</version.junit>
         <version.ear.plugin>2.6</version.ear.plugin>
         <version.ejb.plugin>2.3</version.ejb.plugin>
         <version.war.plugin>2.1.1</version.war.plugin>
@@ -144,6 +144,7 @@
 	<version.wildfly>8.0.0.Final</version.wildfly>
 	<version.io.narayana.nta>1.0.0.Alpha3-SNAPSHOT</version.io.narayana.nta>
 	<jboss.as>7.3.0.Final-redhat-SNAPSHOT</jboss.as>
+        <version.log4j-core>[2.13.2,)</version.log4j-core>
 	
     </properties>
 
@@ -272,7 +273,7 @@
         <dependency>
             <groupId>org.apache.logging.log4j</groupId>
             <artifactId>log4j-core</artifactId>
-            <version>2.13.0</version>
+            <version>${version.log4j-core}</version>
             <scope>provided</scope>
             <exclusions>
                 <exclusion>
