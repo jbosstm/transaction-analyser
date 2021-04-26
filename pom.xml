@@ -137,7 +137,7 @@
 	<version.hibernate>3.5.6-Final</version.hibernate>
 	<version.jboss.narayana.jta>5.0.0.M2</version.jboss.narayana.jta>
 	<version.jboss.spec.javax.transaction>1.0.1.Final</version.jboss.spec.javax.transaction>
-	<version.commons-io>2.5-SNAPSHOT</version.commons-io>
+	<version.commons-io>2.7</version.commons-io>
 	<version.jboss.arquillian.junit>1.0.3.Final</version.jboss.arquillian.junit>
 	<version.com.google.code.gson>2.2.4</version.com.google.code.gson>
 	<version.org.apache.myfaces.tomahawk>1.1.10</version.org.apache.myfaces.tomahawk>
