@@ -139,7 +139,7 @@
 	<version.jboss.spec.javax.transaction>1.0.1.Final</version.jboss.spec.javax.transaction>
 	<version.commons-io>2.7</version.commons-io>
 	<version.jboss.arquillian.junit>1.0.3.Final</version.jboss.arquillian.junit>
-	<version.com.google.code.gson>2.2.4</version.com.google.code.gson>
+	<version.com.google.code.gson>2.8.9</version.com.google.code.gson>
 	<version.org.apache.myfaces.tomahawk>1.1.10</version.org.apache.myfaces.tomahawk>
 	<version.wildfly>8.0.0.Final</version.wildfly>
 	<version.io.narayana.nta>1.0.0.Alpha3-SNAPSHOT</version.io.narayana.nta>
