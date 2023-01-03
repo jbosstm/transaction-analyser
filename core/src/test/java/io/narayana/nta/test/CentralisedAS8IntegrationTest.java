@@ -76,6 +76,7 @@ public class CentralisedAS8IntegrationTest {
                 .addAsWebInfResource(new FileAsset(new File("src/test/resources/persistence.xml")),
                         "classes/META-INF/persistence.xml")
                 .addAsManifestResource(new FileAsset(new File("src/test/resources/nta-test-ds.xml")), "nta-test-ds.xml")
+                .addAsManifestResource("filter.properties")
                         //.addAsManifestResource(new FileAsset(new File("src/test/resources/nta-test-mysql-ds.xml")), "nta-test-mysql-ds.xml")
                 .addAsLibraries(libs)
                 .setManifest(new StringAsset(ManifestMF));
