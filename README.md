@@ -1,5 +1,7 @@
 # Narayana Transaction Analyser
 
+We are no longer actively supporting NTA and this repository is now archived. The [announcement](https://lists.jboss.org/archives/list/jbossts-announce@lists.jboss.org/thread/FYTY5TDTXIY35W4YOT4HLCKOZSSFFAUE/) was made to the jbossts-announce mailing list on Monday, 8 September 2025 and in [a post](https://narayana.zulipchat.com/#narrow/channel/323716-announce/topic/Narayana.20Transaction.20Analyser.20Deprecation/with/538378469) to the narayana zulip forum on the same day.
+
 The `Narayana Transaction Analyser` is a tool for helping to diagnose issues with JTA and JTS transactions in WildFly
 and JBoss EAP 6. Once deployed, the tool provides a list of all transactions ran within the application server. Detailed
 information is available for each transaction; such as what participants where involved and how they behaved. This makes
